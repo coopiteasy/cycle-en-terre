@@ -46,6 +46,7 @@ Contributors
 * Antonio Espinosa <antonioea@antiun.com>
 * Rafael Blasco <rafael.blasco@tecnativa.com>
 * Jairo Llopis <yajo.sk8@gmail.com>
+* Rémy Taymans <remy@coopiteasy.be>
 
 Maintainer
 ----------
