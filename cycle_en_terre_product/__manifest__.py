@@ -16,7 +16,9 @@
     ],
 
     'data': [
+        'data/data.xml',
         'views/product_template.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [
         'demo/demo.xml',

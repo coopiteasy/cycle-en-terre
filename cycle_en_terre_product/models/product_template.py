@@ -23,6 +23,10 @@ class ProductTemplate(models.Model):
     species = fields.Char(
         string='Species',
     )
+    seedling_months = fields.Many2many(
+        comodel_name='seedling.month',
+        string='Seedling Month',
+    )
     latin_name = fields.Char(
         string='Latin Name',
     )
