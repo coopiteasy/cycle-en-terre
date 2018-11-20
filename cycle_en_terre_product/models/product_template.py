@@ -20,6 +20,9 @@ class SeedlingMonth(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
+    is_species = fields.Boolean(
+        string='Is Species',
+    )
     species = fields.Char(
         string='Species',
     )
