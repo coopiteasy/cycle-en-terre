@@ -1,14 +1,14 @@
 {
-    'name': "Cycle en Terre - Products",
+    'name': "Seeds - Products",
 
     'summary': """
-        Customization of product_template for Cycle en Terre""",
+        Customization of product_template to manage seed production""",
 
     'author': "Coop IT Easy SCRL",
     'website': "https://www.coopiteasy.be",
     'license': 'AGPL-3',
 
-    'category': 'Uncategorized',
+    'category': 'Warehouse Management',
     'version': '11.0.0.0.1',
 
     'depends': [
