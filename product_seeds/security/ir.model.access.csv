@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_seedling_month,access_seedling_month,model_seedling_month,base.group_user,1,0,0,0
+access_seed_seedling_month,access_seed_seedling_month,model_seed_seedling_month,base.group_user,1,0,0,0
