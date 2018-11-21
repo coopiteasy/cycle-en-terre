@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-# © 2016 Robin Keunen, Coop IT Easy SCRL fs
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-# -*- coding: utf-8 -*-
 {
     'name': "Cycle en Terre - Migrations",
 
@@ -10,6 +6,7 @@
 
     'author': "Coop IT Easy SCRL",
     'website': "https://www.coopiteasy.be",
+    'license': 'AGPL-3',
 
     'category': 'Warehouse Management',
     'version': '11.0.0.0.1',
