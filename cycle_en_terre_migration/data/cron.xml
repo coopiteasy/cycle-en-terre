@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0"> <!-- fixme -->
+
+    <record id="ir_cron_migrate_variants_to_template" model="ir.cron">
+        <field name="name">Migrate Variants to Templates</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model.migrate_variants_to_template()</field>
+        <field name='interval_number'>30</field>
+        <field name='interval_type'>months</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>
