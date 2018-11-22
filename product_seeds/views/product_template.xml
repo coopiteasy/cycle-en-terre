@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_template_only_form_view">
+            <field name="name">product.template.product.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@name='options']" position="before">
+                    <field name="species" placeholder="Species" attrs="{'invisible':[('is_species','!=',True)]}"/>
+                </xpath>
+
+                <xpath expr="//div[@name='options']" position="inside">
+                    <div>
+                        <field name="is_species"/>
+                        <label for="is_species"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page name="species_information" string="Species Information" attrs="{'invisible':[('is_species','!=',True)]}">
+                        <group>
+                            <field name="seedling_months" widget="many2many_tags"/>
+                            <field name="latin_name"/>
+                            <field name="emergence"/>
+                            <field name="density"/>
+                            <field name="germination"/>
+                            <field name="species_information"/>
+                            <field name="culture_information"/>
+                            <field name="recipe"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
