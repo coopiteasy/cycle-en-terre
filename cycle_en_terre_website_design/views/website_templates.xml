@@ -1,0 +1,17 @@
+<odoo>
+   <!--We add the css stylesheet -->
+  <template id="website_frontend" name="Design Cycle en Terre"
+    inherit_id="website.assets_frontend">
+    <xpath expr="//link[last()]" position="after">
+      <link rel="stylesheet"  type="text/less"
+        href="/cycle_en_terre_website_design/static/src/less/cycle_en_terre_website_design.less"/>
+    </xpath>
+  </template>
+    <!--We add a new DIV above the footer-->
+  <template id="website_layout_background_image_footer" name="Design Cycle en Terre background-image footer"
+    inherit_id="website.footer_custom">
+    <xpath expr="//footer" position="before">
+      <img class="wave-footer" alt="Background footer image" src="/cycle_en_terre_website_design/static/src/img/vague-orange.jpg"></img>
+    </xpath>
+  </template>
+</odoo>
