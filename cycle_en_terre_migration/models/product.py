@@ -1,6 +1,6 @@
 # © 2016 Robin Keunen, Coop IT Easy SCRL fs
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import models, fields, api
+from odoo import models
 
 
 def get_attribute(attribute):
@@ -16,7 +16,7 @@ class ProductTemplate(models.Model):
         seedling_months = self.env['seed.seedling.month'].search([])
         month_map = {
             'Janvier': seedling_months.filtered(lambda m: m.name == 'January'),
-            'Février': seedling_months.filtered(lambda m: m.name == 'February'),
+            'Février': seedling_months.filtered(lambda m: m.name == 'February'),  # noqa
             'Mars': seedling_months.filtered(lambda m: m.name == 'March'),
             'Avril': seedling_months.filtered(lambda m: m.name == 'April'),
             'Mai': seedling_months.filtered(lambda m: m.name == 'May'),
