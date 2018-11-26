@@ -2,7 +2,7 @@ from odoo import models, fields
 
 
 class SeedlingMonth(models.Model):
-    _name = 'seedling.month'
+    _name = 'seed.seedling.month'
     _order = 'sequence'
 
     sequence = fields.Integer(
@@ -27,7 +27,7 @@ class ProductTemplate(models.Model):
         string='Species',
     )
     seedling_months = fields.Many2many(
-        comodel_name='seedling.month',
+        comodel_name='seed.seedling.month',
         string='Seedling Month',
     )
     latin_name = fields.Char(
