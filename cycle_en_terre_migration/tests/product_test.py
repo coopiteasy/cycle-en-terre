@@ -23,4 +23,3 @@ class ProductMigration(TransactionCase):
         template = self.env['product.template']
         template.migrate_variants_to_template()
         self.assertTrue(False)
-
