@@ -8,12 +8,11 @@ class SeedlingMonth(models.Model):
     sequence = fields.Integer(
         string='Sequence',
         required=True,
-        readonly=True,
     )
     name = fields.Char(
         string="Name",
         required=True,
-        readonly=True,
+        translate=True,
     )
 
 

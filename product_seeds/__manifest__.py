@@ -12,12 +12,14 @@
     'version': '11.0.0.0.1',
 
     'depends': [
-        'product'
+        'product',
+        'sale',
     ],
 
     'data': [
         'data/data.xml',
         'views/product_template.xml',
+        'views/seedling_months.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
