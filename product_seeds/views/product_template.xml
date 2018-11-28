@@ -22,12 +22,19 @@
                         <group>
                             <field name="seedling_months" widget="many2many_tags"/>
                             <field name="latin_name"/>
-                            <field name="emergence"/>
+                            <field name="produced_in_house"/>
                             <field name="density"/>
+                            <field name="thousand_grain_weight"/>
+                            <field name="emergence"/>
                             <field name="germination"/>
+                            <field name="light_requirements"/>
+                            <field name="spacing_between_lines"/>
+                            <field name="spacing_within_line"/>
+                            <field name="beemeadow"/>
                             <field name="species_information"/>
                             <field name="culture_information"/>
                             <field name="recipe"/>
+                            <field name="comment"/>
                         </group>
                     </page>
                 </xpath>

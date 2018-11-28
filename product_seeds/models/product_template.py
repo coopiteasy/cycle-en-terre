@@ -30,6 +30,9 @@ class ProductTemplate(models.Model):
         comodel_name='seed.seedling.month',
         string='Seedling Month',
     )
+    produced_in_house = fields.Boolean(
+        string='Produced in House',
+    )
     latin_name = fields.Char(
         string='Latin Name',
     )
@@ -42,6 +45,9 @@ class ProductTemplate(models.Model):
     germination = fields.Float(
         string='Germination (years)'
     )
+    thousand_grain_weight = fields.Float(
+        string='Thousand Grain Weight (g)',
+    )
     species_information = fields.Text(
         string='Species Information',
     )
@@ -50,4 +56,19 @@ class ProductTemplate(models.Model):
     )
     recipe = fields.Html(
         string='Recipe',
+    )
+    beemeadow = fields.Boolean(
+        string='Beemeadow',
+    )
+    spacing_between_lines = fields.Char(
+        string='Spacing Between Lines',
+    )
+    spacing_within_line = fields.Char(
+        string='Spacing Within Line',
+    )
+    light_requirements = fields.Char(
+        string='Light Requirements',
+    )
+    comment = fields.Text(
+        string='Comment',
     )
