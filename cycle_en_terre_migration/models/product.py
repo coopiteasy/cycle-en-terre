@@ -53,5 +53,6 @@ class ProductTemplate(models.Model):
                 'is_species': True,
                 'species': species,
                 'latin_name': latin_name[0] if latin_name else None,
-                'seedling_months': [(6, 0, [m.id for m in template_months])],
+                'seedling_month_ids':
+                    [(6, 0, [m.id for m in template_months])],
             })

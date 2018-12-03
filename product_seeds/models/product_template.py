@@ -25,9 +25,35 @@ class ProductTemplate(models.Model):
     species = fields.Char(
         string='Species',
     )
-    seedling_months = fields.Many2many(
+    seedling_month_ids = fields.Many2many(
         comodel_name='seed.seedling.month',
-        string='Seedling Month',
+        string='Seedling Months',
+        relation='product_template_seed_seedling_month_rel',
+    )
+    flowering_month_ids = fields.Many2many(
+        comodel_name='seed.seedling.month',
+        string='Flowering Months',
+        relation='product_template_flowering_months_rel',
+    )
+    harvest_month_ids = fields.Many2many(
+        comodel_name='seed.seedling.month',
+        string='Harvest Months',
+        relation='product_template_harvest_months_rel',
+    )
+    sowing_indoors_month_ids = fields.Many2many(
+        comodel_name='seed.seedling.month',
+        string='Sowing Indoors Months',
+        relation='product_template_sowing_indoors_months_rel',
+    )
+    sowing_outoors_month_ids = fields.Many2many(
+        comodel_name='seed.seedling.month',
+        string='Sowing Outdoors Months',
+        relation='product_template_sowing_outoors_months_rel',
+    )
+    pot_planting_month_ids = fields.Many2many(
+        comodel_name='seed.seedling.month',
+        string='Pot Planting Months',
+        relation='product_template_pot_planting_months_rel',
     )
     produced_in_house = fields.Boolean(
         string='Produced in House',

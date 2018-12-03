@@ -13,7 +13,7 @@
 
             <field name="is_species">True</field>
             <field name="species">Species 0</field>
-            <field name="seedling_months" eval="[(6, 0, [ref('september'), ref('october')])]"/>
+            <field name="seedling_month_ids" eval="[(6, 0, [ref('september'), ref('october')])]"/>
             <field name="latin_name">Specicus Copernicus</field>
             <field name="emergence">4</field>
             <field name="density">123.2</field>
@@ -35,7 +35,7 @@
 
             <field name="is_species">True</field>
             <field name="species">Species 1</field>
-            <field name="seedling_months" eval="[(6, 0, [ref('november'), ref('october')])]"/>
+            <field name="seedling_month_ids" eval="[(6, 0, [ref('november'), ref('october')])]"/>
             <field name="latin_name">Specicus Robinus</field>
             <field name="emergence">7</field>
             <field name="density">12.2</field>
@@ -57,7 +57,7 @@
 
             <field name="is_species">True</field>
             <field name="species">Species 2</field>
-            <field name="seedling_months" eval="[(6, 0, [ref('january'), ref('february')])]"/>
+            <field name="seedling_month_ids" eval="[(6, 0, [ref('january'), ref('february')])]"/>
             <field name="latin_name">Houssinus boucheis</field>
             <field name="emergence">43</field>
             <field name="density">1232.2</field>
@@ -79,7 +79,7 @@
 
             <field name="is_species">True</field>
             <field name="species">Species 2</field>
-            <field name="seedling_months" eval="[(6, 0, [ref('april'), ref('may'), ref('june')])]"/>
+            <field name="seedling_month_ids" eval="[(6, 0, [ref('april'), ref('may'), ref('june')])]"/>
             <field name="latin_name">Renei Charos</field>
             <field name="emergence">4</field>
             <field name="density">123.2</field>

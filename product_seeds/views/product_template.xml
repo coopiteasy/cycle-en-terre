@@ -21,7 +21,7 @@
                 <xpath expr="//page[@name='general_information']" position="after">
                     <page name="species_information" string="Species Information" attrs="{'invisible':[('is_species','!=',True)]}">
                         <group>
-                            <field name="seedling_months" widget="many2many_tags"/>
+                            <field name="seedling_month_ids" widget="many2many_tags"/>
                             <field name="latin_name"/>
                             <field name="produced_in_house"/>
                             <field name="density"/>
@@ -35,6 +35,11 @@
                             <field name="species_information"/>
                             <field name="culture_information"/>
                             <field name="recipe"/>
+                            <field name="flowering_month_ids" widget="many2many_tags"/>
+                            <field name="harvest_month_ids" widget="many2many_tags"/>
+                            <field name="sowing_indoors_month_ids" widget="many2many_tags"/>
+                            <field name="sowing_outoors_month_ids" widget="many2many_tags"/>
+                            <field name="pot_planting_month_ids" widget="many2many_tags"/>
                             <field name="comment"/>
                         </group>
                     </page>
