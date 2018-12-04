@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_picking" inherit_id="stock.report_picking">
+            <xpath expr="//tr[@t-as='package']" position="attributes">
+                <attribute name="t-foreach">o.entire_package_ids.sorted(key=lambda p: p.current_source_location_id.name)</attribute>
+                <attribute name="t-as">package</attribute>
+            </xpath>
+        </template>
+        </data>
+</odoo>
