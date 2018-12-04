@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <template id="oe_category_breadcrumb_main_position"
+            inherit_id="website_sale.products"
+            name="Products Grid Header Position">
+    <xpath expr="(//div[hasclass('oe_website_sale')]
+                  //div[hasclass('products_pager')])[1]" position="before">
+      <div class="oe_category_breadcrumb row">
+      </div>
+    </xpath>
+  </template>
+
+
+  <!-- Breadcrumb and Search Box -->
+  <template id="search_box_position"
+            inherit_id="website_sale_category_breadcrumb.oe_category_breadcrumb_main_position"
+            name="Category Breadcrumb and Search Box"
+            active="False"
+            customize_show="True">
+    <xpath expr="//div[hasclass('oe_category_breadcrumb')]" position="inside">
+      <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+        <t t-call="website_sale_category_breadcrumb.category_breadcrumb">
+          <t t-set="b_class" t-value="'breadcrumb'"/>
+        </t>
+      </div>
+      <t t-call="website_sale.search">
+        <t t-set="search_class"
+           t-value="'col-xs-12 col-sm-4 col-md-3 col-lg-2 o_website_sale_search'"/>
+      </t>
+    </xpath>
+  </template>
+
+
+  <!-- Breadcrumb -->
+  <template id="breadcrumb_position"
+            inherit_id="website_sale_category_breadcrumb.oe_category_breadcrumb_main_position"
+            name="Category Breadcrumb"
+            active="True"
+            customize_show="True">
+    <xpath expr="//div[hasclass('oe_website_sale')]
+                 //div[hasclass('oe_category_breadcrumb')]" position="inside">
+      <div class="col-xs-12">
+        <t t-call="website_sale_category_breadcrumb.category_breadcrumb">
+          <t t-set="b_class" t-value="'breadcrumb'"/>
+        </t>
+      </div>
+    </xpath>
+  </template>
+
+
+  <template id="category_breadcrumb" name="Category Breadcrumb">
+      <ol t-att-class="b_class if b_class else ''">
+        <li>
+          <a t-att-href="keep(category=0)">
+            Shop
+          </a>
+        </li>
+        <t t-if="category" t-call="website_sale_category_breadcrumb.category_breadcrumb_recursive">
+          <t t-set="cat" t-value="category"/>
+        </t>
+      </ol>
+  </template>
+
+
+  <template id="category_breadcrumb_recursive"
+            name="Category Breadcrumb Recursive">
+    <t t-if="cat.parent_id"
+       t-call="website_sale_category_breadcrumb.category_breadcrumb_recursive">
+      <t t-set="cat" t-value="cat.parent_id"/>
+    </t>
+    <li>
+      <a t-att-href="keep('/shop/category/%s' % slug(cat), category=0)"
+         t-field="cat.name"/>
+    </li>
+  </template>
+
+</odoo>
