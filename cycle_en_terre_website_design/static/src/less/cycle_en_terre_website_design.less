@@ -85,13 +85,38 @@ a, a:visited, a:focus {
    padding: 0 10px ;
 }
 
+.navbar-right .dropdown-menu  {
+    box-shadow: 0 0 0 0 transparent !important;
+    border:none;
+    background:#f0b61c;
+    text-transform: normal;
+    border-radius:0;
+    padding:0;
+    left: -10px;
+    right: auto;
+}
+
+.navbar-default .navbar-nav li > .dropdown-menu a {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav li > ul > li:hover {
+    background-color: #e2ab19;
+}
+
+
+.navbar-default .navbar-nav li > .dropdown-menu a:hover {
+    color: #444;
+    background-color: #e2ab19;
+}
+
 footer {
-   background: #f0b61c url("/cycle_en_terre_website_design/static/src/img/vague-orange.jpg") no-repeat center top ;
+   background-color: #f0b61c;
    color:#fff;
 }
 
-footer > div{
-   border-spacing:20px;
+footer > div {
+   border-spacing:10px;
 }
 
 footer a {
@@ -101,6 +126,13 @@ footer a {
 footer a:hover, footer a:focus, footer a:visited {
     color:#fff;
 }
+
+div.bg-img-footer {
+    background: #f0b61c url("/cycle_en_terre_website_design/static/src/img/vague-orange.jpg") no-repeat center top ;
+    max-width: 1924px;
+    height : 74px;
+    margin: -34px auto 0 auto;
+    }
 
 
 

@@ -7,4 +7,11 @@
         href="/cycle_en_terre_website_design/static/src/less/cycle_en_terre_website_design.less"/>
     </xpath>
   </template>
+    <!--We add a new DIV above the footer-->
+  <template id="website_layout_background_image_footer" name="Design Cycle en Terre background-image footer"
+    inherit_id="website.footer_custom">
+    <xpath expr="//div[@id='footer']" position="before">
+      <div class="bg-img-footer"></div>
+    </xpath>
+  </template>
 </openerp>
