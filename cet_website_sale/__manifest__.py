@@ -14,6 +14,7 @@
     "depends": [
         "website_sale",
         "website_sale_category_megamenu",
+        "website_sale_category_breadcrumb",
     ],
     "data": [
         "views/category_megamenu_templates.xml",
