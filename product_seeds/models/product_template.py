@@ -67,8 +67,8 @@ class ProductTemplate(models.Model):
     density = fields.Float(
         string='Density (g/10 m²)',
     )
-    germination = fields.Float(
-        string='Germination (years)'
+    germination = fields.Char(
+        string='Germination',
     )
     thousand_grain_weight = fields.Float(
         string='Thousand Grain Weight (g)',
