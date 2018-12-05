@@ -17,6 +17,7 @@
         "website_sale_category_breadcrumb",
     ],
     "data": [
+        "views/templates.xml",
         "views/category_megamenu_templates.xml",
         "views/assets.xml",
     ],

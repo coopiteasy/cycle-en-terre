@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+<data>
+
+  <template id="remove_top_pager"
+    inherit_id="website_sale.products"
+    name="Remove Top Pager and All It's Content"
+    active="True"
+    customize_show="True">
+    <xpath expr="(//div[hasclass('oe_website_sale')]
+                  //div[hasclass('products_pager')])[1]" position="replace">
+      <div class="products_pager"></div>
+    </xpath>
+  </template>
+
+</data>
+</odoo>
