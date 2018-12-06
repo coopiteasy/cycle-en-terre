@@ -14,6 +14,20 @@
     </xpath>
   </template>
 
+
+  <template id="search_reset_filter"
+    inherit_id="website_sale.search"
+    name="Search Reset Category and Months Filters"
+    active="True"
+    customize_show="True">
+    <xpath expr="//form" position="attributes">
+      <attribute name="t-att-action">
+        keep('/shop', search=0)
+      </attribute>
+    </xpath>
+  </template>
+
+
   <template id="big_banner_top"
     inherit_id="website_sale.products"
     name="Cycle en Terre Big Banner Top"

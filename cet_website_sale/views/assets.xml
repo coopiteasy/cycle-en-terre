@@ -13,6 +13,8 @@
       <link rel="stylesheet" type="text/less"
         href="/cet_website_sale/static/src/less/category_megamenu.less"/>
       <link rel="stylesheet" type="text/less"
+        href="/cet_website_sale/static/src/less/products_item.less"/>
+      <link rel="stylesheet" type="text/less"
         href="/cet_website_sale/static/src/less/category_breadcrumb.less"/>
     </xpath>
   </template>

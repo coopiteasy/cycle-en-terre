@@ -26,8 +26,8 @@
 
               <a t-if="not c.child_id"
                 t-att-href="keep(
-                '/shop/category/' + slug(c),
-                category=0)"
+                            '/shop/category/' + slug(c),
+                            category=0, seedling_months='', search='')"
                 t-field="c.name"/>
 
               <ul t-if="c.child_id"
@@ -56,7 +56,11 @@
                           <t t-foreach="c.child_id" t-as="cat">
                             <li t-if="col_index * len_col_xs &lt;= cat_index
                                       and cat_index &lt; (col_index + 1) * len_col_xs">
-                              <a t-att-href="keep('/shop/category/' + slug(cat), category=0)"
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
                                  t-field="cat.name"/>
                             </li>
                           </t>
@@ -70,7 +74,11 @@
                           <t t-foreach="c.child_id" t-as="cat">
                             <li t-if="col_index * len_col_sm &lt;= cat_index
                                       and cat_index &lt; (col_index + 1) * len_col_sm">
-                              <a t-att-href="keep('/shop/category/' + slug(cat), category=0)"
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
                                  t-field="cat.name"/>
                             </li>
                           </t>
@@ -84,7 +92,11 @@
                           <t t-foreach="c.child_id" t-as="cat">
                             <li t-if="col_index * len_col_md &lt;= cat_index
                                       and cat_index &lt; (col_index + 1) * len_col_md">
-                              <a t-att-href="keep('/shop/category/' + slug(cat), category=0)"
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
                                  t-field="cat.name"/>
                             </li>
                           </t>
@@ -98,7 +110,11 @@
                           <t t-foreach="c.child_id" t-as="cat">
                             <li t-if="col_index * len_col_lg &lt;= cat_index
                                       and cat_index &lt; (col_index + 1) * len_col_lg">
-                              <a t-att-href="keep('/shop/category/' + slug(cat), category=0)"
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
                                  t-field="cat.name"/>
                             </li>
                           </t>
