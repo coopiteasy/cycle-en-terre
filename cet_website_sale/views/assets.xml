@@ -9,6 +9,8 @@
     inherit_id="website.assets_frontend">
     <xpath expr="//link[last()]" position="after">
       <link rel="stylesheet" type="text/less"
+        href="/cet_website_sale/static/src/less/design.less"/>
+      <link rel="stylesheet" type="text/less"
         href="/cet_website_sale/static/src/less/category_megamenu.less"/>
       <link rel="stylesheet" type="text/less"
         href="/cet_website_sale/static/src/less/category_breadcrumb.less"/>

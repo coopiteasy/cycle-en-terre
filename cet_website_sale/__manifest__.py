@@ -15,6 +15,7 @@
         "website_sale",
         "website_sale_category_megamenu",
         "website_sale_category_breadcrumb",
+        "website_sale_product_seeds",
     ],
     "data": [
         "views/templates.xml",

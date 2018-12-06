@@ -2,7 +2,6 @@
 <!-- Copyright 2018 Coop IT Easy SCRLfs
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-<data>
 
   <template id="remove_top_pager"
     inherit_id="website_sale.products"
@@ -15,5 +14,21 @@
     </xpath>
   </template>
 
-</data>
+  <template id="big_banner_top"
+    inherit_id="website_sale.products"
+    name="Cycle en Terre Big Banner Top"
+    active="True"
+    customize_show="True">
+    <xpath expr="//div[hasclass('oe_website_sale')]" position="before">
+      <div class="big-banner-top">
+        <div class="container">
+          <t t-call="website_sale_category_megamenu.categories_megamenu"/>
+          <t t-call="website_sale_product_seeds.seedling_months">
+            <t t-set="sm_class" t-value="'oe_seedling_month_menu row nav nav-pills'"/>
+          </t>
+        </div>
+      </div>
+    </xpath>
+  </template>
+
 </odoo>
