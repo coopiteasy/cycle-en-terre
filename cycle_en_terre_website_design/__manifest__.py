@@ -4,7 +4,8 @@
 {
     'name': 'Cycle en terre Website design',
     'category': 'Website',
-    'summary': 'Design modification to look like their own WordPress Website http://www.cycle-en-terre.be',
+    'summary': 'Design modification to look like their own WordPress Website '
+               'http://www.cycle-en-terre.be',
     'website': 'http://www.cycle-en-terre.be',
     'author': 'Nicolas Jamoulle <nicolas@coopiteasy.be>',
     'depends': ['website'],
