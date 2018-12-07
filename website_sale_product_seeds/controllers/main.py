@@ -39,7 +39,7 @@ class WebsiteSale(Base):
         if 'seedling_month_ids' in request.env.context:
             seedling_month_ids = request.env.context['seedling_month_ids']
             domain.append(
-                ('seedling_months', 'in', seedling_month_ids.ids)
+                ('seedling_month_ids', 'in', seedling_month_ids.ids)
             )
         return domain
 
