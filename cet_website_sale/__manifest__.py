@@ -13,6 +13,7 @@
     'installable': True,
     "depends": [
         "website_sale",
+        "website_sale_options",
         "website_sale_category_megamenu",
         "website_sale_category_breadcrumb",
         "website_sale_product_seeds",
@@ -21,6 +22,7 @@
     "data": [
         "views/templates.xml",
         "views/website_sale_templates.xml",
+        "views/website_sale_options_templates.xml",
         "views/category_megamenu_templates.xml",
         "views/assets.xml",
     ],

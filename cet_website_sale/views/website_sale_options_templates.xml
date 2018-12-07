@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+
+  <template id="modal"
+            inherit_id="website_sale_options.modal"
+            name="Optional Products Switch Button"
+            customize_show="True"
+            active="True">
+    <xpath expr="//div[hasclass('modal-footer')]" position="replace">
+      <div class="modal-footer">
+        <a class="btn btn-default a-submit">
+          <i class="fa fa-shopping-cart fa-fw"></i>
+          &#160;
+          <span class="hidden-xs">
+            Proceed to Checkout
+          </span>
+          <span class="visible-xs-inline">Checkout</span>
+        </a>
+        <a class="btn btn-primary a-submit js_goto_shop">
+          <span class="hidden-xs">
+            Add to Cart and Continue Shopping
+          </span>
+          <span class="visible-xs-inline">
+            Add and Continue
+          </span>
+          &#160;
+          <i class="fa fa-chevron-right"></i>
+        </a>
+      </div>
+    </xpath>
+  </template>
+
+
+</odoo>
