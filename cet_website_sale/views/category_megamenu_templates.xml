@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+<data>
+
+  <template id="category_megamenu_extend"
+    inherit_id="website_sale_category_megamenu.categories_megamenu"
+    name="Cycle en Terre Category Megamenu Theme"
+    active="True"
+    customize_show="True">
+
+    <xpath expr="//div[hasclass('oe_category_megamenu')]" position="replace">
+      <div class="oe_category_megamenu navbar">
+        <ul id="categories_megamenu"
+          class="nav navbar-nav navbar-left">
+          <t t-foreach="categories" t-as="c">
+            <li t-att-class="' '.join(('dropdown',
+                                       'active' if c.id is not False else ''))">
+
+              <a t-if="c.child_id"
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                t-field="c.name"/>
+
+              <a t-if="not c.child_id"
+                t-att-href="keep(
+                            '/shop/category/' + slug(c),
+                            category=0, seedling_months='', search='')"
+                t-field="c.name"/>
+
+              <ul t-if="c.child_id"
+                class="dropdown-menu"
+                role="menu">
+
+                <div class="container">
+                  <div class="row">
+
+                    <!-- Show categories in columns -->
+
+                    <t t-set="nb_child" t-value="len(c.child_id)"/>
+                    <t t-set="nb_col_xs" t-value="2"/>
+                    <t t-set="nb_col_sm" t-value="3"/>
+                    <t t-set="nb_col_md" t-value="4"/>
+                    <t t-set="nb_col_lg" t-value="6"/>
+                    <!-- Computation trick:-(-x//y) is equivalent to ceil(x/4) -->
+                    <t t-set="len_col_xs" t-value="int(- (- nb_child // nb_col_xs))"/>
+                    <t t-set="len_col_sm" t-value="int(- (- nb_child // nb_col_sm))"/>
+                    <t t-set="len_col_md" t-value="int(- (- nb_child // nb_col_md))"/>
+                    <t t-set="len_col_lg" t-value="int(- (-nb_child // nb_col_lg))"/>
+
+                    <t t-foreach="range(nb_col_xs)" t-as="col_index">
+                      <div class="col-xs-6 visible-xs">
+                        <ul class="megamenu-column-cat">
+                          <t t-foreach="c.child_id" t-as="cat">
+                            <li t-if="col_index * len_col_xs &lt;= cat_index
+                                      and cat_index &lt; (col_index + 1) * len_col_xs">
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
+                                 t-field="cat.name"/>
+                            </li>
+                          </t>
+                        </ul>
+                      </div>
+                    </t>
+
+                    <t t-foreach="range(nb_col_sm)" t-as="col_index">
+                      <div class="col-sm-4 visible-sm">
+                        <ul class="megamenu-column-cat">
+                          <t t-foreach="c.child_id" t-as="cat">
+                            <li t-if="col_index * len_col_sm &lt;= cat_index
+                                      and cat_index &lt; (col_index + 1) * len_col_sm">
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
+                                 t-field="cat.name"/>
+                            </li>
+                          </t>
+                        </ul>
+                      </div>
+                    </t>
+
+                    <t t-foreach="range(nb_col_md)" t-as="col_index">
+                      <div class="col-md-3 visible-md">
+                        <ul class="megamenu-column-cat">
+                          <t t-foreach="c.child_id" t-as="cat">
+                            <li t-if="col_index * len_col_md &lt;= cat_index
+                                      and cat_index &lt; (col_index + 1) * len_col_md">
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
+                                 t-field="cat.name"/>
+                            </li>
+                          </t>
+                        </ul>
+                      </div>
+                    </t>
+
+                    <t t-foreach="range(nb_col_lg)" t-as="col_index">
+                      <div class="col-lg-2 visible-lg">
+                        <ul class="megamenu-column-cat">
+                          <t t-foreach="c.child_id" t-as="cat">
+                            <li t-if="col_index * len_col_lg &lt;= cat_index
+                                      and cat_index &lt; (col_index + 1) * len_col_lg">
+                              <a t-att-href="keep('/shop/category/'
+                                                  + slug(cat),
+                                                  category=0,
+                                                  seedling_months='',
+                                                  search='')"
+                                 t-field="cat.name"/>
+                            </li>
+                          </t>
+                        </ul>
+                      </div>
+                    </t>
+
+                  </div>
+                </div>
+
+              </ul>
+
+            </li>
+          </t>
+        </ul>
+      </div>
+    </xpath>
+
+  </template>
+
+</data>
+</odoo>

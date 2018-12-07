@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <template id="remove_top_pager"
+    inherit_id="website_sale.products"
+    name="Remove Top Pager and All It's Content"
+    active="True"
+    customize_show="True">
+    <xpath expr="(//div[hasclass('oe_website_sale')]
+                  //div[hasclass('products_pager')])[1]" position="replace">
+      <div class="products_pager"></div>
+    </xpath>
+  </template>
+
+
+  <template id="search_reset_filter"
+    inherit_id="website_sale.search"
+    name="Search Reset Category and Months Filters"
+    active="True"
+    customize_show="True">
+    <xpath expr="//form" position="attributes">
+      <attribute name="t-att-action">
+        keep('/shop', search=0)
+      </attribute>
+    </xpath>
+  </template>
+
+
+  <template id="big_banner_top"
+    inherit_id="website_sale.products"
+    name="Cycle en Terre Big Banner Top"
+    active="True"
+    customize_show="True">
+    <xpath expr="//div[hasclass('oe_website_sale')]" position="before">
+      <div class="big-banner-top">
+        <div class="container">
+          <t t-call="website_sale_category_megamenu.categories_megamenu"/>
+          <t t-call="website_sale_product_seeds.seedling_months">
+            <t t-set="sm_class" t-value="'oe_seedling_month_menu row nav nav-pills'"/>
+          </t>
+        </div>
+      </div>
+    </xpath>
+  </template>
+
+</odoo>

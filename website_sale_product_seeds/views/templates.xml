@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+<data>
+
+  <template id="seedling_month_main_position"
+    inherit_id="website_sale.products"
+    name="Seedling Month Selector Position">
+    <xpath expr="//div[hasclass('oe_website_sale')]
+      //div[@id='products_grid']/.." position="before">
+      <div class="oe_seedling_month row">
+      </div>
+    </xpath>
+  </template>
+
+  <template id="seedling_month_position"
+    inherit_id="website_sale_product_seeds.seedling_month_main_position"
+    name="Seedling Month Calendar"
+    active="True"
+    customize_show="True">
+    <xpath expr="//div[hasclass('oe_website_sale')]
+                 //div[hasclass('oe_seedling_month')]" position="inside">
+      <t t-call="website_sale_product_seeds.seedling_months">
+        <t t-set="sm_class" t-value="'nav nav-pills'"/>
+      </t>
+    </xpath>
+  </template>
+
+  <template id="seedling_months" name="Seedling Months">
+    <!-- For large screen -->
+    <ul t-att-class="'hidden-xs hidden-sm %s' % sm_class if sm_class else ''">
+      <t t-foreach="all_seedling_months" t-as="sm">
+        <li t-att-class="'active' if sm in seedling_months else ''">
+          <a t-att-href="keep(seedling_months=
+                         sm_add2str(seedling_months, sm)
+                         if sm not in seedling_months
+                         else sm_del2str(seedling_months, sm))"
+            t-esc="sm.name"/>
+        </li>
+      </t>
+    </ul>
+    <!-- For small screen -->
+    <ul t-att-class="'visible-xs visible-sm %s' % sm_class if sm_class else ''">
+      <t t-foreach="all_seedling_months" t-as="sm">
+        <li t-att-class="'active' if sm in seedling_months else ''">
+          <a t-att-href="keep(seedling_months=
+                         sm_add2str(seedling_months, sm)
+                         if sm not in seedling_months
+                         else sm_del2str(seedling_months, sm))"
+            t-esc="sm.name[0]"/>
+        </li>
+      </t>
+    </ul>
+  </template>
+
+</data>
+</odoo>

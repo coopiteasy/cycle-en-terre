@@ -1,0 +1,116 @@
+@color-orange: #f0b61c;
+@color-dark-orange: #a67c0a;
+@color-dark-gray: #626262;
+
+/* Main */
+.oe_cet_product_grid .oe_cet_product {
+    display: auto;
+
+    /* The line that separate products */
+    &:after {
+        content: "";
+        display: block;
+        margin: 4em auto;
+        width: 60%;
+        border-bottom: 2px solid @color-orange;
+    }
+
+    /* Image */
+    .oe_cet_product_image img {
+        width: 100%;
+    }
+
+    /* Publish button */
+    #website_published_button > div.pull-right {
+        float: none !important;
+        float: none;
+    }
+
+    /* Section */
+    section {
+        position: relative;
+        border: none;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        background: transparent;
+        overflow: auto;
+        padding: 0;
+        min-height: auto;
+        z-index: auto;
+
+        .oe_p_name {
+            > a {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 2em;
+                color: @color-orange;
+
+                &:hover {
+                    color: @color-dark-orange;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .oe_p_sub_name {
+            display: inline-block;
+            color: gray;
+            border-bottom: 1px solid @color-orange;
+        }
+
+        .oe_p_description {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .oe_details {
+            > a {
+                color: black;
+            }
+        }
+
+        .product_price {
+            margin: 0 !important;
+            margin: 0;
+
+            .oe_price_h4 {
+                margin: 0;
+            }
+        }
+
+        .oe_price {
+            color: @color-orange;
+            font-weight: bold;
+            font-size: 2em;
+            &:parent {
+                margin: 0;
+            }
+        }
+    }
+
+    /* Product quantity */
+    .product_price {
+        position: static;
+        bottom: auto;
+        padding: 0;
+    }
+
+    /* Product quantity */
+    .css_quantity {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #add_to_cart {
+        width: 100%;
+    }
+}
+
+/* No product */
+.oe_cet_product_grid .oe_cet_no_product {
+    font-size: 2em;
+    text-transform: uppercase;
+    text-align: center;
+}

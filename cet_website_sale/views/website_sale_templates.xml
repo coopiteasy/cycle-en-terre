@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+
+  <template id="products_item" name="CET Products Item Design">
+
+      <form class="js_add_cart_variants row" action="/shop/cart/update" method="post">
+        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+        <div itemscope="itemscope" itemtype="http://schema.org/Product">
+          <div class="col-xs-12 col-sm-3">
+            <div class="oe_cet_product_image">
+              <a itemprop="url" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
+                <img class="img-responsive" t-attf-src="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image" t-att-alt="product.name" />
+              </a>
+            </div>
+          </div>
+          <section class="col-xs-12 col-sm-9">
+            <div class="col-xs-12 col-sm-8">
+              <div class="oe_p_name">
+                <a itemprop="name" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" t-att-content="product.name" t-field="product.name" />
+              </div>
+              <div class="oe_p_sub_name">
+                <span class="oe_p_ref"># <t t-esc="product.id"/></span>
+                <span class="oe_p_latin_name" t-field="product.latin_name"/>
+              </div>
+              <p class="oe_p_description" t-field="product.description_sale"/>
+              <p class="oe_details">
+                <a t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
+                  More details
+                </a>
+              </p>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-right">
+              <t t-if="show_publish">
+                <div id="website_published_button" class="" groups="sales_team.group_sale_manager">
+                  <t t-call="website.publish_management">
+                    <t t-set="object" t-value="product" />
+                    <t t-set="publish_edit" t-value="True" />
+                    <t t-set="action" t-value="'product.product_template_action'" />
+                  </t>
+                </div>
+              </t>
+
+              <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer" class="js_product add_to_cart" t-if="product.product_variant_ids">
+                <!-- Price -->
+                <t t-call="website_sale.product_price" />
+                <!-- Variants -->
+                <t t-placeholder="select">
+                  <input type="hidden" class="product_id" name="product_id" t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'" />
+                  <t t-call="website_sale.variants">
+                    <t t-set="ul_class" t-value="'nav-stacked'" />
+                  </t>
+                </t>
+                <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
+
+                <div class="oe_quantity_price">
+                  <!-- Quantity Selector -->
+                  <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
+                    <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
+                      <i class="fa fa-minus"></i>
+                    </a>
+                    <input type="text" class="form-control quantity" data-min="1" name="add_qty" value="1"/>
+                    <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json">
+                      <i class="fa fa-plus"></i>
+                    </a>
+                  </div>
+                  <!-- Add to cart -->
+                  <a id="add_to_cart" class="btn btn-primary mt8 a-submit js_goto_shop" href="#">Add to Cart</a>
+                </div>
+              </div>
+
+            </div>
+          </section>
+        </div>
+      </form>
+
+  </template>
+
+
+  <template id="products_list_view"
+    inherit_id="website_sale.products"
+    name="CET Products List Design"
+    customize_show="True"
+    active="True">
+    <xpath expr="//div[@id='products_grid']" position="replace">
+      <div id="products_grid" class="oe_cet_product_grid col-md-12">
+        <t t-foreach="products" t-as="product">
+          <div class="oe_cet_product"
+            t-att-data-publish="product.website_published and 'on' or 'off'">
+            <t t-call="cet_website_sale.products_item">
+              <t t-set="show_publish" t-value="True" />
+            </t>
+          </div>
+        </t>
+        <div t-if="not products" class="oe_cet_no_product col-xs-12">
+          No product found
+        </div>
+      </div>
+    </xpath>
+  </template>
+
+</odoo>
