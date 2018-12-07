@@ -94,6 +94,9 @@
             </t>
           </div>
         </t>
+        <div t-if="not products" class="oe_cet_no_product col-xs-12">
+          No product found
+        </div>
       </div>
     </xpath>
   </template>
