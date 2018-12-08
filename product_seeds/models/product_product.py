@@ -39,9 +39,12 @@ class ProductProduct(models.Model):
         store=True,
     )
 
+    @api.multi
     def _compute_default_variant(self):
-        return self.default_variant
+        for product in self:
+            product.default_variant = product.default_variant
 
+    @api.multi
     def _inverse_default_variant(self):
         self.ensure_one()
         if self.default_variant:
