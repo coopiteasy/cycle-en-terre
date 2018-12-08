@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="product_variant_easy_edit_view">
+            <field name="name">product.product.product.form.easy</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+
+                <!-- group attribute selector -->
+                <xpath expr="//field[@name='attribute_value_ids']/.." position="before">
+                    <group string="E Commerce" name="ecommerce">
+                        <field name="variant_sale_ok"/>
+                        <field name="default_variant"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='attribute_value_ids']" position="after">
+                    <field name="covered_surface"/>
+                    <field name="label"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_normal_form_view">
+            <field name="name">product.product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <!-- group attribute selector -->
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page name="variant_information" string="Variant Information">
+                        <group name="Information">
+                            <field name="attribute_value_ids" widget="many2many_tags" readonly="1" groups="product.group_product_variant"/>
+                            <field name="covered_surface"/>
+                            <field name="weight"/>
+                            <field name="label"/>
+                        </group>
+                        <group string="E Commerce" name="ecommerce">
+                            <field name="variant_sale_ok"/>
+                            <field name="default_variant"/>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='attribute_value_ids']" position="after">
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
