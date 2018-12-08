@@ -20,6 +20,16 @@
                     <field name="covered_surface"/>
                     <field name="label"/>
                 </xpath>
+
+                <xpath expr="//group[@name='weight']" position="inside">
+                    <group>
+                        <field name="display_weight"/>
+                        <field name="weight_unit"/>
+                    </group>
+                </xpath>
+
+                <!-- todo hide weight field -->
+
             </field>
         </record>
 
@@ -29,23 +39,22 @@
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
 
-                <!-- group attribute selector -->
                 <xpath expr="//page[@name='general_information']" position="after">
                     <page name="variant_information" string="Variant Information">
+                        <field name="attribute_value_ids" widget="many2many_tags" readonly="1" groups="product.group_product_variant"/>
                         <group name="Information">
-                            <field name="attribute_value_ids" widget="many2many_tags" readonly="1" groups="product.group_product_variant"/>
-                            <field name="covered_surface"/>
-                            <field name="weight"/>
-                            <field name="label"/>
+                            <group>
+                                <field name="covered_surface"/>
+                                <field name="label"/>
+                                <field name="display_weight"/>
+                                <field name="weight_unit"/>
+                            </group>
                         </group>
                         <group string="E Commerce" name="ecommerce">
                             <field name="variant_sale_ok"/>
                             <field name="default_variant"/>
                         </group>
                     </page>
-                </xpath>
-
-                <xpath expr="//field[@name='attribute_value_ids']" position="after">
                 </xpath>
             </field>
         </record>
