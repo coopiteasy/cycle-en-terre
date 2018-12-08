@@ -18,6 +18,7 @@
 
     'data': [
         'data/data.xml',
+        'views/product_product.xml',
         'views/product_template.xml',
         'views/seedling_months.xml',
         'security/ir.model.access.csv',
