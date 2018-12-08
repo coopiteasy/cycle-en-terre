@@ -7,6 +7,10 @@ from odoo import models, fields, api
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
+    @api.model
+    def _get_kg(self):
+        return self.env['product.uom'].search([('name', '=', 'kg')])
+
     covered_surface = fields.Float(
         string='Covered Surface (m²)',
     )
@@ -23,7 +27,17 @@ class ProductProduct(models.Model):
     label = fields.Char(
         string="Label",
     )
-    # todo weight unit of measure
+
+    weight_unit = fields.Many2one(
+        comodel_name='product.uom',
+        default=_get_kg,
+        domain=[('category_id.name', '=', 'Weight')],
+    )
+    display_weight = fields.Float(
+        compute='_compute_display_weight',
+        inverse='_inverse_display_weight',
+        store=True,
+    )
 
     def _compute_default_variant(self):
         return self.default_variant
@@ -41,3 +55,20 @@ class ProductProduct(models.Model):
                 product.default_variant = False
 
         return
+
+    @api.depends('weight_unit', 'weight')
+    def _compute_display_weight(self):
+        """Default weight is set in kg, this function computes the weight
+        displayed with the product unit """
+        for product in self:
+            unit_factor = product.weight_unit.factor
+            product.display_weight = product.weight * unit_factor
+
+    @api.depends('weight_unit', 'weight', 'display_weight')
+    def _inverse_display_weight(self):
+        """Default weight is set in kg, this function computes the weight
+        displayed with the product unit """
+        for product in self:
+            # product.display_weight = product.display_weight
+            unit_factor = product.weight_unit.factor
+            product.weight = product.display_weight / unit_factor
