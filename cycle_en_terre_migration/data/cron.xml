@@ -23,4 +23,15 @@
         <field name="active" eval="False"/>
     </record>
 
+    <record id="ir_cron_delete_deprecated_attributes" model="ir.cron">
+        <field name="name">Delete deprecated attributes</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model.delete_attributes()</field>
+        <field name='interval_number'>30</field>
+        <field name='interval_type'>months</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="False"/>
+    </record>
+
 </odoo>

@@ -62,6 +62,9 @@ class ProductTemplate(models.Model):
             })
 
     def unlink_product_variant_deprecated_attribute(self):
+        """Migration 2:
+            - unlink attributes values from product.product
+            - unlink attributes lines from product.template"""
         templates = self.search([])
         logger = logging.getLogger(__name__)
         logger.info("run cron unlink_product_variant_deprecated_attribute")
@@ -90,8 +93,22 @@ class ProductTemplate(models.Model):
 
             # self.env.cr.commit()
 
+    def delete_attributes(self):
+        """
+        Migration 3;
+            - unlink all attribute values
+            - unlink all attributes
+
+        If attribute lines remain, use:
+        ```
+            delete from product_attribute_line
+            where attribute_id != <package id>
+        ```
+        """
+        logger = logging.getLogger(__name__)
         values = (
             self.env['product.attribute.value']
+                .search([('attribute_id.is_package', '=', False)])
                 .filtered(lambda v: not v.attribute_id.is_package)
         )
         logger.info('unlink %s' % values.mapped('name'))
@@ -99,6 +116,7 @@ class ProductTemplate(models.Model):
 
         attributes = (
             self.env['product.attribute']
+                .search([('is_package', '=', False)])
                 .filtered(lambda a: not a.is_package)
         )
         logger.info('unlink %s ' % attributes.mapped('name'))
