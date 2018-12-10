@@ -12,4 +12,15 @@
         <field name="active" eval="False"/>
     </record>
 
+    <record id="ir_cron_unlink_product_variant_deprecated_attribute" model="ir.cron">
+        <field name="name">Unlink product variants' deprecated attribute</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model.unlink_product_variant_deprecated_attribute()</field>
+        <field name='interval_number'>30</field>
+        <field name='interval_type'>months</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="False"/>
+    </record>
+
 </odoo>
