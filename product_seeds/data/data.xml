@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <!-- fixme -->
+    <data noupdate="0">
+
+        <record id="package_attribute" model="product.attribute">
+            <field name="name">package</field>
+            <field name="type">select</field>
+            <field name="is_package">1</field>
+        </record>
+
         <record id="january" model="seed.seedling.month">
             <field name="sequence">1</field>
             <field name="name">January</field>
