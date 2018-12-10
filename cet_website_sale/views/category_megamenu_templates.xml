@@ -18,14 +18,7 @@
             <li t-att-class="' '.join(('dropdown',
                                        'active' if c.id is not False else ''))">
 
-              <a t-if="c.child_id"
-                href="#"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                t-field="c.name"/>
-
-              <a t-if="not c.child_id"
-                t-att-href="keep(
+              <a t-att-href="keep(
                             '/shop/category/' + slug(c),
                             category=0, seedling_months='', search='')"
                 t-field="c.name"/>

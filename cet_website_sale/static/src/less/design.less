@@ -42,12 +42,16 @@
                 }
             }
 
-            > li.open {
+            > li:hover {
+                position: static;
+
                 > a {
                     background-color: rgba(255, 255, 255, 0.5);
                 }
 
                 > .dropdown-menu {
+                    display: block;
+                    width: 100%;
                     background-color: @color-orange;
                     box-shadow: none;
                     border: none;
@@ -69,7 +73,6 @@
                 }
             }
         }
-
     }
 
     .oe_seedling_month_menu {

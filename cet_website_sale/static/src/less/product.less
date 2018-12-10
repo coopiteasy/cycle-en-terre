@@ -1,0 +1,180 @@
+@color-orange: #f0b61c;
+@color-dark-orange: #a67c0a;
+@color-dark-gray: #626262;
+
+/* Main */
+.oe_cet_product_detail .oe_cet_pd_product {
+
+    /* Image */
+    .oe_cet_product_image img {
+        width: 100%;
+    }
+
+    .oe_p_name {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 2em;
+        color: black;
+    }
+
+    .oe_p_sub_name {
+        display: inline-block;
+        color: gray;
+        border-bottom: 1px solid @color-orange;
+    }
+
+    .product_price {
+        margin: 0 !important;
+        margin: 0;
+
+        .oe_price_h4 {
+            margin: 0;
+        }
+    }
+
+    .oe_price {
+        color: @color-orange;
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+
+    .oe_quantity_price {
+        .oe_p_quantity {
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        > a {
+            display: inline-block;
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+    }
+
+    #oe_collapse_product {
+        margin-top: 1em;
+        border-left: 2px solid @color-orange;
+
+        .panel-default {
+            border: none;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+
+            .panel-heading {
+                background: transparent;
+                border: none;
+                color: @color-orange;
+
+                .panel-title {
+                    font-size: 1.2em;
+
+                    > a:before {
+                        font-family: FontAwesome;
+                        content: '\f068'; // minus
+                    }
+
+                    > a.collapsed:before {
+                        font-family: FontAwesome;
+                        content: '\f067'; // plus
+                    }
+                }
+            }
+
+            .panel-body {
+                border: none;
+                text-align: justify;
+                text-justify: inter-word;
+                padding: 0;
+                padding-left: 15px;
+                margin-left: 1em;
+            }
+        }
+
+        .oe_p_alt_button {
+            padding: 15px;
+
+            > a {
+                font-size: 1.2em;
+                color: @color-orange;
+
+                &:hover {
+                    text-decoration: none;
+                    color: @color-dark-orange;
+                }
+            }
+        }
+
+        .oe_p_shop_button {
+            text-align: right;
+
+            > a {
+                display: inline-block;
+            }
+
+            .oe_p_continue_shop {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 1.2em;
+                color: black;
+
+                &:hover {
+                    text-decoration: none;
+                    color: gray;
+                }
+            }
+
+            .oe_p_checkout {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 1.2em;
+                color: @color-orange;
+
+                &:hover {
+                    text-decoration: none;
+                    color: @color-dark-orange;
+                }
+
+                &:before {
+                    content: "";
+                    border-left: 2px solid @color-orange;
+                    margin-left: 15px;
+                    margin-right: 15px;
+                }
+            }
+        }
+
+    }
+}
+
+.oe_cet_product_detail .oe_cet_pd_alt_section {
+    h2 {
+        // .col-xs-* properties
+        //padding-left: 15px;
+        //padding-right: 15px;
+        padding-bottom: 5px;
+        margin: 15px;
+        // other properties
+        text-transform: uppercase;
+        color: black;
+        border-bottom: 2px solid @color-orange;
+        font-size: 1.8em;
+        font-weight: bold;
+    }
+}
+
+
+.oe_cet_product_detail .oe_cet_pd_alt_product {
+    .oe_p_name {
+        margin-top: 5px;
+        font-size: 0.8em;
+
+        > a {
+            text-transform: uppercase;
+            color: gray;
+
+            &:hover {
+                color: black;
+            }
+        }
+    }
+}
