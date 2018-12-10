@@ -61,6 +61,9 @@
         <t t-if="category" t-call="website_sale_category_breadcrumb.category_breadcrumb_recursive">
           <t t-set="cat" t-value="category"/>
         </t>
+        <li t-if="product" class="oe_b_product_name active">
+          <t t-esc="product.name"/>
+        </li>
       </ol>
   </template>
 
