@@ -214,9 +214,46 @@ ol.breadcrumb > li + li::before {
     color: @color-deep-dark-gray;
 }
 
-/*ADD TO CART*/
-span.bt-add-to-cart {
+/*DEFAULT BUTTONS <A>*/
+
+a.btn {
+    border:none;
+    border-radius:0;
+}
+
+a.btn-primary {
     background-color: @color-orange;
-    border:4px solid @color-deep-dark-gray;
+}
+
+a.btn-primary:hover {
+    background-color: @color-dark-orange;
+    color: @color-deep-dark-gray;
+}
+
+
+/*ADD TO CART*/
+
+a#add_to_cart {
+    background-color: @color-default-background;
+    color:@color-deep-dark-gray;
+    border: none;
+    margin-bottom: -10px;
+    font-weight: bold;
+    position: relative;
+}
+
+a#add_to_cart:after {
+    content: "+";
+    font-size: 14px;
+    background-color: @color-orange;
+    border: 2px solid @color-deep-dark-gray;
     border-radius: 50%;
+    color:#fff;
+    margin: 0 0 0 8px;
+    padding: 3px;
+    font-weight: 900;
+    position: absolute;
+    top: 6px;
+    width: 30px;
+    height: 30px;
 }
