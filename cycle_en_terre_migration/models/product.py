@@ -1,5 +1,7 @@
 # © 2016 Robin Keunen, Coop IT Easy SCRL fs
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import logging
+
 from odoo import models
 
 
@@ -32,7 +34,9 @@ class ProductTemplate(models.Model):
         return month_map
 
     def migrate_variants_to_template(self):
-        """Migration 1"""
+        """Migration 1:
+            - set is_species to true
+            - migrate species, latin_name, seedling_month_data"""
         templates = self.search([])
         seedling_months = self.get_seedling_months()
 
@@ -56,3 +60,48 @@ class ProductTemplate(models.Model):
                 'seedling_month_ids':
                     [(6, 0, [m.id for m in template_months])],
             })
+
+    def unlink_product_variant_deprecated_attribute(self):
+        templates = self.search([])
+        logger = logging.getLogger(__name__)
+        logger.info("run cron unlink_product_variant_deprecated_attribute")
+
+        for template in templates:
+            logger.info(template.name)
+            variants = template.product_variant_ids
+
+            for variant in variants:
+                attribute_values = (
+                    variant
+                    .mapped('attribute_value_ids')
+                    .filtered(lambda av: not av.attribute_id.is_package)
+                )
+                logger.info(attribute_values.mapped('name'))
+                variant.attribute_value_ids = [
+                    (3, av.id, 0) for av in attribute_values]
+
+            attribute_lines = (
+                template
+                .attribute_line_ids
+                .filtered(lambda al: not al.attribute_id.is_package)
+            )
+            template.attribute_line_ids = [
+                (3, al.id, 0) for al in attribute_lines]
+
+            # self.env.cr.commit()
+
+        values = (
+            self.env['product.attribute.value']
+                .filtered(lambda v: not v.attribute_id.is_package)
+        )
+        logger.info('unlink %s' % values.mapped('name'))
+        values.unlink()
+
+        attributes = (
+            self.env['product.attribute']
+                .filtered(lambda a: not a.is_package)
+        )
+        logger.info('unlink %s ' % attributes.mapped('name'))
+        attributes.unlink()
+
+        return
