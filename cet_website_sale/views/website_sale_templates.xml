@@ -57,17 +57,19 @@
 
                 <div class="oe_quantity_price">
                   <!-- Quantity Selector -->
-                  <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
-                    <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
-                      <i class="fa fa-minus"></i>
-                    </a>
-                    <input type="text" class="form-control quantity" data-min="1" name="add_qty" value="1"/>
-                    <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json">
-                      <i class="fa fa-plus"></i>
-                    </a>
+                  <div class="oe_p_quantity">
+                    <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
+                      <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
+                        <i class="fa fa-minus"></i>
+                      </a>
+                      <input type="text" class="form-control quantity" data-min="1" name="add_qty" value="1"/>
+                      <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json">
+                        <i class="fa fa-plus"></i>
+                      </a>
+                    </div>
                   </div>
                   <!-- Add to cart -->
-                  <a id="add_to_cart" class="btn btn-primary mt8 a-submit js_goto_shop" href="#">Add to Cart</a>
+                  <a id="add_to_cart" class="btn btn-primary pull-right js_check_product a-submit js_goto_shop" href="#">Add to Cart</a>
                 </div>
               </div>
 
