@@ -14,6 +14,7 @@
     'depends': [
         'product',
         'sale',
+        'stock',
         'website_sale',
     ],
 
