@@ -1,15 +1,23 @@
 # © 2016 Robin Keunen, Coop IT Easy SCRL fs
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     @api.model
-    def _get_kg(self):
-        return self.env['product.uom'].search([('name', '=', 'kg')])
+    def _get_g(self):
+        g = self.env['product.uom'].search([('name', '=', 'g')])
+
+        if not g:
+            raise ValidationError(_('Missing reference weight g'))
+        elif len(g) == 1:
+            return g
+        else:
+            raise ValidationError(_('Several units named g'))
 
     covered_surface = fields.Float(
         string='Covered Surface (m²)',
@@ -30,8 +38,8 @@ class ProductProduct(models.Model):
 
     weight_unit = fields.Many2one(
         comodel_name='product.uom',
-        default=_get_kg,
-        domain=[('category_id.name', '=', 'Weight')],
+        default=_get_g,
+        # domain=<weight category>, # todo
     )
     display_weight = fields.Float(
         compute='_compute_display_weight',
@@ -72,6 +80,5 @@ class ProductProduct(models.Model):
         """Default weight is set in kg, this function computes the weight
         displayed with the product unit """
         for product in self:
-            # product.display_weight = product.display_weight
             unit_factor = product.weight_unit.factor
             product.weight = product.display_weight / unit_factor
