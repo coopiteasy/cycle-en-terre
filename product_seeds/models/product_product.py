@@ -34,6 +34,7 @@ class ProductProduct(models.Model):
     # todo migrate to many2many
     label = fields.Char(
         string="Label",
+        translate=True,
     )
 
     weight_unit = fields.Many2one(
