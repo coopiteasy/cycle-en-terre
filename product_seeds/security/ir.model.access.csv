@@ -4,3 +4,4 @@ access_seed_package,access_seed_package,model_seed_package,base.group_user,1,1,1
 access_product_uom_uom,access_product_uom,product.model_product_uom,product.group_uom,1,1,1,0
 stock.access_product_uom_stock_manager,stock.access_product_uom_stock_manager,product.model_product_uom,stock.group_stock_manager,1,0,0,0
 sale.access_product_uom_sale_manager,product.uom salemanager,product.model_product_uom,sales_team.group_sale_manager,1,0,0,0
+access_seed_product_category,access_seed_product_category,model_seed_product_category,base.group_user,1,1,1,1

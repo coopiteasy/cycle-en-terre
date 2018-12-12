@@ -5,6 +5,15 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
+class VariantCategory(models.Model):
+    _name = 'seed.product.category'
+
+    name = fields.Char(
+        string='Name',
+        translate=True,
+    )
+
+
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
@@ -35,7 +44,6 @@ class ProductProduct(models.Model):
     label = fields.Char(
         string="Label",
     )
-
     weight_unit = fields.Many2one(
         comodel_name='product.uom',
         default=_get_g,
@@ -45,6 +53,10 @@ class ProductProduct(models.Model):
         compute='_compute_display_weight',
         inverse='_inverse_display_weight',
         store=True,
+    )
+    variant_category_id = fields.Many2one(
+        comodel_name='seed.product.category',
+        string='Variant Category',
     )
 
     @api.multi
