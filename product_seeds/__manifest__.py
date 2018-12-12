@@ -23,6 +23,7 @@
         'views/product_product.xml',
         'views/product_template.xml',
         'views/seed_package.xml',
+        'views/product_product_category.xml',
         'views/seedling_months.xml',
         'security/ir.model.access.csv',
     ],

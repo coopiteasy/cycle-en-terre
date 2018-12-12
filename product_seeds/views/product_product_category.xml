@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_seed_product_category_form" model="ir.ui.view">
+        <field name="name">seed.product.category.form</field>
+        <field name="model">seed.product.category</field>
+        <field name="arch" type="xml">
+            <form name="seed_product_category_form" string="Variant Category">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_seed_product_category_tree" model="ir.ui.view">
+        <field name="name">seed.product.category.tree</field>
+        <field name="model">seed.product.category</field>
+        <field name="arch" type="xml">
+            <tree name="seed_product_category_tree" string="Variant Categories">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_seed_product_category_tree" model="ir.actions.act_window">
+        <field name="name">Variant Categories</field>
+        <field name="view_mode">tree,form</field>
+        <field name="res_model">seed.product.category</field>
+        <field name="view_id" ref="view_seed_product_category_tree"/>
+    </record>
+
+    <menuitem id="menu_seed_product_category_tree"
+              name="Variant Categories"
+              action="action_seed_product_category_tree"
+              parent="sale.product_menu_catalog"
+            />
+</odoo>
