@@ -30,25 +30,35 @@
   <template id="seedling_months" name="Seedling Months">
     <!-- For large screen -->
     <ul t-att-class="'hidden-xs hidden-sm %s' % sm_class if sm_class else ''">
+      <li t-att-class="'active' if not seedling_months else ''">
+        <a t-att-href="keep(seedling_months='')">
+          All
+        </a>
+      </li>
       <t t-foreach="all_seedling_months" t-as="sm">
         <li t-att-class="'active' if sm in seedling_months else ''">
           <a t-att-href="keep(seedling_months=
                          sm_add2str(seedling_months, sm)
                          if sm not in seedling_months
                          else sm_del2str(seedling_months, sm))"
-            t-esc="sm.name"/>
+             t-esc="sm.name"/>
         </li>
       </t>
     </ul>
     <!-- For small screen -->
     <ul t-att-class="'visible-xs visible-sm %s' % sm_class if sm_class else ''">
+      <li t-att-class="'active' if not seedling_months else ''">
+        <a t-att-href="keep(seedling_months='')">
+          All
+        </a>
+      </li>
       <t t-foreach="all_seedling_months" t-as="sm">
         <li t-att-class="'active' if sm in seedling_months else ''">
           <a t-att-href="keep(seedling_months=
                          sm_add2str(seedling_months, sm)
                          if sm not in seedling_months
                          else sm_del2str(seedling_months, sm))"
-            t-esc="sm.name[0]"/>
+             t-esc="sm.name[0]"/>
         </li>
       </t>
     </ul>
