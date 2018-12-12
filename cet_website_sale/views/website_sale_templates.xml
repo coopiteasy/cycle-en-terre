@@ -196,6 +196,124 @@
                 <div class="panel-body" t-field="product.culture_information"/>
               </div>
             </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="oe_collapse_p_species_info">
+                <h4 class="panel-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" href="#oe_p_species_info" aria-expanded="false" aria-controls="oe_p_species_info">
+                    Species information
+                  </a>
+                </h4>
+              </div>
+              <div id="oe_p_species_info" class="panel-collapse collapse" role="tabpanel" aria-labelledby="oe_collapse_p_species_info">
+                <div class="panel-body">
+                  <p t-field="product.species_information"/>
+                  <div class="oe_p_species_info_content">
+                    <ul>
+                      <li t-if="product.seedling_month_ids">
+                        <label>Seedling Months:</label>
+                        <t t-foreach="start_end_months(product.seedling_month_ids)" t-as="sq_months">
+                          <t t-if="len(sq_months) == 2">
+                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                          </t>
+                          <t t-if="len(sq_months) == 1">
+                            <t t-esc="sq_months[0].name"/>
+                          </t>
+                          <t t-if="not sq_months_last">, </t>
+                        </t>
+                      </li>
+                      <li t-if="product.density">
+                        <label>Density (g/10 m<sup>2</sup>):</label>
+                        <span t-field="product.density"/>
+                      </li>
+                      <li t-if="product.thousand_grain_weight">
+                        <label>Thousand Grain Weight (g):</label>
+                        <span t-field="product.thousand_grain_weight"/>
+                      </li>
+                      <li t-if="product.emergence">
+                        <label>Emergence (days):</label>
+                        <span t-field="product.emergence"/>
+                      </li>
+                      <li t-if="product.germination">
+                        <label>Germination:</label>
+                        <span t-field="product.germination"/>
+                      </li>
+                      <li t-if="product.light_requirements">
+                        <label>Light Requirements:</label>
+                        <span t-field="product.light_requirements"/>
+                      </li>
+                      <li t-if="product.spacing_between_lines">
+                        <label>Spacing Between Lines:</label>
+                        <span t-field="product.spacing_between_lines"/>
+                      </li>
+                      <li t-if="product.spacing_within_line">
+                        <label>Spacing Between Lines:</label>
+                        <span t-field="product.spacing_within_line"/>
+                      </li>
+                      <li t-if="product.flowering_month_ids">
+                        <label>Flowering Months:</label>
+                        <t t-foreach="start_end_months(product.flowering_month_ids)" t-as="sq_months">
+                          <t t-if="len(sq_months) == 2">
+                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                          </t>
+                          <t t-if="len(sq_months) == 1">
+                            <t t-esc="sq_months[0].name"/>
+                          </t>
+                          <t t-if="not sq_months_last">, </t>
+                        </t>
+                      </li>
+                      <li t-if="product.harvest_month_ids">
+                        <label>Harvest Months:</label>
+                        <t t-foreach="start_end_months(product.harvest_month_ids)" t-as="sq_months">
+                          <t t-if="len(sq_months) == 2">
+                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                          </t>
+                          <t t-if="len(sq_months) == 1">
+                            <t t-esc="sq_months[0].name"/>
+                          </t>
+                          <t t-if="not sq_months_last">, </t>
+                        </t>
+                      </li>
+                      <li t-if="product.sowing_indoors_month_ids">
+                        <label>Sowing Indoors Months:</label>
+                        <t t-foreach="start_end_months(product.sowing_indoors_month_ids)" t-as="sq_months">
+                          <t t-if="len(sq_months) == 2">
+                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                          </t>
+                          <t t-if="len(sq_months) == 1">
+                            <t t-esc="sq_months[0].name"/>
+                          </t>
+                          <t t-if="not sq_months_last">, </t>
+                        </t>
+                      </li>
+                      <li t-if="product.sowing_outoors_month_ids">
+                        <label>Sowing Outdoors Months:</label>
+                        <t t-foreach="start_end_months(product.sowing_outoors_month_ids)" t-as="sq_months">
+                          <t t-if="len(sq_months) == 2">
+                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                          </t>
+                          <t t-if="len(sq_months) == 1">
+                            <t t-esc="sq_months[0].name"/>
+                          </t>
+                          <t t-if="not sq_months_last">, </t>
+                        </t>
+                      </li>
+                      <li t-if="product.pot_planting_month_ids">
+                        <label>Pot Planting Months:</label>
+                        <t t-foreach="start_end_months(product.pot_planting_month_ids)" t-as="sq_months">
+                          <t t-if="len(sq_months) == 2">
+                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                          </t>
+                          <t t-if="len(sq_months) == 1">
+                            <t t-esc="sq_months[0].name"/>
+                          </t>
+                          <t t-if="not sq_months_last">, </t>
+                        </t>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="oe_p_alt_button">
               <a href="#oe_p_recipe" t-if="product.recipe">
                 <i class="fa fa-chevron-down"></i> Recipe
