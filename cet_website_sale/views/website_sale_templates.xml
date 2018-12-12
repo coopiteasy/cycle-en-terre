@@ -108,14 +108,14 @@
     <section id="product_detail" t-attf-class="oe_cet_product_detail container oe_website_sale #{(compute_currency(product.lst_price) - product.website_price) &gt; 0.01 and website.get_current_pricelist().discount_policy == 'without_discount'  and 'discount'}">
       <!-- Breadcrumb -->
       <div class="oe_category_breadcrumb row">
-        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+        <div class="col-xs-12 col-sm-8 col-md-9">
           <t t-call="website_sale_category_breadcrumb.category_breadcrumb">
             <t t-set="b_class" t-value="'breadcrumb'"/>
           </t>
         </div>
         <t t-call="website_sale.search">
           <t t-set="search_class"
-             t-value="'col-xs-12 col-sm-4 col-md-3 col-lg-2 o_website_sale_search'"/>
+             t-value="'col-xs-12 col-sm-4 col-md-3 o_website_sale_search'"/>
         </t>
       </div>
       <!-- Action button -->
