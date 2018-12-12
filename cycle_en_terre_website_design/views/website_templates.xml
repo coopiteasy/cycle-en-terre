@@ -11,7 +11,7 @@
   <template id="website_layout_background_image_footer" name="Design Cycle en Terre background-image footer"
     inherit_id="website.footer_custom">
     <xpath expr="//div[@id='footer']" position="before">
-      <div class="bg-img-footer"></div>
+      <img class="wave-footer" alt="Background footer image" src="/cycle_en_terre_website_design/static/src/img/vague-orange.jpg"></img>
     </xpath>
   </template>
 </odoo>
