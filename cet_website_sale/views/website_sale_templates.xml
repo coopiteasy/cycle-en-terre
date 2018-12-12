@@ -126,6 +126,7 @@
       </div>
       <!-- Product -->
       <div class="oe_cet_pd_product row">
+        <!-- Image -->
         <div class="col-xs-12 col-sm-5 col-md-6">
           <div class="oe_cet_product_image">
             <img class="img-responsive"
@@ -134,6 +135,7 @@
               itemprop="image"/>
           </div>
         </div>
+        <!-- Informatinos -->
         <div class="col-xs-12 col-sm-7 col-md-6">
           <div class="oe_p_name" t-field="product.name" itemprop="name"/>
           <span itemprop="url" class="hidden" t-esc="'%sshop/product/%s' % (request.httprequest.url_root, slug(product))"/>
@@ -173,7 +175,7 @@
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="oe_collapse_p_description">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#oe_collapse_product" href="#oe_p_description" aria-expanded="true" aria-controls="oe_p_description">
+                  <a role="button" data-toggle="collapse" href="#oe_p_description" aria-expanded="true" aria-controls="oe_p_description">
                     Description
                   </a>
                 </h4>
@@ -183,14 +185,14 @@
               </div>
             </div>
             <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="oe_collapse_p_info">
+              <div class="panel-heading" role="tab" id="oe_collapse_p_cult_info">
                 <h4 class="panel-title">
-                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#oe_collapse_product" href="#oe_p_info" aria-expanded="false" aria-controls="oe_p_info">
+                  <a role="button" data-toggle="collapse" href="#oe_p_cult_info" aria-expanded="true" aria-controls="oe_p_cult_info">
                     Culture Information
                   </a>
                 </h4>
               </div>
-              <div id="oe_p_info" class="panel-collapse collapse" role="tabpanel" aria-labelledby="oe_collapse_p_info">
+              <div id="oe_p_cult_info" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="oe_collapse_p_cult_info">
                 <div class="panel-body" t-field="product.culture_information"/>
               </div>
             </div>
