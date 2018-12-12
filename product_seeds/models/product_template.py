@@ -69,31 +69,39 @@ class ProductTemplate(models.Model):
     )
     germination = fields.Char(
         string='Germination',
+        translate=True,
     )
     thousand_grain_weight = fields.Float(
         string='Thousand Grain Weight (g)',
     )
     species_information = fields.Text(
         string='Species Information',
+        translate=True,
     )
     culture_information = fields.Text(
         string='Culture Information',
+        translate=True,
     )
     recipe = fields.Html(
         string='Recipe',
+        translate=True,
     )
     beemeadow = fields.Boolean(
         string='Beemeadow',
     )
     spacing_between_lines = fields.Char(
         string='Spacing Between Lines',
+        translate=True,
     )
     spacing_within_line = fields.Char(
         string='Spacing Within Line',
+        translate=True,
     )
     light_requirements = fields.Char(
         string='Light Requirements',
+        translate=True,
     )
     comment = fields.Text(
         string='Comment',
+        translate=True,
     )
