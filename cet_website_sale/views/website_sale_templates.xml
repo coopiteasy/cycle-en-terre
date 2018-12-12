@@ -50,14 +50,9 @@
                 <!-- Price -->
                 <t t-call="website_sale.product_price" />
                 <!-- Variants -->
-                <t t-placeholder="select">
-                  <input type="hidden" class="product_id" name="product_id" t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'" />
-                  <t t-call="website_sale.variants">
-                    <t t-set="ul_class" t-value="'nav-stacked'" />
-                  </t>
+                <t t-call="cet_website_sale.product_variants">
+                  <t t-set="radio_position" t-value="'after'"/>
                 </t>
-                <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
-
                 <div class="oe_quantity_price">
                   <!-- Quantity Selector -->
                   <div class="oe_p_quantity">
@@ -152,11 +147,8 @@
             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
             <div class="js_product" t-if="product.product_variant_ids">
               <t t-call="website_sale.product_price" />
-              <t t-placeholder="select">
-                <input type="hidden" class="product_id" name="product_id" t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'" />
-                <t t-call="website_sale.variants">
-                  <t t-set="ul_class" t-value="'nav-stacked'" />
-                </t>
+              <t t-call="cet_website_sale.product_variants">
+                <t t-set="radio_position" t-value="'before'"/>
               </t>
               <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
               <div class="oe_quantity_price">
@@ -252,5 +244,49 @@
     </xpath>
   </template>
 
+
+  <template id="product_variants">
+    <t t-set="radio_position" t-value="'before'" t-if="not radio_position"/>
+
+    <input type="hidden" t-if="len(product.product_variant_ids) == 1" class="product_id" name="product_id" t-att-value="product.product_variant_id.id"/>
+
+    <t t-if="len(product.product_variant_ids) &gt; 1">
+      <div class="oe_cet_product_variant">
+        <t t-foreach="product.product_variant_ids" t-as="variant_id">
+          <div class="radio">
+            <label label-default="label-default" t-if="variant_id.variant_sale_ok" t-att-class="radio_position">
+              <input type="radio" name="product_id"
+                t-if="radio_position == 'before'"
+                class="js_product_change"
+                t-att-checked="'checked' if variant_id.default_variant else None"
+                t-att-value="variant_id.id"
+                t-att-data-lst_price="compute_currency(variant_id.lst_price)"
+                t-att-data-price="variant_id.price"/>
+
+              Portion (<t t-esc="variant_id.display_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
+              <span t-if="variant_id.covered_surface">
+                - <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
+              </span>
+
+              <input type="radio" name="product_id"
+                t-if="radio_position == 'after'"
+                class="js_product_change"
+                t-att-checked="'checked' if variant_id.default_variant else None"
+                t-att-value="variant_id.id"
+                t-att-data-lst_price="compute_currency(variant_id.lst_price)"
+                t-att-data-price="variant_id.price"/>
+            </label>
+          </div>
+        </t>
+      </div>
+
+    </t>
+    <t t-else="">
+
+      <t t-set="attribute_value_ids" t-value="get_attribute_value_ids(product)"/>
+      <ul class="hidden js_add_cart_variants" t-att-data-attribute_value_ids="json.dumps(attribute_value_ids)"/>
+
+    </t>
+  </template>
 
 </odoo>
