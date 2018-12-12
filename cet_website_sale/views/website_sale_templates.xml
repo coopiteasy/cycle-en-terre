@@ -9,14 +9,14 @@
       <form class="js_add_cart_variants row" action="/shop/cart/update" method="post">
         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
         <div itemscope="itemscope" itemtype="http://schema.org/Product">
-          <div class="col-xs-12 col-sm-3">
+          <div class="col-xs-12 col-sm-2">
             <div class="oe_cet_product_image">
               <a itemprop="url" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
                 <img class="img-responsive" t-attf-src="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image" t-att-alt="product.name" />
               </a>
             </div>
           </div>
-          <section class="col-xs-12 col-sm-9">
+          <section class="col-xs-12 col-sm-10">
             <div class="col-xs-12 col-sm-8">
               <div class="oe_p_name">
                 <a itemprop="name" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" t-att-content="product.name" t-field="product.name" />
