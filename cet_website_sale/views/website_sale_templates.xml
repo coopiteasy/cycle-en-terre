@@ -22,10 +22,13 @@
                 <a itemprop="name" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" t-att-content="product.name" t-field="product.name" />
               </div>
               <div class="oe_p_sub_name">
-                <span class="oe_p_ref"># <t t-esc="product.id"/></span>
+                <t t-foreach="product.product_variant_ids" t-as="p">
+                  <span class="oe_p_ref" t-if="p.default_variant"># <t t-esc="p.default_code"/></span>
+                </t>
                 <span class="oe_p_latin_name" t-field="product.latin_name"/>
               </div>
-              <p class="oe_p_description" t-field="product.description_sale"/>
+              <p class="oe_p_species_info" t-if="product.species_information and len(product.species_information) &gt; 250" t-esc="product.species_information[0:250]"/>
+              <p class="oe_p_species_info" t-if="product.species_information and len(product.species_information) &lt;= 250" t-esc="product.species_information"/>
               <p class="oe_details">
                 <a t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
                   More details
@@ -140,7 +143,9 @@
           <div class="oe_p_name" t-field="product.name" itemprop="name"/>
           <span itemprop="url" class="hidden" t-esc="'%sshop/product/%s' % (request.httprequest.url_root, slug(product))"/>
           <div class="oe_p_sub_name">
-            <span class="oe_p_ref"># <t t-esc="product.id"/></span>
+            <t t-foreach="product.product_variant_ids" t-as="p">
+              <span class="oe_p_ref" t-if="p.default_variant"># <t t-esc="p.default_code"/></span>
+            </t>
             <span class="oe_p_latin_name" t-field="product.latin_name"/>
           </div>
           <form action="/shop/cart/update" class="js_add_cart_variants" method="POST">
