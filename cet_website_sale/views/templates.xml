@@ -45,4 +45,16 @@
     </xpath>
   </template>
 
+  <template id="product_category_megamenu"
+    inherit_id="website_sale.product"
+    name="Category Mega-menu on Top"
+    active="True"
+    customize_show="True">
+    <xpath expr="//div[hasclass('js_sale')]" position="before">
+      <div class="container">
+        <t t-call="website_sale_category_megamenu.categories_megamenu"/>
+      </div>
+    </xpath>
+  </template>
+
 </odoo>
