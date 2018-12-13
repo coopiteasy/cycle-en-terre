@@ -1,6 +1,8 @@
 @color-orange: #f0b61c;
-@color-dark-orange: #a67c0a;
+@color-dark-orange: #e2ab19;
+@color-deep-dark-orange: #a67c0a;
 @color-dark-gray: #626262;
+@color-deep-dark-gray: #444;
 
 .big-banner-top {
     width: 100%;
@@ -111,3 +113,102 @@
     }
 }
 
+.oe_category_breadcrumb {
+    /* Search Box */
+    .o_website_sale_search {
+
+        .form-control {
+            border: 1px solid @color-orange;
+        }
+
+        .btn {
+            border: 1px solid @color-orange;
+            background-color: @color-orange;
+            border-radius: 0;
+        }
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+
+        > li + li:before {
+            content: ">";
+        }
+
+        > li > a {
+            color: black;
+        }
+    }
+}
+
+/* Default bootstrap overwrite */
+.popover, .modal-content {
+    border-radius: 0;
+}
+
+/* Payement */
+ul.wizard li.text-primary {
+    background: @color-orange;
+
+    > a {
+        color: @color-dark-orange;
+    }
+
+    .chevron::before {
+        border-left: 10px solid @color-orange;
+    }
+}
+
+.text-primary {
+    color: @color-dark-orange;
+}
+
+/* Add to cart */
+#add_to_cart {
+    background-color: transparent;
+    border: none;
+    color: @color-deep-dark-gray;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:hover {
+        color: black;
+    }
+
+    &:active,.active {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    &:after {
+        content: "\f067";
+        font-family: FontAwesome;
+        background-color: @color-orange;
+        border-radius: 50%;
+        border: 2px solid @color-deep-dark-gray;
+        color:#ffffff;
+        margin-left: 10px;
+        padding: 6px;
+    }
+}
+
+/* Quantity selector */
+.oe_p_quantity {
+
+    .css_quantity {
+        max-width: 5em;
+    }
+
+    .input-group-addon {
+        font-size: 0.8em;
+        padding-left: 2px;
+        padding-right: 2px;
+        border-radius: 0;
+        background-color: @color-orange;
+        color: @color-dark-orange;
+
+        &:hover {
+            color: black;
+        }
+    }
+}
