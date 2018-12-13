@@ -246,7 +246,7 @@
                         <span t-field="product.spacing_between_lines"/>
                       </li>
                       <li t-if="product.spacing_within_line">
-                        <label>Spacing Between Lines:</label>
+                        <label>Spacing Within Lines:</label>
                         <span t-field="product.spacing_within_line"/>
                       </li>
                       <li t-if="product.flowering_month_ids">
