@@ -23,7 +23,7 @@
 
                 <xpath expr="//group[@name='weight']" position="inside">
                     <group>
-                        <field name="display_weight"/>
+                        <field name="seed_weight"/>
                         <field name="weight_unit"/>
                     </group>
                 </xpath>
@@ -46,7 +46,7 @@
                             <group>
                                 <field name="covered_surface"/>
                                 <field name="label"/>
-                                <field name="display_weight"/>
+                                <field name="seed_weight"/>
                                 <field name="weight_unit"/>
                             </group>
                         </group>

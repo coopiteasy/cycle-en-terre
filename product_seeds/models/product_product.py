@@ -38,14 +38,22 @@ class ProductProduct(models.Model):
     )
 
     weight_unit = fields.Many2one(
+        string='Weight Unit',
         comodel_name='product.uom',
         default=_get_g,
         # domain=<weight category>, # todo
     )
-    display_weight = fields.Float(
-        compute='_compute_display_weight',
-        inverse='_inverse_display_weight',
+    package_weight = fields.Float(
+        string='Package Weight',
+        compute='_compute_package_weight',
+        inverse='_inverse_package_weight',
         store=True,
+        help='Total package weight (seed and container), layer over weight '
+             'field.',
+    )
+    seed_weight = fields.Float(
+        string='Seed Weight',
+        help='Seed Weight',
     )
 
     @api.multi
@@ -69,17 +77,17 @@ class ProductProduct(models.Model):
         return
 
     @api.depends('weight_unit', 'weight')
-    def _compute_display_weight(self):
+    def _compute_package_weight(self):
         """Default weight is set in kg, this function computes the weight
         displayed with the product unit """
         for product in self:
             unit_factor = product.weight_unit.factor
-            product.display_weight = product.weight * unit_factor
+            product.package_weight = product.weight * unit_factor
 
-    @api.depends('weight_unit', 'weight', 'display_weight')
-    def _inverse_display_weight(self):
+    @api.depends('weight_unit', 'weight', 'package_weight')
+    def _inverse_package_weight(self):
         """Default weight is set in kg, this function computes the weight
         displayed with the product unit """
         for product in self:
             unit_factor = product.weight_unit.factor
-            product.weight = product.display_weight / unit_factor
+            product.weight = product.package_weight / unit_factor

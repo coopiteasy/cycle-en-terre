@@ -18,7 +18,7 @@ class ProductAttributeValue(models.Model):
         attribute = super(ProductAttributeValue, self).create(vals)
 
         if (attribute.attribute_id.is_package
-                and not 'seed_package' in self._context):
+                and 'seed_package' not in self._context):
             (self.env['seed.package']
                  .create({'attribute_value_id': attribute.id}))
 
@@ -45,7 +45,8 @@ class SeedPackage(models.Model):
 
         vals['attribute_id'] = package_attribute.pop()
 
-        package = super(SeedPackage, self.with_context(seed_package=True)).create(vals)
+        package = super(SeedPackage,
+                        self.with_context(seed_package=True)).create(vals)
         return package
 
     @api.constrains('attribute_value_id')
