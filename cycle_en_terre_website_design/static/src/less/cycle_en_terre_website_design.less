@@ -12,19 +12,20 @@
 
 /*MAIN TAGS*/
 
-a {
+a, .btn-link {
     color: @color-orange;
     outline: 0;
     text-decoration: none;
     &:hover {
         color: @color-deep-dark-orange;
-        text-decoration:underline;
+        text-decoration: underline;
     }
     &:visited, &:focus {
         outline: 0;
         text-decoration: none;
     }
 }
+
 
 /*HEADER*/
 
@@ -191,8 +192,8 @@ ul.pagination>li.active>a {
 .btn-primary {
     background-color: @color-orange;
     border-color: @color-orange;
-    color: @color-dark-orange;
-    &:focus, &:hover, &:active, &:active:focus {
+    color: @color-deep-dark-gray;
+    &:focus, &:hover, &:active, &:active:focus, &:active:hover {
         color: black;
         background-color: @color-dark-orange;
         border-color: @color-dark-orange;
