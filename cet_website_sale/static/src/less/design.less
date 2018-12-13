@@ -151,7 +151,7 @@
     border-radius: 0;
 }
 
-/* Payement */
+/* Payment */
 ul.wizard li.text-primary {
     background: @color-orange;
 
@@ -171,6 +171,23 @@ ul.wizard li.text-primary {
 .border_primary {
     border-color: @color-dark-orange;
     border-radius: 0
+}
+
+/* Confirm */
+
+.panel {
+    border-radius: 0;
+
+    &.panel-info {
+        border-color: @color-orange;
+    }
+
+    &.panel-info > .panel-heading {
+        border-radius: 0;
+        color: @color-deep-dark-gray;
+        background-color: @color-orange;
+        border-color: @color-orange;
+    }
 }
 
 /* Add to cart */
