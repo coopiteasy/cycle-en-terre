@@ -9,6 +9,33 @@ from odoo.addons.website.controllers.main import QueryURL
 from odoo.addons.website_sale.controllers.main import WebsiteSale as Base
 
 
+def start_end_months(months):
+    """Example, get months = seed.seedling.month(2, 3, 4, 6, 8) this
+    returns :
+        [
+            [2, 4],
+            [6],
+            [8],
+        ]
+    """
+    ordered_months = months.sorted(key='sequence')
+    result = []
+    tmp_sequence = []
+    previous_month = None
+    for month in ordered_months:
+        if not tmp_sequence:
+            tmp_sequence.append(month)
+        elif previous_month.sequence + 1 != month.sequence:
+            result.append(tmp_sequence)
+            tmp_sequence = [month]
+        previous_month = month
+    if tmp_sequence:
+        if tmp_sequence[-1].sequence != previous_month.sequence:
+            tmp_sequence.append(previous_month)
+        result.append(tmp_sequence)
+    return result
+
+
 def seedling_months_to_list(seedling_months=""):
     if seedling_months:
         return [int(x) for x in seedling_months.split("-")]
@@ -89,4 +116,10 @@ class WebsiteSale(Base):
         response.qcontext['sm_add2str'] = seedling_months_add_to_str
         response.qcontext['sm_del2str'] = seedling_months_del_to_str
 
+        return response
+
+    @http.route()
+    def product(self, product, category='', search='', **kwargs):
+        response = super().product(product, category, search, **kwargs)
+        response.qcontext['start_end_months'] = start_end_months
         return response
