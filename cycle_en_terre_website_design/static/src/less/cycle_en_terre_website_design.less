@@ -12,19 +12,20 @@
 
 /*MAIN TAGS*/
 
-a {
+a, .btn-link {
     color: @color-orange;
     outline: 0;
     text-decoration: none;
     &:hover {
         color: @color-deep-dark-orange;
-        text-decoration:underline;
+        text-decoration: underline;
     }
     &:visited, &:focus {
         outline: 0;
         text-decoration: none;
     }
 }
+
 
 /*HEADER*/
 
@@ -175,10 +176,31 @@ img.wave-footer {
 
 /* PAGER */
 
-ul.pagination>li.active>a {
-    background-color: @color-orange;
-    border-color: @color-orange;
-    color: #fff;
+.pagination {
+
+    > li > a {
+        color: @color-orange;
+
+        &:hover, &:focus, &:active, &:focus:active {
+            background-color: @color-orange;
+            border-color: @color-orange;
+            color: white;
+        }
+    }
+
+    li.active > a, li.active > a:hover {
+        background-color: @color-orange;
+        border-color: @color-orange;
+        color: white;
+    }
+
+    > li:first-child > a {
+        border-radius: 0;
+    }
+
+    > li:last-child > a {
+        border-radius: 0;
+    }
 }
 
 
@@ -191,8 +213,8 @@ ul.pagination>li.active>a {
 .btn-primary {
     background-color: @color-orange;
     border-color: @color-orange;
-    color: @color-dark-orange;
-    &:focus, &:hover, &:active, &:active:focus {
+    color: @color-deep-dark-gray;
+    &:focus, &:hover, &:active, &:active:focus, &:active:hover {
         color: black;
         background-color: @color-dark-orange;
         border-color: @color-dark-orange;
@@ -204,6 +226,20 @@ ul.pagination>li.active>a {
     border-radius: 0;
 }
 
-.label-primary {
+.label-primary, .badge {
     background-color: @color-orange;
+}
+
+body .text-primary {
+    color: @color-deep-dark-orange;
+}
+
+.page-header {
+    // other properties
+    text-transform: uppercase;
+    color: black;
+    border-bottom: 2px solid @color-orange;
+    font-size: 1.8em;
+    font-weight: bold;
+
 }

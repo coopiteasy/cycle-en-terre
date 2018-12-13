@@ -53,6 +53,7 @@
     }
 }
 
+/* Category Megamenu */
 .oe_category_megamenu {
     background-color: @color-orange;
     border-radius: 0;
@@ -102,7 +103,7 @@
                 }
 
                 li > a {
-                    color: @color-dark-orange;
+                    color: @color-deep-dark-gray;
                     &:hover {
                         color: black;
                         text-decoration: none;
@@ -151,7 +152,7 @@ ul.wizard li.text-primary {
     background: @color-orange;
 
     > a {
-        color: @color-dark-orange;
+        color: @color-deep-dark-gray;
     }
 
     .chevron::before {
@@ -163,32 +164,40 @@ ul.wizard li.text-primary {
     color: @color-dark-orange;
 }
 
+.border_primary {
+    border-color: @color-dark-orange;
+    border-radius: 0
+}
+
 /* Add to cart */
-#add_to_cart {
-    background-color: transparent;
-    border: none;
-    color: @color-deep-dark-gray;
-    font-weight: bold;
-    text-transform: uppercase;
+.oe_cet_product, .oe_cet_product_detail {
+    #add_to_cart {
+        background-color: transparent;
+        border: none;
+        color: @color-deep-dark-gray;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding-right: 0;
 
-    &:hover {
-        color: black;
-    }
+        &:hover {
+            color: black;
+        }
 
-    &:active,.active {
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
+        &:active,.active {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
 
-    &:after {
-        content: "\f067";
-        font-family: FontAwesome;
-        background-color: @color-orange;
-        border-radius: 50%;
-        border: 2px solid @color-deep-dark-gray;
-        color:#ffffff;
-        margin-left: 10px;
-        padding: 6px;
+        &:after {
+            content: "\f067";
+            font-family: FontAwesome;
+            background-color: @color-orange;
+            border-radius: 50%;
+            border: 2px solid @color-deep-dark-gray;
+            color:#ffffff;
+            margin-left: 10px;
+            padding: 6px;
+        }
     }
 }
 
@@ -205,7 +214,7 @@ ul.wizard li.text-primary {
         padding-right: 2px;
         border-radius: 0;
         background-color: @color-orange;
-        color: @color-dark-orange;
+        color: white;
 
         &:hover {
             color: black;
