@@ -383,7 +383,7 @@
                 t-att-data-lst_price="compute_currency(variant_id.lst_price)"
                 t-att-data-price="variant_id.price"/>
 
-              Portion (<t t-esc="variant_id.display_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
+              Portion (<t t-esc="variant_id.seed_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
               <span t-if="variant_id.covered_surface">
                 - <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
               </span>
