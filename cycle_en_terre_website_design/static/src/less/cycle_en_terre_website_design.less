@@ -234,6 +234,18 @@ img.wave-footer {
     }
 }
 
+.btn-primary[disabled] {
+    border-color: @color-orange;
+    background-color: gray;
+    color: white;
+    &:focus, &:hover, &:active, &:active:focus, &:active:hover {
+        color: black;
+        background-color: gray;
+        border-color: @color-dark-orange;
+        color: black;
+    }
+}
+
 .label {
     border-radius: 0;
 }
