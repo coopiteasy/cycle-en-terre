@@ -258,7 +258,7 @@
                         <label>Sowing Indoors Months:</label>
                         <t t-foreach="start_end_months(product.sowing_indoors_month_ids)" t-as="sq_months">
                           <t t-if="len(sq_months) == 2">
-                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                            <t t-esc="sq_months[0].name"/> - <t t-esc="sq_months[1].name"/>
                           </t>
                           <t t-if="len(sq_months) == 1">
                             <t t-esc="sq_months[0].name"/>
@@ -270,7 +270,7 @@
                         <label>Sowing Outdoors Months:</label>
                         <t t-foreach="start_end_months(product.sowing_outoors_month_ids)" t-as="sq_months">
                           <t t-if="len(sq_months) == 2">
-                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                            <t t-esc="sq_months[0].name"/> - <t t-esc="sq_months[1].name"/>
                           </t>
                           <t t-if="len(sq_months) == 1">
                             <t t-esc="sq_months[0].name"/>
@@ -282,7 +282,7 @@
                         <label>Pot Planting Months:</label>
                         <t t-foreach="start_end_months(product.pot_planting_month_ids)" t-as="sq_months">
                           <t t-if="len(sq_months) == 2">
-                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                            <t t-esc="sq_months[0].name"/> - <t t-esc="sq_months[1].name"/>
                           </t>
                           <t t-if="len(sq_months) == 1">
                             <t t-esc="sq_months[0].name"/>
@@ -294,7 +294,7 @@
                         <label>Flowering Months:</label>
                         <t t-foreach="start_end_months(product.flowering_month_ids)" t-as="sq_months">
                           <t t-if="len(sq_months) == 2">
-                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                            <t t-esc="sq_months[0].name"/> - <t t-esc="sq_months[1].name"/>
                           </t>
                           <t t-if="len(sq_months) == 1">
                             <t t-esc="sq_months[0].name"/>
@@ -306,7 +306,7 @@
                         <label>Harvest Months:</label>
                         <t t-foreach="start_end_months(product.harvest_month_ids)" t-as="sq_months">
                           <t t-if="len(sq_months) == 2">
-                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                            <t t-esc="sq_months[0].name"/> - <t t-esc="sq_months[1].name"/>
                           </t>
                           <t t-if="len(sq_months) == 1">
                             <t t-esc="sq_months[0].name"/>
@@ -318,17 +318,13 @@
                         <label>Seedling Months:</label>
                         <t t-foreach="start_end_months(product.seedling_month_ids)" t-as="sq_months">
                           <t t-if="len(sq_months) == 2">
-                            from <t t-esc="sq_months[0].name"/> to <t t-esc="sq_months[1].name"/>
+                            <t t-esc="sq_months[0].name"/> - <t t-esc="sq_months[1].name"/>
                           </t>
                           <t t-if="len(sq_months) == 1">
                             <t t-esc="sq_months[0].name"/>
                           </t>
                           <t t-if="not sq_months_last">, </t>
                         </t>
-                      </li>
-                      <li t-if="product.density">
-                        <label>Density (g/10 m<sup>2</sup>):</label>
-                        <span t-field="product.density"/>
                       </li>
                     </ul>
                   </div>
@@ -406,7 +402,7 @@
 
               Portion (<t t-esc="variant_id.seed_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
               <span t-if="variant_id.covered_surface">
-                - <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
+                = <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
               </span>
 
               <input type="radio" name="product_id"
