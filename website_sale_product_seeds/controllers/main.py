@@ -13,9 +13,9 @@ def start_end_months(months):
     """Example, get months = seed.seedling.month(2, 3, 4, 6, 8) this
     returns :
         [
-            [2, 4],
-            [6],
-            [8],
+            [seed.seedling.month(2,), seed.seedling.month(4,)],
+            [seed.seedling.month(6,)],
+            [seed.seedling.month(8,)],
         ]
     """
     ordered_months = months.sorted(key='sequence')
@@ -26,6 +26,8 @@ def start_end_months(months):
         if not tmp_sequence:
             tmp_sequence.append(month)
         elif previous_month.sequence + 1 != month.sequence:
+            if previous_month not in tmp_sequence:
+                tmp_sequence.append(previous_month)
             result.append(tmp_sequence)
             tmp_sequence = [month]
         previous_month = month
