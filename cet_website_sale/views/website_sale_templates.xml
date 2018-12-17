@@ -27,7 +27,9 @@
                 </t>
                 <span class="oe_p_latin_name" t-field="product.latin_name"/>
               </div>
-              <p class="oe_p_species_info" t-if="product.species_information and len(product.species_information) &gt; 250" t-esc="product.species_information[0:250]"/>
+              <p class="oe_p_species_info" t-if="product.species_information and len(product.species_information) &gt; 250">
+                <t t-esc="product.species_information[0:250]"/> ...
+              </p>
               <p class="oe_p_species_info" t-if="product.species_information and len(product.species_information) &lt;= 250" t-esc="product.species_information"/>
               <p class="oe_details">
                 <a t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
