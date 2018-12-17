@@ -530,7 +530,7 @@
             </div>
 
           </div>
-          <div class="col-md-4 oe_cart">
+          <div class="col-xs-12 col-md-4 oe_cart">
             <div class="row">
               <div class='col-md-12'>
                 <h2 class="page-header">Cart</h2>
