@@ -61,8 +61,9 @@ class ProductTemplate(models.Model):
     latin_name = fields.Char(
         string='Latin Name',
     )
-    emergence = fields.Integer(
-        string='Emergence (days)',
+    emergence = fields.Char(
+        string='Emergence',
+        tanslate=True,
     )
     density = fields.Float(
         string='Density (g/10 m²)',
