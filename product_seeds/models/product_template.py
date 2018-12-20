@@ -63,7 +63,7 @@ class ProductTemplate(models.Model):
     )
     emergence = fields.Char(
         string='Emergence',
-        tanslate=True,
+        translate=True,
     )
     density = fields.Float(
         string='Density (g/10 m²)',
