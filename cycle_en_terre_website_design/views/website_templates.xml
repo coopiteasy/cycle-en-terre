@@ -16,9 +16,9 @@
 
     <template id="website_footer" name="Custom footer" inherit_id="website.footer_custom">
         <xpath expr="//div[@id='footer']" position="replace">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-lg-2 col-lg-offset-1">
+            <div class="container footer-custom">
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-1 text-left">
                         <a href="mailto:info@cycle-en-terre.be">
                             <img width="63" height="64"
                                  src="\cycle_en_terre_website_design\static\src\img\icon-mail.jpg"
@@ -28,7 +28,7 @@
                     </div>
 
 
-                    <div class="col-lg-2">
+                    <div class="col-md-2 text-left">
                         <a href="https://www.facebook.com/cycleenterre/" target="_blank">
                             <img width="63" height="64"
                                  src="\cycle_en_terre_website_design\static\src\img\icon-facebook.jpg"
@@ -38,7 +38,7 @@
                     </div>
 
 
-                    <div class="col-lg-2">
+                    <div class="col-md-2 text-center">
                         <div class="textwidget custom-html-widget">
                             <a href="https://cycle-en-terre.be/conditions-generales-de-vente/">Conditions Générales
                                 de Vente
@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-md-2 text-right">
                         <a href="https://cycle-en-terre.be/conditions-generales-de-vente/#cgvpaiement">
                             <img width="63" height="64"
                                  src="\cycle_en_terre_website_design\static\src\img\icon-paiement.jpg"
@@ -62,7 +62,7 @@
                     </div>
 
 
-                    <div class="col-lg-2">
+                    <div class="col-md-2 text-right">
                         <a href="https://cycle-en-terre.be/conditions-generales-de-vente/#livraison">
                             <img width="63" height="64"
                                  src="\cycle_en_terre_website_design\static\src\img\icon-livraison.jpg"
@@ -71,11 +71,12 @@
                         </a>
                     </div>
                 </div>
+
                 <div class="row text-center">
                     <!-- Copyrights -->
                     <div class="copyright">
                         <img alt="Logo cycle en Terre"
-                             src="\cycle_en_terre_website_design\static\src\img\logo-cet-footer.png"/>
+                             src="\cycle_en_terre_website_design\static\src\img\logo-cet-footer.png" class="logo-footer"/>
                         <br/>
                         ©2018 Cycle-En-Terre: Semences biologiques
                     </div>
