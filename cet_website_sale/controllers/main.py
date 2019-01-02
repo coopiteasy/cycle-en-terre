@@ -35,6 +35,9 @@ class WebsiteSale(Base):
                 domain = expression.OR([domain, [('latin_name', '%', word)]])
                 # Categories
                 category_mgr = request.env['product.public.category']
+                # Set threshold for pg_trgm for the category search
+                threshold = 0.3
+                request.env.cr.execute("SELECT set_limit(%f);" % threshold)
                 category_ids = category_mgr.sudo().search(
                     [('name', '%', word)]
                 )
