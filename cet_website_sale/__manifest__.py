@@ -19,6 +19,7 @@
         "website_sale_category_breadcrumb",
         "website_sale_product_seeds",
         "product_seeds",
+        "base_search_fuzzy",
     ],
     "data": [
         "views/templates.xml",

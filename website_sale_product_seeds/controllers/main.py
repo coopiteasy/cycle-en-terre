@@ -92,8 +92,8 @@ class WebsiteSale(Base):
 
         seedling_months = seedling_months_to_str(seedling_month_ids)
 
-        # Put supplier in the context so that it is accessible by other
-        # function of this controller.
+        # Put seedling months in the context so that it is accessible by
+        # other function of this controller.
         if seedling_month_ids:
             context = dict(request.env.context)
             context['seedling_month_ids'] = seedling_month_ids
