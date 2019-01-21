@@ -8,6 +8,9 @@ from odoo.addons.website_sale_product_seeds.controllers.main import (
     WebsiteSale as Base
 )
 
+FUZZY_DEFAULT_TRESHOLD = 0.1
+FUZZY_CATEGORY_TRESHOLD = 0.3
+
 
 class WebsiteSale(Base):
 
@@ -28,6 +31,8 @@ class WebsiteSale(Base):
             if (isinstance(v, tuple) and len(v) == 3
                     and (v[0] == 'name' and v[1] == 'ilike')):
                 domain[i] = (v[0], '%', v[2])
+        # Normalize domain
+        domain = expression.normalize_domain(domain)
         # Add new field in search domain
         if search:
             for word in search.split(" "):
@@ -36,8 +41,9 @@ class WebsiteSale(Base):
                 # Categories
                 category_mgr = request.env['product.public.category']
                 # Set threshold for pg_trgm for the category search
-                threshold = 0.3
-                request.env.cr.execute("SELECT set_limit(%f);" % threshold)
+                request.env.cr.execute(
+                    "SELECT set_limit(%f);" % FUZZY_CATEGORY_TRESHOLD
+                )
                 category_ids = category_mgr.sudo().search(
                     [('name', '%', word)]
                 )
@@ -46,8 +52,11 @@ class WebsiteSale(Base):
                         domain,
                         [('public_categ_ids', 'in', category_ids.ids)]
                     ])
+                request.env.cr.execute(
+                    "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
+                )
         # Add sale product domain to domain
-        domain = sale_domain + domain
+        domain = expression.AND([sale_domain, domain])
         return domain
 
     @http.route()
@@ -55,8 +64,9 @@ class WebsiteSale(Base):
              ppg=False, **post):
         # Set threshold for pg_trgm
         # TODO: use a config to let user configure this value
-        threshold = 0.1
-        request.env.cr.execute("SELECT set_limit(%f);" % threshold)
+        request.env.cr.execute(
+            "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
+        )
 
         response = super().shop(page, category, seedling_months, search,
                                 ppg, **post)
