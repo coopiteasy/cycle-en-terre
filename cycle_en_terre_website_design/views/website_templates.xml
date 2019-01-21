@@ -94,6 +94,8 @@
               name="Automatic Copyright Footer"
               priority="20">
         <xpath expr="//div[hasclass('text-muted')]" position="replace">
+            <div class="pull-left text-muted">
+            </div>
         </xpath>
     </template>
 
