@@ -97,6 +97,9 @@
             <div class="pull-left text-muted">
             </div>
         </xpath>
+        <xpath expr="//div[hasclass('pull-right')]" position="replace">
+            <div class="pull-right"/>
+        </xpath>
     </template>
 
 </odoo>
