@@ -3,7 +3,7 @@
     <data>
         <template id="report_picking" inherit_id="stock.report_picking">
             <xpath expr="//div/table[last()-1]/tbody/tr" position="attributes">
-                <attribute name="t-foreach">o.move_lines.sorted(key=lambda m: m.move_line_ids[0].location_id.name if m.move_line_ids else None)</attribute>
+                <attribute name="t-foreach">o.move_lines.sorted(key=lambda m: m.move_line_ids[0].location_id.name if m.move_line_ids else "zzzzz")</attribute>
                 <attribute name="t-as">move</attribute>
             </xpath>
         </template>
