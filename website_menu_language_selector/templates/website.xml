@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="position_language_selector"
+    inherit_id="website.layout"
+    name="Main Menu Language Selector"
+    active="True"
+    customize_show="True">
+    <xpath expr="//ul[@id='top_menu']/li[last()-1]" position="before">
+      <t t-call="website_menu_language_selector.menu_language_selector"/>
+    </xpath>
+  </template>
+
+
+  <template id="menu_language_selector">
+    <li class="dropdown"
+        t-if="(request and request.is_frontend_multilang and len(languages) &gt; 1) or (website and (editable or translatable))">
+      <a href="#" class="dropdown-toggle" role="button"
+         data-toggle="dropdown"
+         aria-haspopup="true"
+         aria-expanded="false">
+        <span>
+          <t t-esc="request.lang.split('_')[0].upper()"/> <span class="caret"></span>
+        </span>
+      </a>
+      <ul class="dropdown-menu js_language_selector">
+        <li t-foreach="languages" t-as="lg">
+          <a t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang=lg[0])"
+             t-att-data-default-lang="(editable or translatable) and 'true' if website and lg[0] == website.default_lang_code else None"
+             t-att-data-lang="lg[0]"
+             class="js_change_lang">
+            <t t-esc="lg[0].split('_')[0].upper()"/>
+          </a>
+        </li>
+        <li groups="website.group_website_publisher">
+          <t t-set="url_return"
+             t-value="url_for('', '[lang]') + '?' + keep_query()"/>
+          <a t-attf-href="/web#action=base.action_view_base_language_install&amp;website_id=#{website.id if website else ''}&amp;url_return=#{url_return}">
+            <i class="fa fa-plus-circle"/>
+            Add a language...
+          </a>
+        </li>
+      </ul>
+    </li>
+  </template>
+
+</odoo>
