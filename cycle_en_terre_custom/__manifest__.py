@@ -13,10 +13,12 @@
 
     'depends': [
         'stock',
+        'sale',
     ],
 
     'data': [
         'report/report_stockpicking_operations.xml',
+        'report/sale_report.xml',
     ],
     'installable': True,
 }

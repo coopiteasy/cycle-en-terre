@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//thead/tr/th[1]" position="after">
+                <th class="text-right">Label</th>
+                <th class="text-right">Weight</th>
+            </xpath>
+            <!-- todo is_species = true-->
+            <xpath expr="//tbody[hasclass('sale_tbody')]//t[@t-as='l']/tr/td[1]" position="after">
+                <td class="text-right">
+                    <t t-if="l.product_id.is_species">
+                        <span t-field="l.product_id.label"/>
+                    </t>
+                </td>
+                <td class="text-right">
+                    <t t-if="l.product_id.is_species">
+                        <span t-field="l.product_id.seed_weight"/>
+                        <span t-field="l.product_id.weight_unit"/>
+                    </t>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>
