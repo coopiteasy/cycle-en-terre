@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+
+        <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[1]" position="after">
+            <th>Label</th>
+            <th>Conditionnement</th>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']/tbody/tr[1]/td[1]" position="after">
+            <td class="text-right">
+                <t t-if="l.product_id.is_species">
+                    <span t-field="l.label"/>
+                </t>
+            </td>
+            <td class="text-right">
+                <t t-if="l.product_id.is_species">
+                    <span t-field="l.seed_weight"/>
+                    <span t-field="l.weight_unit"/>
+                </t>
+            </td>
+        </xpath>
+
+        <xpath expr="//t[@name='lines_layouted']//th[1]" position="after">
+            <th class="text-right">Label</th>
+            <th class="text-right">Conditionnement</th>
+        </xpath>
+
+        <xpath expr="//t[@name='lines_layouted']//td[2]" position="before">
+            <td class="text-right">
+                <t t-if="l.product_id.is_species">
+                    <span t-field="l.label"/>
+                </t>
+            </td>
+            <td class="text-right">
+                <t t-if="l.product_id.is_species">
+                    <span t-field="l.seed_weight"/>
+                    <span t-field="l.weight_unit"/>
+                </t>
+            </td>
+        </xpath>
+
+    </template>
+</odoo>

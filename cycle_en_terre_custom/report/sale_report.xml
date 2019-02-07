@@ -6,17 +6,17 @@
                 <th class="text-right">Label</th>
                 <th class="text-right">Weight</th>
             </xpath>
-            
+
             <xpath expr="//tbody[hasclass('sale_tbody')]//t[@t-as='l']/tr/td[1]" position="after">
                 <td class="text-right">
                     <t t-if="l.product_id.is_species">
-                        <span t-field="l.product_id.label"/>
+                        <span t-field="l.label"/>
                     </t>
                 </td>
                 <td class="text-right">
                     <t t-if="l.product_id.is_species">
-                        <span t-field="l.product_id.seed_weight"/>
-                        <span t-field="l.product_id.weight_unit"/>
+                        <span t-field="l.seed_weight"/>
+                        <span t-field="l.weight_unit"/>
                     </t>
                 </td>
             </xpath>

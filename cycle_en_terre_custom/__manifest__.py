@@ -12,13 +12,19 @@
     'version': '11.0.0.0.1',
 
     'depends': [
+        'account',
+        'product_seeds',
         'stock',
         'sale',
     ],
 
     'data': [
+        'report/report_invoice.xml',
         'report/report_stockpicking_operations.xml',
         'report/sale_report.xml',
+        'views/account_invoice_views.xml',
+        'views/sale_views.xml',
+        'views/account_invoice_views.xml',
     ],
     'installable': True,
 }
