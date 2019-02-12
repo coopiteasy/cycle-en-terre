@@ -80,7 +80,18 @@ class WebsiteSale(Base):
         response = super().shop(page, category, seedling_months, search,
                                 ppg, **post)
 
+        def variants_sale_ok(product):
+            """Return True if at least one variant can be sold."""
+            for variant in product.product_variant_ids:
+                if variant.variant_sale_ok:
+                    return True
+            return False
+
+        products = response.qcontext['products']
+        products = products.filtered(variants_sale_ok)
+
         # Add element to context
+        response.qcontext['products'] = products
         response.qcontext['get_attribute_value_ids'] = (
             self.get_attribute_value_ids
         )
