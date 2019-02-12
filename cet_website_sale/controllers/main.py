@@ -53,6 +53,7 @@ class WebsiteSale(Base):
                         domain,
                         [('public_categ_ids', 'in', category_ids.ids)]
                     ])
+                # Reset threshold for pg_trgm after the category search
                 request.env.cr.execute(
                     "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
                 )
@@ -72,7 +73,6 @@ class WebsiteSale(Base):
     def shop(self, page=0, category=None, seedling_months=None, search='',
              ppg=False, **post):
         # Set threshold for pg_trgm
-        # TODO: use a config to let user configure this value
         request.env.cr.execute(
             "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
         )
