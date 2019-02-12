@@ -8,6 +8,7 @@ from odoo.addons.website_sale_product_seeds.controllers.main import (
     WebsiteSale as Base
 )
 
+# TODO: use a config to let user configure these values
 FUZZY_DEFAULT_TRESHOLD = 0.1
 FUZZY_CATEGORY_TRESHOLD = 0.3
 
@@ -58,6 +59,14 @@ class WebsiteSale(Base):
         # Add sale product domain to domain
         domain = expression.AND([sale_domain, domain])
         return domain
+
+    def _get_search_order(self, post):
+        """Order by similarity between search terms and the name of the
+        product."""
+        order = super()._get_search_order(post)
+        if "search" in post:
+            order = ("similarity(name, '%s') DESC," % post['search']) + order
+        return order
 
     @http.route()
     def shop(self, page=0, category=None, seedling_months=None, search='',
