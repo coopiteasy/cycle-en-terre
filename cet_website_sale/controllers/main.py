@@ -8,6 +8,7 @@ from odoo.addons.website_sale_product_seeds.controllers.main import (
     WebsiteSale as Base
 )
 
+# TODO: use a config to let user configure these values
 FUZZY_DEFAULT_TRESHOLD = 0.1
 FUZZY_CATEGORY_TRESHOLD = 0.3
 
@@ -52,6 +53,7 @@ class WebsiteSale(Base):
                         domain,
                         [('public_categ_ids', 'in', category_ids.ids)]
                     ])
+                # Reset threshold for pg_trgm after the category search
                 request.env.cr.execute(
                     "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
                 )
@@ -59,11 +61,18 @@ class WebsiteSale(Base):
         domain = expression.AND([sale_domain, domain])
         return domain
 
+    def _get_search_order(self, post):
+        """Order by similarity between search terms and the name of the
+        product."""
+        order = super()._get_search_order(post)
+        if "search" in post:
+            order = ("similarity(name, '%s') DESC," % post['search']) + order
+        return order
+
     @http.route()
     def shop(self, page=0, category=None, seedling_months=None, search='',
              ppg=False, **post):
         # Set threshold for pg_trgm
-        # TODO: use a config to let user configure this value
         request.env.cr.execute(
             "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
         )
@@ -71,7 +80,18 @@ class WebsiteSale(Base):
         response = super().shop(page, category, seedling_months, search,
                                 ppg, **post)
 
+        def variants_sale_ok(product):
+            """Return True if at least one variant can be sold."""
+            for variant in product.product_variant_ids:
+                if variant.variant_sale_ok:
+                    return True
+            return False
+
+        products = response.qcontext['products']
+        products = products.filtered(variants_sale_ok)
+
         # Add element to context
+        response.qcontext['products'] = products
         response.qcontext['get_attribute_value_ids'] = (
             self.get_attribute_value_ids
         )
