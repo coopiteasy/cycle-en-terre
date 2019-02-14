@@ -6,6 +6,16 @@
                 <attribute name="t-foreach">o.move_lines.sorted(key=lambda m: m.move_line_ids[0].location_id.name if m.move_line_ids else "zzzzz")</attribute>
                 <attribute name="t-as">move</attribute>
             </xpath>
+
+            <xpath expr="//div[@name='partner_header']/div" position="attributes">
+                <attribute name="t-options">
+                    {"widget": "contact",
+                     "fields": ["name", "address", "phone"],
+                     "no_marker": True,
+                     "phone_icons": True}
+                </attribute>
+            </xpath>
+
         </template>
     </data>
 </odoo>
