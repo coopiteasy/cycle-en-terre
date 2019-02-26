@@ -96,3 +96,23 @@ class WebsiteSale(Base):
             self.get_attribute_value_ids
         )
         return response
+
+    @http.route(['/shop/product/stock_info'], type='json', website=True,
+                auth='public')
+    def get_product_stock_info(self, **kwargs):
+        """Give a json data structure that contains informations about
+        the available stock for a product variant.
+        """
+        product_id = kwargs.get('id', None)
+        product = request.env['product.product'].sudo().browse(product_id)
+        if product:
+            return {
+                'id': product.id,
+                'virtual_available': product.virtual_available,
+                'inventory_availability': product.inventory_availability,
+                'available_threshold': product.available_threshold,
+                'custom_message': product.custom_message,
+                'cart_qty': product.cart_qty,
+            }
+        else:
+            return {'error': True}
