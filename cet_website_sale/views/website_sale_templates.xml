@@ -59,11 +59,11 @@
                   <!-- Quantity Selector -->
                   <div class="oe_p_quantity">
                     <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
-                      <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
+                      <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json js_remove">
                         <i class="fa fa-minus"></i>
                       </a>
                       <input type="text" class="form-control input-sm quantity" data-min="1" name="add_qty" value="1"/>
-                      <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json">
+                      <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json js_add">
                         <i class="fa fa-plus"></i>
                       </a>
                     </div>
@@ -159,11 +159,11 @@
                 <!-- Quantity Selector -->
                 <div class="oe_p_quantity pull-left">
                   <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
-                    <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
+                    <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json js_remove">
                       <i class="fa fa-minus"></i>
                     </a>
                     <input type="text" class="form-control input-sm quantity" data-min="1" name="add_qty" value="1"/>
-                    <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json">
+                    <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json js_add">
                       <i class="fa fa-plus"></i>
                     </a>
                   </div>
@@ -380,7 +380,9 @@
     <t t-if="len(product.product_variant_ids) &gt; 1">
       <div class="oe_cet_product_variant">
         <t t-foreach="product.product_variant_ids" t-as="variant_id">
-          <div class="radio" t-if="variant_id.variant_sale_ok">
+          <div id="oe_variant_ids_selector"
+               class="radio"
+               t-if="variant_id.variant_sale_ok">
             <input type="radio" name="product_id"
               t-if="radio_position == 'before'"
               class="js_product_change radio-before"
