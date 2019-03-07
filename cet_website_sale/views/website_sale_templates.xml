@@ -59,6 +59,7 @@
                 <t t-call="cet_website_sale.product_variants">
                   <t t-set="radio_position" t-value="'after'"/>
                 </t>
+                <div class="oe_stock_messages hidden"/>
                 <div class="oe_quantity_price">
                   <!-- Quantity Selector -->
                   <div class="oe_p_quantity">
@@ -159,6 +160,7 @@
                 <t t-set="radio_position" t-value="'before'"/>
               </t>
               <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
+              <div class="oe_stock_messages hidden"/>
               <div class="oe_quantity_price">
                 <!-- Quantity Selector -->
                 <div class="oe_p_quantity pull-left">

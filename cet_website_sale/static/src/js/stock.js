@@ -7,6 +7,7 @@ var ajax = require('web.ajax');
 var core = require('web.core');
 
 var QWeb = core.qweb;
+var xml_load = ajax.loadXML('/cet_website_sale/static/src/xml/stock_messages.xml', QWeb);
 
 if(!$('.oe_website_sale').length) {
   return $.Deferred().reject("DOM doesn't contain '.oe_website_sale'");
@@ -74,7 +75,19 @@ $('.oe_website_sale').each(function() {
               'disabled btn',
               qty <= 1
             );
+
+            // Display message
+            $(js_product).find('.oe_stock_messages').toggleClass(
+              'hidden',
+              stock_info['virtual_available'] - qty >= 1
+            );
           }
+
+          xml_load.then(function() {
+            var message = $(QWeb.render('cet_website_sale.stock_messages', stock_info));
+            $(js_product).find('.oe_stock_messages').html(message);
+          });
+
         });
     });
 
