@@ -601,9 +601,9 @@
   </template>
 
   <template id="stock_messages">
-    <div class="alert alert-danger">
-      <i class="fa fa-exclamation-triangle"/> Not enough product in stock !
-    </div>
+    <p class="text-muted">
+      Not enough products in stock for now.
+    </p>
   </template>
 
 </odoo>
