@@ -4,6 +4,8 @@
 <odoo>
 <data>
 
+  <!-- Seedling Month Menu -->
+
   <template id="seedling_month_main_position"
     inherit_id="website_sale.products"
     name="Seedling Month Selector Position">
@@ -29,7 +31,7 @@
 
   <template id="seedling_months" name="Seedling Months">
     <!-- For large screen -->
-    <ul t-att-class="'hidden-xs hidden-sm %s' % sm_class if sm_class else ''">
+    <ul t-att-class="'hidden-xs hidden-sm %s' % (sm_class if sm_class else '',)">
       <li t-att-class="'active' if not seedling_months else ''">
         <a t-att-href="keep(seedling_months='')">
           All
@@ -46,7 +48,7 @@
       </t>
     </ul>
     <!-- For small screen -->
-    <ul t-att-class="'visible-xs visible-sm %s' % sm_class if sm_class else ''">
+    <ul t-att-class="'visible-xs visible-sm %s' % (sm_class if sm_class else '',)">
       <li t-att-class="'active' if not seedling_months else ''">
         <a t-att-href="keep(seedling_months='')">
           All
