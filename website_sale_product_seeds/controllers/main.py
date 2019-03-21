@@ -122,6 +122,8 @@ class WebsiteSale(Base):
 
     @http.route()
     def product(self, product, category='', search='', **kwargs):
+        sm_mgr = request.env['seed.seedling.month']
         response = super().product(product, category, search, **kwargs)
         response.qcontext['start_end_months'] = start_end_months
+        response.qcontext['all_seedling_months'] = sm_mgr.sudo().search([])
         return response
