@@ -18,7 +18,7 @@
 
   <template id="seedling_month_position"
     inherit_id="website_sale_product_seeds.seedling_month_main_position"
-    name="Seedling Month Calendar"
+    name="Seedling Month Selector"
     active="True"
     customize_show="True">
     <xpath expr="//div[hasclass('oe_website_sale')]
