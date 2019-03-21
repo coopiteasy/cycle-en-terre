@@ -97,6 +97,13 @@ class WebsiteSale(Base):
         )
         return response
 
+    @http.route()
+    def product(self, product, category='', search='', **kwargs):
+        sm_mgr = request.env['seed.seedling.month']
+        response = super().product(product, category, search, **kwargs)
+        response.qcontext['all_seedling_months'] = sm_mgr.sudo().search([])
+        return response
+
     @http.route(['/shop/product/stock_info'], type='json', website=True,
                 auth='public')
     def get_product_stock_info(self, **kwargs):
