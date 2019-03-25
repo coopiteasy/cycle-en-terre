@@ -40,6 +40,16 @@
                   More details
                 </a>
               </p>
+              <div class="oe_seedling_calendar">
+                <t t-call="website_sale_product_seeds.seedling_calendar">
+                  <t t-set="smc_class" t-value="'hidden-xs'"/>
+                  <t t-set="smc_month_len" t-value="3"/>
+                </t>
+                <t t-call="website_sale_product_seeds.seedling_calendar">
+                  <t t-set="smc_class" t-value="'visible-xs text-center'"/>
+                  <t t-set="smc_month_len" t-value="3"/>
+                </t>
+              </div>
             </div>
             <div class="col-xs-12 col-sm-4 text-right">
               <t t-if="show_publish">
@@ -136,12 +146,23 @@
       <!-- Product -->
       <div class="oe_cet_pd_product row">
         <!-- Image -->
-        <div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-5 col-md-6">
-          <div class="oe_cet_product_image">
+        <div class="col-xs-12 col-sm-5 col-md-6">
+          <div class="oe_cet_product_image col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-12">
             <span itemprop="image"
               t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image"
               t-field="product.image" t-options="{'widget': 'image'}"
               t-att-alt="product.name" />
+          </div>
+          <div class="oe_seedling_calendar col-xs-12">
+            <t t-call="website_sale_product_seeds.seedling_calendar">
+              <t t-set="smc_class" t-value="'hidden-xs'"/>
+              <t t-set="smc_month_len" t-value="3"/>
+            </t>
+            <t t-call="website_sale_product_seeds.seedling_calendar">
+              <t t-set="smc_class" t-value="'visible-xs text-center'"/>
+              <t t-set="smc_month_len" t-value="3"/>
+            </t>
+            <t t-call="website_sale_product_seeds.seedling_calendar_caption"/>
           </div>
         </div>
         <!-- Informatinos -->
@@ -373,12 +394,17 @@
   </template>
 
 
+  <!-- Warning, as this template replace a element of his parent
+       (`website_sale.product`), it should by loaded last. So, it should
+       have a hight priority.
+   -->
   <template id="product_view"
     inherit_id="website_sale.product"
     name="CET Product Design"
+    priority="100"
     customize_show="True"
     active="True">
-    <xpath expr="//section" position="replace">
+    <xpath expr="//section[@id='product_detail']" position="replace">
       <t t-if="product" t-call="cet_website_sale.product_detail_section"/>
     </xpath>
   </template>

@@ -6,6 +6,7 @@
 @color-deep-dark-orange: #a67c0a;
 @color-dark-gray: #626262;
 @color-deep-dark-gray: #444;
+@color-green: #43a75e;
 
 .big-banner-top {
     width: 100%;
@@ -141,6 +142,39 @@
         > li > a {
             color: black;
         }
+    }
+}
+
+/* Seedling Calendar */
+.oe_seedling_calendar {
+    .seedling_calendar_list {
+        text-transform: uppercase;
+        margin-left: 0;
+
+        li {
+            padding: 0;
+            margin-top: 10px;
+        }
+    }
+
+    .month_name {
+        padding: 5px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        display: inline-block;
+        background: lightgray;
+    }
+
+    .sowing_indoors {
+        background: repeating-linear-gradient(45deg, transparent, transparent 4px, @color-orange 4px, @color-orange 8px);
+    }
+
+    .sowing_outdoors {
+        background: @color-orange;
+    }
+
+    .harvest_or_flowering {
+        background: @color-green;
     }
 }
 

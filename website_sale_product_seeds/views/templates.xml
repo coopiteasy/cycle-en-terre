@@ -4,6 +4,8 @@
 <odoo>
 <data>
 
+  <!-- Seedling Month Menu -->
+
   <template id="seedling_month_main_position"
     inherit_id="website_sale.products"
     name="Seedling Month Selector Position">
@@ -16,7 +18,7 @@
 
   <template id="seedling_month_position"
     inherit_id="website_sale_product_seeds.seedling_month_main_position"
-    name="Seedling Month Calendar"
+    name="Seedling Month Selector"
     active="True"
     customize_show="True">
     <xpath expr="//div[hasclass('oe_website_sale')]
@@ -29,7 +31,7 @@
 
   <template id="seedling_months" name="Seedling Months">
     <!-- For large screen -->
-    <ul t-att-class="'hidden-xs hidden-sm %s' % sm_class if sm_class else ''">
+    <ul t-att-class="'hidden-xs hidden-sm %s' % (sm_class if sm_class else '',)">
       <li t-att-class="'active' if not seedling_months else ''">
         <a t-att-href="keep(seedling_months='')">
           All
@@ -46,7 +48,7 @@
       </t>
     </ul>
     <!-- For small screen -->
-    <ul t-att-class="'visible-xs visible-sm %s' % sm_class if sm_class else ''">
+    <ul t-att-class="'visible-xs visible-sm %s' % (sm_class if sm_class else '',)">
       <li t-att-class="'active' if not seedling_months else ''">
         <a t-att-href="keep(seedling_months='')">
           All
@@ -61,6 +63,61 @@
              t-esc="sm.name[0]"/>
         </li>
       </t>
+    </ul>
+  </template>
+
+
+  <!-- Seedling Month Calendar -->
+
+  <template id="seedling_calendar" name="Seedling Month Calendar">
+    <!--
+      This show a calendar for seedling months. To render it properly,
+      include the `/static/src/less/smc_design.less` to your assets.
+
+      To use this template, the variable `all_seedling_months` must be
+      in the context.
+
+      Params:
+         - smc_class: classes added to the calendar.
+         - smc_month_len: length of the name of the month.
+    -->
+    <ul t-att-class="'list-inline seedling_calendar_list %s' % (smc_class if smc_class else '',)">
+      <t t-foreach="all_seedling_months" t-as="sm">
+        <t t-set="harvest_or_flowering"
+          t-value="sm in product.harvest_month_ids or sm in product.flowering_month_ids"/>
+        <t t-set="sowing_indoors"
+          t-value="sm in product.sowing_indoors_month_ids and not sm in product.sowing_outoors_month_ids"/>
+        <t t-set="sowing_outdoors"
+          t-value="sm in product.sowing_outoors_month_ids"/>
+        <li t-att-class="'%s %s %s' % ('active_harvest_or_flowering' if harvest_or_flowering else '',
+                                      'active_sowing_indoors' if sowing_indoors else '',
+                                      'active_sowing_outdoors' if sowing_outdoors else '')">
+          <div class="sowing_indoors" t-if="sowing_indoors"/>
+          <div class="sowing_outdoors" t-if="sowing_outdoors"/>
+          <span t-if="smc_month_len" class="month_name" t-esc="sm.name[0:smc_month_len]"/>
+          <span t-if="not smc_month_len" class="month_name" t-esc="sm.name"/>
+          <div class="harvest_or_flowering" t-if="harvest_or_flowering"/>
+        </li>
+      </t>
+    </ul>
+  </template>
+
+  <template id="seedling_calendar_caption" name="Seedling Month Calendar Caption">
+    <!--
+      This template provide a caption for the `seedling_calendar`
+      template. To render it properly, include the
+      `/static/src/less/smc_design.less` to your assets.
+    -->
+    <ul class="list-unstyled seedling_calendar_caption">
+      <li>
+        <span class="sowing_indoors empty_tag"/> Sowing indoors
+      </li>
+      <li>
+        <span class="sowing_outdoors empty_tag"/> Sowing
+      </li>
+      <li>
+        <span class="harvest_or_flowering empty_tag"/> Harvest / flowering
+      </li>
     </ul>
   </template>
 
