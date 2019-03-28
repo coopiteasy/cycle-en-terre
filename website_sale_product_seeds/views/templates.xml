@@ -89,14 +89,12 @@
           t-value="sm in product.sowing_indoors_month_ids and not sm in product.sowing_outoors_month_ids"/>
         <t t-set="sowing_outdoors"
           t-value="sm in product.sowing_outoors_month_ids"/>
-        <li t-att-class="'%s %s %s' % ('active_harvest_or_flowering' if harvest_or_flowering else '',
-                                      'active_sowing_indoors' if sowing_indoors else '',
-                                      'active_sowing_outdoors' if sowing_outdoors else '')">
-          <div class="sowing_indoors" t-if="sowing_indoors"/>
-          <div class="sowing_outdoors" t-if="sowing_outdoors"/>
+        <li>
+          <div class="smc_tag sowing_indoors" t-if="sowing_indoors"/>
+          <div class="smc_tag sowing_outdoors" t-if="sowing_outdoors"/>
           <span t-if="smc_month_len" class="month_name" t-esc="sm.name[0:smc_month_len]"/>
           <span t-if="not smc_month_len" class="month_name" t-esc="sm.name"/>
-          <div class="harvest_or_flowering" t-if="harvest_or_flowering"/>
+          <div class="smc_tag harvest_or_flowering" t-if="harvest_or_flowering"/>
         </li>
       </t>
     </ul>
@@ -110,13 +108,13 @@
     -->
     <ul class="list-unstyled seedling_calendar_caption">
       <li>
-        <span class="sowing_indoors empty_tag"/> Sowing indoors
+        <span class="smc_tag sowing_indoors empty_tag"/> Sowing indoors
       </li>
       <li>
-        <span class="sowing_outdoors empty_tag"/> Sowing
+        <span class="smc_tag sowing_outdoors empty_tag"/> Sowing
       </li>
       <li>
-        <span class="harvest_or_flowering empty_tag"/> Harvest / flowering
+        <span class="smc_tag harvest_or_flowering empty_tag"/> Harvest / flowering
       </li>
     </ul>
   </template>
