@@ -147,6 +147,7 @@
 
 /* Seedling Calendar */
 .oe_seedling_calendar {
+    /* General design for calendar */
     .seedling_calendar_list {
         text-transform: uppercase;
         margin-left: 0;
@@ -158,11 +159,15 @@
     }
 
     .month_name {
+        width: 100%;
         padding: 5px;
+        padding-top: 2px;
+        padding-bottom: 2px;
         margin-top: 2px;
         margin-bottom: 2px;
         display: inline-block;
         background: lightgray;
+        text-align: center;
     }
 
     .sowing_indoors {
@@ -175,6 +180,28 @@
 
     .harvest_or_flowering {
         background: @color-green;
+    }
+
+    /* Design in product list view */
+    .tiny_calendar_list {
+        font-size: 0.8em;
+
+        .smc_tag {
+            height: 5px;  // Prevent rounding to different height
+        }
+    }
+
+    /* Design for three letters month */
+    .three_letters_list {
+        li {
+            width: 3em;
+        }
+    }
+    /* Design for one letter month */
+    .one_letter_list {
+        li {
+            width: 2em;
+        }
     }
 }
 
