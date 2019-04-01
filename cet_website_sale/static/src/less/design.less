@@ -145,6 +145,14 @@
     }
 }
 
+/* Stock message */
+.oe_stock_messages {
+
+    .stock_message_text {
+        color: @color-orange;
+    }
+}
+
 /* Seedling Calendar */
 .oe_seedling_calendar {
     /* General design for calendar */
@@ -182,9 +190,18 @@
         background: @color-green;
     }
 
-    /* Design in product list view */
-    .tiny_calendar_list {
+    /* Design for small calendar */
+    .small_calendar_list {
         font-size: 0.8em;
+
+        .smc_tag {
+            height: 5px;
+        }
+    }
+
+    /* Design for tiny calendar */
+    .tiny_calendar_list {
+        font-size: 0.7em;
 
         .smc_tag {
             height: 5px;  // Prevent rounding to different height

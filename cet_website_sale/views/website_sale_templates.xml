@@ -71,7 +71,9 @@
                   <t t-set="radio_position" t-value="'after'"/>
                 </t>
                 <div class="oe_stock_messages hidden">
-                  <t t-call="cet_website_sale.stock_messages"/>
+                  <t t-call="cet_website_sale.stock_messages">
+                    <t t-set="text_class" t-value="'stock_message_text'"/>
+                  </t>
                 </div>
                 <div class="oe_quantity_price">
                   <!-- Quantity Selector -->
@@ -157,15 +159,15 @@
           <!-- Seedling month calendar -->
           <div class="oe_seedling_calendar col-xs-12">
             <t t-call="website_sale_product_seeds.seedling_calendar">
-              <t t-set="smc_class" t-value="'hidden-xs hidden-sm three_letters_list'"/>
+              <t t-set="smc_class" t-value="'hidden-xs hidden-sm  small_calendar_list three_letters_list'"/>
               <t t-set="smc_month_len" t-value="3"/>
             </t>
             <t t-call="website_sale_product_seeds.seedling_calendar">
-              <t t-set="smc_class" t-value="'visible-sm one_letter_list'"/>
+              <t t-set="smc_class" t-value="'visible-sm small_calendar_list one_letter_list'"/>
               <t t-set="smc_month_len" t-value="1"/>
             </t>
             <t t-call="website_sale_product_seeds.seedling_calendar">
-              <t t-set="smc_class" t-value="'visible-xs text-center one_letter_list'"/>
+              <t t-set="smc_class" t-value="'visible-xs text-center small_calendar_list one_letter_list'"/>
               <t t-set="smc_month_len" t-value="1"/>
             </t>
             <t t-call="website_sale_product_seeds.seedling_calendar_caption"/>
@@ -190,7 +192,9 @@
               </t>
               <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
               <div class="oe_stock_messages hidden">
-                <t t-call="cet_website_sale.stock_messages"/>
+                <t t-call="cet_website_sale.stock_messages">
+                  <t t-set="text_class" t-value="'stock_message_text'"/>
+                </t>
               </div>
               <div class="oe_quantity_price">
                 <!-- Quantity Selector -->
@@ -633,8 +637,12 @@
   </template>
 
   <template id="stock_messages">
-    <p class="text-muted">
-      Not enough products in stock for now.
+    <!--
+      :param: text_class: classes that will be applied to the text.
+    -->
+    <p t-attf-class="{{ text_class }}">
+      <i class="fa fa-exclamation-triangle"></i> Not enough products in
+      stock for now.
     </p>
   </template>
 
