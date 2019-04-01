@@ -159,15 +159,15 @@
           <!-- Seedling month calendar -->
           <div class="oe_seedling_calendar col-xs-12">
             <t t-call="website_sale_product_seeds.seedling_calendar">
-              <t t-set="smc_class" t-value="'hidden-xs hidden-sm three_letters_list'"/>
+              <t t-set="smc_class" t-value="'hidden-xs hidden-sm  small_calendar_list three_letters_list'"/>
               <t t-set="smc_month_len" t-value="3"/>
             </t>
             <t t-call="website_sale_product_seeds.seedling_calendar">
-              <t t-set="smc_class" t-value="'visible-sm one_letter_list'"/>
+              <t t-set="smc_class" t-value="'visible-sm small_calendar_list one_letter_list'"/>
               <t t-set="smc_month_len" t-value="1"/>
             </t>
             <t t-call="website_sale_product_seeds.seedling_calendar">
-              <t t-set="smc_class" t-value="'visible-xs text-center one_letter_list'"/>
+              <t t-set="smc_class" t-value="'visible-xs text-center small_calendar_list one_letter_list'"/>
               <t t-set="smc_month_len" t-value="1"/>
             </t>
             <t t-call="website_sale_product_seeds.seedling_calendar_caption"/>
