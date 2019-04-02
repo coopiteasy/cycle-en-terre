@@ -99,6 +99,12 @@ class WebsiteSale(Base):
             context['seedling_month_ids'] = seedling_month_ids
             request.env.context = context
 
+        # The parent does not take seedling_months as an argument. So we
+        # give them in the post arg. This is needed for the pager to
+        # work correctly.
+        if seedling_months:
+            post['seedling_months'] = str(seedling_months)
+
         response = super().shop(page, category, search, ppg, **post)
 
         # Build the new `keep` function to keep arguments in the URL
