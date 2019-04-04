@@ -15,11 +15,15 @@ class ProductMigration(TransactionCase):
         self.assertEqual(1+1, 3)
 
     def test_migrate_variants_to_template(self):
-        print('**--' * 100)
-        print('**--' * 100)
-        print('**--' * 100)
-        print('**--' * 100)
-        print('**--' * 100)
+        # These print statement should be replaced by 'logger'
+        # statement. These print statement prevent this file to pass
+        # linting check. As mentioned in a comment above, this test doesn't
+        # work so I just comment out these lines. -- remytms
+        # print('**--' * 100)
+        # print('**--' * 100)
+        # print('**--' * 100)
+        # print('**--' * 100)
+        # print('**--' * 100)
         template = self.env['product.template']
         template.migrate_variants_to_template()
         self.assertTrue(False)
