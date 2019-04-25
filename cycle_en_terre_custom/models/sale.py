@@ -1,5 +1,5 @@
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class SaleOrderLine(models.Model):
@@ -7,13 +7,20 @@ class SaleOrderLine(models.Model):
 
     label = fields.Char(
         string='Label',
-        related='product_id.label',
+        default=lambda self: self.product_id.label,
     )
     seed_weight = fields.Float(
         string='Seed Weight',
-        related='product_id.seed_weight',
+        default=lambda self: self.product_id.seed_weight,
     )
     weight_unit = fields.Many2one(
+        comodel_name='product.uom',
         string='Weight Unit',
-        related='product_id.weight_unit',
+        default=lambda self: self.product_id.weight_unit,
     )
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        self.label = self.product_id.label
+        self.seed_weight = self.product_id.seed_weight
+        self.weight_unit = self.product_id.weight_unit
