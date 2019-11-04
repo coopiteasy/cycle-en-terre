@@ -10,12 +10,7 @@
     "author": "Coop IT Easy SCRLfs",
     "license": "AGPL-3",
     "application": False,
-    'installable': True,
-    "depends": [
-        "website_sale",
-        "product_seeds",
-    ],
-    "data": [
-        "views/templates.xml",
-    ],
+    "installable": True,
+    "depends": ["website_sale", "product_seeds"],
+    "data": ["views/templates.xml"],
 }

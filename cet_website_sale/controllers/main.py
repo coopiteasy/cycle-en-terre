@@ -5,7 +5,7 @@ from odoo import http
 from odoo.http import request
 from odoo.osv import expression
 from odoo.addons.website_sale_product_seeds.controllers.main import (
-    WebsiteSale as Base
+    WebsiteSale as Base,
 )
 
 # TODO: use a config to let user configure these values
@@ -14,7 +14,6 @@ FUZZY_CATEGORY_TRESHOLD = 0.3
 
 
 class WebsiteSale(Base):
-
     def _get_search_domain(self, search, category, attrib_values):
         """Extend the search to use fuzzy search.
         And search also in the:
@@ -29,30 +28,35 @@ class WebsiteSale(Base):
                 domain.remove(domain_elem)
         # Use '%' in place of 'ilike' for name search
         for i, v in enumerate(domain):
-            if (isinstance(v, tuple) and len(v) == 3
-                    and (v[0] == 'name' and v[1] == 'ilike')):
-                domain[i] = (v[0], '%', v[2])
+            if (
+                isinstance(v, tuple)
+                and len(v) == 3
+                and (v[0] == "name" and v[1] == "ilike")
+            ):
+                domain[i] = (v[0], "%", v[2])
         # Normalize domain
         domain = expression.normalize_domain(domain)
         # Add new field in search domain
         if search:
             for word in search.split(" "):
                 # Latin name
-                domain = expression.OR([domain, [('latin_name', '%', word)]])
+                domain = expression.OR([domain, [("latin_name", "%", word)]])
                 # Categories
-                category_mgr = request.env['product.public.category']
+                category_mgr = request.env["product.public.category"]
                 # Set threshold for pg_trgm for the category search
                 request.env.cr.execute(
                     "SELECT set_limit(%f);" % FUZZY_CATEGORY_TRESHOLD
                 )
                 category_ids = category_mgr.sudo().search(
-                    [('name', '%', word)]
+                    [("name", "%", word)]
                 )
                 if category_ids:
-                    domain = expression.OR([
-                        domain,
-                        [('public_categ_ids', 'in', category_ids.ids)]
-                    ])
+                    domain = expression.OR(
+                        [
+                            domain,
+                            [("public_categ_ids", "in", category_ids.ids)],
+                        ]
+                    )
                 # Reset threshold for pg_trgm after the category search
                 request.env.cr.execute(
                     "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
@@ -66,19 +70,27 @@ class WebsiteSale(Base):
         product."""
         order = super()._get_search_order(post)
         if "search" in post:
-            order = ("similarity(name, '%s') DESC," % post['search']) + order
+            order = ("similarity(name, '%s') DESC," % post["search"]) + order
         return order
 
     @http.route()
-    def shop(self, page=0, category=None, seedling_months=None, search='',
-             ppg=False, **post):
+    def shop(
+        self,
+        page=0,
+        category=None,
+        seedling_months=None,
+        search="",
+        ppg=False,
+        **post
+    ):
         # Set threshold for pg_trgm
         request.env.cr.execute(
             "SELECT set_limit(%f);" % FUZZY_DEFAULT_TRESHOLD
         )
 
-        response = super().shop(page, category, seedling_months, search,
-                                ppg, **post)
+        response = super().shop(
+            page, category, seedling_months, search, ppg, **post
+        )
 
         def variants_sale_ok(product):
             """Return True if at least one variant can be sold."""
@@ -87,39 +99,40 @@ class WebsiteSale(Base):
                     return True
             return False
 
-        products = response.qcontext['products']
+        products = response.qcontext["products"]
         products = products.filtered(variants_sale_ok)
 
         # Add element to context
-        response.qcontext['products'] = products
-        response.qcontext['get_attribute_value_ids'] = (
-            self.get_attribute_value_ids
-        )
+        response.qcontext["products"] = products
+        response.qcontext[
+            "get_attribute_value_ids"
+        ] = self.get_attribute_value_ids
         return response
 
     @http.route()
-    def product(self, product, category='', search='', **kwargs):
-        sm_mgr = request.env['seed.seedling.month']
+    def product(self, product, category="", search="", **kwargs):
+        sm_mgr = request.env["seed.seedling.month"]
         response = super().product(product, category, search, **kwargs)
-        response.qcontext['all_seedling_months'] = sm_mgr.sudo().search([])
+        response.qcontext["all_seedling_months"] = sm_mgr.sudo().search([])
         return response
 
-    @http.route(['/shop/product/stock_info'], type='json', website=True,
-                auth='public')
+    @http.route(
+        ["/shop/product/stock_info"], type="json", website=True, auth="public"
+    )
     def get_product_stock_info(self, **kwargs):
         """Give a json data structure that contains informations about
         the available stock for a product variant.
         """
-        product_id = kwargs.get('id', None)
-        product = request.env['product.product'].sudo().browse(product_id)
+        product_id = kwargs.get("id", None)
+        product = request.env["product.product"].sudo().browse(product_id)
         if product:
             return {
-                'id': product.id,
-                'virtual_available': product.virtual_available,
-                'inventory_availability': product.inventory_availability,
-                'available_threshold': product.available_threshold,
-                'custom_message': product.custom_message,
-                'cart_qty': product.cart_qty,
+                "id": product.id,
+                "virtual_available": product.virtual_available,
+                "inventory_availability": product.inventory_availability,
+                "available_threshold": product.available_threshold,
+                "custom_message": product.custom_message,
+                "cart_qty": product.cart_qty,
             }
         else:
-            return {'error': True}
+            return {"error": True}

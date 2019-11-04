@@ -11,11 +11,7 @@
     "author": "Coop IT Easy SCRLfs",
     "license": "AGPL-3",
     "application": False,
-    'installable': True,
-    "depends": [
-        "website",
-    ],
-    "data": [
-        "templates/website.xml",
-    ],
+    "installable": True,
+    "depends": ["website"],
+    "data": ["templates/website.xml"],
 }

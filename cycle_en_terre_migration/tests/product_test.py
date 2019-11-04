@@ -7,12 +7,11 @@ from odoo.tests.common import TransactionCase
 
 # I did not manage to get these tests to run
 class ProductMigration(TransactionCase):
-
     def setUp(self):
         super(ProductMigration, self).setUp()
 
     def test_me(self):
-        self.assertEqual(1+1, 3)
+        self.assertEqual(1 + 1, 3)
 
     def test_migrate_variants_to_template(self):
         # These print statement should be replaced by 'logger'
@@ -24,6 +23,6 @@ class ProductMigration(TransactionCase):
         # print('**--' * 100)
         # print('**--' * 100)
         # print('**--' * 100)
-        template = self.env['product.template']
+        template = self.env["product.template"]
         template.migrate_variants_to_template()
         self.assertTrue(False)
