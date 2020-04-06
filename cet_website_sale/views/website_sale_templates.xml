@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2018 Coop IT Easy SCRLfs
+<!-- Copyright 2020 Coop IT Easy SCRLfs
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
@@ -126,6 +126,10 @@
 
   <template id="product_detail_section">
     <section id="product_detail" t-attf-class="oe_cet_product_detail container oe_website_sale #{(compute_currency(product.lst_price) - product.website_price) &gt; 0.01 and website.get_current_pricelist().discount_policy == 'without_discount'  and 'discount'}">
+      <!-- Custom Text -->
+      <div class="row">
+        <span t-raw="request.website.custom_text"/>
+      </div>
       <!-- Breadcrumb -->
       <div class="oe_category_breadcrumb row">
         <div class="col-xs-12 col-sm-8 col-md-9">
@@ -646,6 +650,30 @@
       <i class="fa fa-exclamation-triangle"></i> Not enough products in
       stock for now.
     </p>
+  </template>
+
+  <template id="login_invite"
+          inherit_id="website_sale.products"
+          name="Custom Login Invite"
+          priority="2">
+    <xpath expr="(//div[@id='wrap']//div[hasclass('oe_website_sale')]/*)[1]"
+           position="before">
+        <div t-if="not request.session.uid">
+            <span t-raw="request.website.login_invite"/>
+        </div>
+    </xpath>
+  </template>
+
+  <template id="custom_text"
+          inherit_id="website_sale.products"
+          name="Custom Text"
+          priority="1">
+    <xpath expr="(//div[@id='wrap']//div[hasclass('oe_website_sale')]/*)[1]"
+           position="before">
+        <div class="row">
+            <span t-raw="request.website.custom_text"/>
+        </div>
+    </xpath>
   </template>
 
 </odoo>

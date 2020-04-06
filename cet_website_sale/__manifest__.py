@@ -22,6 +22,7 @@
         "base_search_fuzzy",
     ],
     "data": [
+        "views/res_config_settings_views.xml",
         "views/res_partner_category.xml",
         "views/templates.xml",
         "views/website_sale_templates.xml",

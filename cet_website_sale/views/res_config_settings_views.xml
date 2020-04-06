@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.cet.website.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div id="webmaster_settings" position="after">
+                <h2>Custom Texts</h2>
+                <div class="row mt16 o_settings_container" id="custom_texts_settings">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="custom_login">
+                        <div class="o_setting_right_pane">
+                            <label string="Custom Login"/>
+                            <div class="text-muted">
+                                Login invite
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="login_invite"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="custom_text">
+                        <div class="o_setting_right_pane">
+                            <label string="Custom Text"/>
+                            <div class="text-muted">
+                                Text for shop and product pages
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="custom_text"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>
