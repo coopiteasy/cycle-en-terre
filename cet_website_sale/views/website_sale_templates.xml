@@ -659,7 +659,11 @@
     <xpath expr="(//div[@id='wrap']//div[hasclass('oe_website_sale')]/*)[1]"
            position="before">
         <div t-if="not request.session.uid">
-            <span t-raw="request.website.login_invite"/>
+            <div class="row">
+              <div class="col-xs-12">
+                <span t-raw="request.website.login_invite"/>
+              </div>
+            </div>
         </div>
     </xpath>
   </template>
@@ -671,7 +675,9 @@
     <xpath expr="(//div[@id='wrap']//div[hasclass('oe_website_sale')]/*)[1]"
            position="before">
         <div class="row">
+          <div class="col-xs-12">
             <span t-raw="request.website.custom_text"/>
+          </div>
         </div>
     </xpath>
   </template>
