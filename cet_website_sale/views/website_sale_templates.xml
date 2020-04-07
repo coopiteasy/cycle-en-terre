@@ -655,7 +655,7 @@
   <template id="login_invite"
           inherit_id="website_sale.products"
           name="Custom Login Invite"
-          priority="2">
+          priority="40">
     <xpath expr="(//div[@id='wrap']//div[hasclass('oe_website_sale')]/*)[1]"
            position="before">
         <div t-if="not request.session.uid">
@@ -671,7 +671,7 @@
   <template id="custom_text"
           inherit_id="website_sale.products"
           name="Custom Text"
-          priority="1">
+          priority="30">
     <xpath expr="(//div[@id='wrap']//div[hasclass('oe_website_sale')]/*)[1]"
            position="before">
         <div class="row">
