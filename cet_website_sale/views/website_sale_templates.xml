@@ -126,10 +126,6 @@
 
   <template id="product_detail_section">
     <section id="product_detail" t-attf-class="oe_cet_product_detail container oe_website_sale #{(compute_currency(product.lst_price) - product.website_price) &gt; 0.01 and website.get_current_pricelist().discount_policy == 'without_discount'  and 'discount'}">
-      <!-- Custom Text -->
-      <div class="row">
-        <span t-raw="request.website.custom_text"/>
-      </div>
       <!-- Breadcrumb -->
       <div class="oe_category_breadcrumb row">
         <div class="col-xs-12 col-sm-8 col-md-9">
@@ -668,11 +664,24 @@
     </xpath>
   </template>
 
-  <template id="custom_text"
+  <template id="custom_text_shop"
           inherit_id="website_sale.products"
           name="Custom Text"
           priority="30">
     <xpath expr="(//div[@id='wrap']//div[hasclass('oe_website_sale')]/*)[1]"
+           position="before">
+        <div class="row">
+          <div class="col-xs-12">
+            <span t-raw="request.website.custom_text"/>
+          </div>
+        </div>
+    </xpath>
+  </template>
+
+  <template id="custom_text_product"
+          inherit_id="cet_website_sale.product_detail_section"
+          name="Custom Text Product">
+    <xpath expr="//section[@id='product_detail']//div[hasclass('oe_category_breadcrumb')]"
            position="before">
         <div class="row">
           <div class="col-xs-12">
