@@ -29,5 +29,6 @@
         "views/website_sale_options_templates.xml",
         "views/category_megamenu_templates.xml",
         "views/assets.xml",
+        "views/website_views.xml",
     ],
 }

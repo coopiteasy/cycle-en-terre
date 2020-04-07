@@ -11,7 +11,7 @@
             <div id="webmaster_settings" position="after">
                 <h2>Custom Texts</h2>
                 <div class="row mt16 o_settings_container" id="custom_texts_settings">
-                    <div class="col-xs-12 col-md-6 o_setting_box" id="custom_login">
+                    <div class="col-xs-12 col-md-12 o_setting_box" id="custom_login">
                         <div class="o_setting_right_pane">
                             <label string="Custom Login"/>
                             <div class="text-muted">
@@ -19,13 +19,13 @@
                             </div>
                             <div class="content-group">
                                 <div class="mt16">
-                                    <field name="login_invite"/>
+                                    <field name="login_invite" widget="html"/>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-md-6 o_setting_box" id="custom_text">
+                    <div class="col-xs-12 col-md-12 o_setting_box" id="custom_text">
                         <div class="o_setting_right_pane">
                             <label string="Custom Text"/>
                             <div class="text-muted">
@@ -33,7 +33,7 @@
                             </div>
                             <div class="content-group">
                                 <div class="mt16">
-                                    <field name="custom_text"/>
+                                    <field name="custom_text" widget="html"/>
                                 </div>
                             </div>
                         </div>

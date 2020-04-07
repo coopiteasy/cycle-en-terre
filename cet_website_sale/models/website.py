@@ -7,5 +7,5 @@ from odoo import api, fields, models
 class Website(models.Model):
     _inherit = "website"
 
-    login_invite = fields.Html(string="Login Invite")
-    custom_text = fields.Html(string="Custom Text")
+    login_invite = fields.Html(string="Login Invite", translate=True,)
+    custom_text = fields.Html(string="Custom Text", translate=True,)
