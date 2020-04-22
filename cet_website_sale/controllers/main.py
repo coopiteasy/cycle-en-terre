@@ -189,3 +189,22 @@ class WebsiteSale(Base):
             }
         else:
             return {"error": True}
+
+    @http.route(['/shop/cart'], type='http', auth="public", website=True)
+    def cart(self, access_token=None, revive="", **post):
+        response = super().cart(access_token, revive, **post)
+        sale_order = request.website.sale_get_order()
+        uid = request.session["uid"]
+        customer_type_id = request.env["res.users"].browse(uid).customer_type_id or request.env.user.customer_type_id
+        if customer_type_id and customer_type_id.sudo().website_restrict_product:
+            sale_order._check_cart_customer_type(customer_type_id)
+        sale_order._check_cart_available_threshold()
+        return response
+
+    @http.route(['/shop/checkout'], type='http', auth="public", website=True)
+    def checkout(self, **post):
+        response = super().checkout(**post)
+        sale_order = request.website.sale_get_order()
+        if sale_order._is_threshold_reached():
+            return request.redirect('/shop/cart')
+        return response

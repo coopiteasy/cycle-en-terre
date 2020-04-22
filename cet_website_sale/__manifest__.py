@@ -13,6 +13,7 @@
     "installable": True,
     "depends": [
         "website_sale",
+        "website_sale_stock",
         "website_sale_options",
         "website_sale_delivery",
         "website_sale_category_megamenu",
