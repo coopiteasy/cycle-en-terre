@@ -1,7 +1,7 @@
 # Copyright 2018 Coop IT Easy SCRLfs
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import http
+from odoo import _, http
 from odoo.http import request
 from odoo.osv import expression
 from odoo.addons.website_sale.controllers.main import PPG
@@ -73,6 +73,138 @@ class WebsiteSale(Base):
         if "search" in post:
             order = ("similarity(name, '%s') DESC," % post["search"]) + order
         return order
+
+    def _user_can_shop(self):
+        """
+        Return True if the user can shop or False if it needs to follow
+        the customer selector process.
+        """
+        customer_type_id = None
+        if "customer_type" in request.session:
+            customer_type_id = (
+                request
+                .env["res.partner.customer.type"]
+                .sudo()
+                .browse(int(request.session["customer_type"]))
+            )
+        return (
+            request.session["uid"]
+            and customer_type_id
+            and customer_type_id == request.env.user.customer_type_id
+        ) or (
+            not request.session["uid"]
+            and customer_type_id
+            and not customer_type_id.website_require_early_login
+        )
+
+    def _get_customer_selector_vals(self):
+        """
+        Return values for the template that generate de popover
+        selector.
+        """
+        vals = {}
+        customer_type_ids = (
+            request
+            .env["res.partner.customer.type"]
+            .sudo()
+            .search(
+                [("show_on_website", "=", True)]
+            )
+        )
+        vals["show_customer_type_selector"] = (
+            customer_type_ids and not self._user_can_shop()
+        )
+        vals["customer_type_ids"] = customer_type_ids
+        if "customer_type_selector_error" in request.session:
+            vals["customer_type_selector_error"] = request.session[
+                "customer_type_selector_error"
+            ]
+        return vals
+
+    @http.route(
+        ["/shop/product/stock_info"], type="json", website=True, auth="public"
+    )
+    def get_product_stock_info(self, **kwargs):
+        """Give a json data structure that contains informations about
+        the available stock for a product variant.
+        """
+        product_id = kwargs.get("id", None)
+        product = request.env["product.product"].sudo().browse(product_id)
+        if product:
+            return {
+                "id": product.id,
+                "virtual_available": product.virtual_available,
+                "inventory_availability": product.inventory_availability,
+                "available_threshold": product.available_threshold,
+                "custom_message": product.custom_message,
+                "cart_qty": product.cart_qty,
+            }
+        else:
+            return {"error": True}
+
+    @http.route(
+        ['/set/customer_type'], type='http', auth="public", website=True
+    )
+    def set_customer_type(self, customer_type=None, origin_url=None, **post):
+        """
+        Set the customer_type in the request.session and redirect to
+        next_url.
+        """
+        # Remove previous error if any
+        if "customer_type_selector_error" in request.session:
+            del request.session["customer_type_selector_error"]
+
+        customer_type_id = (
+            request
+            .env["res.partner.customer.type"]
+            .sudo()
+            .browse(int(customer_type))
+        )
+
+        # Set customer_type in session
+        request.session["customer_type"] = customer_type_id.id
+
+        # Redirect
+        next_url = (
+            "/check/customer_type?next_url=%s&origin_url=%s"
+            % (customer_type_id.next_url or origin_url, origin_url)
+        )
+        if customer_type_id.website_require_early_login:
+            return request.redirect("/web/login?redirect=%s" % next_url)
+        return request.redirect(next_url)
+
+    @http.route(
+        ['/check/customer_type'], type='http', auth="public", website=True
+    )
+    def check_customer_type(self, origin_url=None, next_url=None, **post):
+        """
+        Check if the customer type choice is correct regarding to the
+        connected user.
+        """
+        # Check that customer type is in session to test this choice
+        if "customer_type" not in request.session:
+            return request.redirect(origin_url)
+        customer_type_id = (
+            request
+            .env["res.partner.customer.type"]
+            .sudo()
+            .browse(int(request.session["customer_type"]))
+        )
+        # Check state that needs to show errors to the user
+        if (
+            customer_type_id.website_require_early_login
+            or request.session["uid"]
+        ) and request.env.user.customer_type_id != customer_type_id:
+            request.session.logout(keep_db=True)
+            request.session["customer_type_selector_error"] = _(
+                "Mismatch between the customer type selected and the "
+                "customer type of the user. Please select a customer "
+                "type and login with the corresponding user."
+            )
+            return request.redirect(origin_url)
+        if not self._user_can_shop():
+            return request.redirect(origin_url)
+        return request.redirect(next_url)
 
     @http.route()
     def shop(
@@ -180,6 +312,7 @@ class WebsiteSale(Base):
         response.qcontext[
             "get_attribute_value_ids"
         ] = self.get_attribute_value_ids
+        response.qcontext.update(self._get_customer_selector_vals())
         return response
 
     @http.route()
@@ -187,25 +320,5 @@ class WebsiteSale(Base):
         sm_mgr = request.env["seed.seedling.month"]
         response = super().product(product, category, search, **kwargs)
         response.qcontext["all_seedling_months"] = sm_mgr.sudo().search([])
+        response.qcontext.update(self._get_customer_selector_vals())
         return response
-
-    @http.route(
-        ["/shop/product/stock_info"], type="json", website=True, auth="public"
-    )
-    def get_product_stock_info(self, **kwargs):
-        """Give a json data structure that contains informations about
-        the available stock for a product variant.
-        """
-        product_id = kwargs.get("id", None)
-        product = request.env["product.product"].sudo().browse(product_id)
-        if product:
-            return {
-                "id": product.id,
-                "virtual_available": product.virtual_available,
-                "inventory_availability": product.inventory_availability,
-                "available_threshold": product.available_threshold,
-                "custom_message": product.custom_message,
-                "cart_qty": product.cart_qty,
-            }
-        else:
-            return {"error": True}
