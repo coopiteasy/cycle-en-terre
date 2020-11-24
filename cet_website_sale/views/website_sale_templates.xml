@@ -649,6 +649,18 @@
          </t>
       </t>
     </xpath>
+    <xpath expr="//t[@t-call='website_sale.payment_confirmation_status']" position="before">
+      <t t-if="order.payment_acquirer_id.provider == 'transfer'">
+        <div class="row">
+          <div class="col-md-9">
+            <h3 class="text-left">
+              <strong>Your invoice will be available on your account <i>after</i> shipping.</strong>
+              <br/>
+            </h3>
+          </div>
+        </div>
+      </t>
+    </xpath>
   </template>
 
   <template id="stock_messages">
