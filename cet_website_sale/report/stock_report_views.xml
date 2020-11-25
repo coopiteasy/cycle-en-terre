@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+      <xpath expr="//h2" position="after">
+        <div class="row mb16" name="customer_details">
+          <div class="col-xs-6">
+            <div name="cust_details_name" t-if="partner">
+              <strong>Customer Name:</strong>
+              <span t-field="partner.name"/>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div name="cust_details_customer_type" t-if="partner and partner.customer_type_id">
+              <strong>Customer Type:</strong>
+              <span t-field="partner.customer_type_id.name"/>
+            </div>
+          </div>
+        </div>
+      </xpath>
+    </template>
+
+</odoo>

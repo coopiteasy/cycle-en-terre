@@ -33,6 +33,7 @@
         "views/category_megamenu_templates.xml",
         "views/assets.xml",
         "views/website_views.xml",
+        "report/stock_report_views.xml",
         "security/ir.model.access.csv",
     ],
 }
