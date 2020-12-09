@@ -22,4 +22,18 @@
       </xpath>
     </template>
 
+
+    <template id="report_picking" inherit_id="stock.report_picking">
+      <xpath expr="//h1" position="after">
+        <div class="row mb16" name="customer_details">
+          <div class="col-xs-6">
+            <div name="cust_details_customer_type" t-if="o.partner_id and o.partner_id.customer_type_id">
+              <strong>Customer Type:</strong>
+              <span t-field="o.partner_id.customer_type_id.name"/>
+            </div>
+          </div>
+        </div>
+      </xpath>
+    </template>
+
 </odoo>
