@@ -319,6 +319,24 @@ class WebsiteSale(Base):
     def product(self, product, category="", search="", **kwargs):
         sm_mgr = request.env["seed.seedling.month"]
         response = super().product(product, category, search, **kwargs)
+
+        # Add seedling months
         response.qcontext["all_seedling_months"] = sm_mgr.sudo().search([])
         response.qcontext.update(self._get_customer_selector_vals())
+
+        # Get product list allowed for the current user (product.product)
+        partner = request.env.user.commercial_partner_id
+        if partner.website_restrict_product:
+            allowed_products = partner.website_product_ids
+        else:
+            allowed_products = None
+
+        # Filter alternative_product_ids
+        if allowed_products is not None:
+            alt_product_ids = product.alternative_products_ids.filtered(
+                lambda p: p in allowed_products
+            )
+        else:
+            alt_product_ids = product.alternative_product_ids
+        response.qcontext["alt_product_ids"] = alt_product_ids
         return response

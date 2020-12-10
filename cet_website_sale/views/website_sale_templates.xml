@@ -383,7 +383,7 @@
       <div class="oe_cet_pd_alt_product oe_cet_pd_alt_section row"
         t-if="product.alternative_product_ids">
         <h2>Alternative Products</h2>
-        <div class="col-xs-6 col-sm-3 col-md-2 col-lg-1" t-foreach="product.alternative_product_ids" t-as="p">
+        <div class="col-xs-6 col-sm-3 col-md-2 col-lg-1" t-foreach="alt_product_ids" t-as="p">
           <span itemprop="image"
             t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image"
             t-field="product.image"
