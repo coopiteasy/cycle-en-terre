@@ -29,6 +29,7 @@
                     </group>
                     <group name="website_product">
                         <field name="website_restrict_product"/>
+                        <field name="default_cart_qty"/>
                         <field name="website_product_ids"
                             attrs="{'invisible': [('website_restrict_product', '=', False)]}"/>
                     </group>

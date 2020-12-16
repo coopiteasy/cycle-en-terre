@@ -46,6 +46,7 @@ class ResPartnerCustomerType(models.Model):
             "that belongs to this customer type."
         )
     )
+    default_cart_qty = fields.Integer('Default Cart Quantity', default=1)
 
     def show_on_website_button(self):
         """Toggle function used for the button in the form"""
