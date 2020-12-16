@@ -332,7 +332,7 @@ class WebsiteSale(Base):
             allowed_products = None
 
         # Filter alternative_product_ids
-        if allowed_products is not None:
+        if product.alternative_product_ids and allowed_products is not None:
             alt_product_ids = product.alternative_products_ids.filtered(
                 lambda p: p in allowed_products
             )
