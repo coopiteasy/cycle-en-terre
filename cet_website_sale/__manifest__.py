@@ -4,7 +4,7 @@
 {
     "name": "Cycle en Terre Website Sale",
     "summary": "Adaptation for Cycle en Terre to the e-Commerce",
-    "version": "11.0.1.2.0",
+    "version": "11.0.1.3.0",
     "category": "e-commerce",
     "website": "https://github.com/coopiteasy/cycle-en-terre/",
     "author": "Coop IT Easy SCRLfs",
@@ -18,15 +18,13 @@
         "website_sale_category_megamenu",
         "website_sale_category_breadcrumb",
         "website_sale_product_seeds",
+        "website_sale_customer_type",
         "product_seeds",
-        "contacts",
         "base_search_fuzzy",
     ],
     "data": [
         "views/res_config_settings_views.xml",
-        "views/res_partner.xml",
         "views/res_partner_customer_type.xml",
-        "views/product_product.xml",
         "views/templates.xml",
         "views/website_sale_templates.xml",
         "views/website_sale_options_templates.xml",
@@ -34,6 +32,5 @@
         "views/assets.xml",
         "views/website_views.xml",
         "report/stock_report_views.xml",
-        "security/ir.model.access.csv",
     ],
 }

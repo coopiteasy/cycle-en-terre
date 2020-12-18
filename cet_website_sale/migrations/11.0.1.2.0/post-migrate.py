@@ -7,7 +7,7 @@ def migrate(cr, version):
     cr.execute(
         """
         SELECT id, name, website_restrict_product, active
-        FROM tmp_res_partner_customer_type
+        FROM backup_res_partner_customer_type
         """
     )
     categs = cr.fetchall()
@@ -17,7 +17,7 @@ def migrate(cr, version):
         cr.execute(
             """
             SELECT product_product_id
-            FROM tmp_product_product_res_partner_category_rel
+            FROM backup_product_product_res_partner_category_rel
             WHERE res_partner_category_id = %s
             """,
             (categ[0],)
@@ -66,14 +66,14 @@ def migrate(cr, version):
             partner_customer_type_vals
         )
 
-    # Delete tmp tables
+    # Delete backup tables
     cr.execute(
         """
-        DROP TABLE tmp_product_product_res_partner_category_rel
+        DROP TABLE backup_product_product_res_partner_category_rel
         """
     )
     cr.execute(
         """
-        DROP TABLE tmp_res_partner_customer_type
+        DROP TABLE backup_res_partner_customer_type
         """
     )

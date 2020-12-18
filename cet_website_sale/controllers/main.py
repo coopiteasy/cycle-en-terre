@@ -74,138 +74,6 @@ class WebsiteSale(Base):
             order = ("similarity(name, '%s') DESC," % post["search"]) + order
         return order
 
-    def _user_can_shop(self):
-        """
-        Return True if the user can shop or False if it needs to follow
-        the customer selector process.
-        """
-        customer_type_id = None
-        if "customer_type" in request.session:
-            customer_type_id = (
-                request
-                .env["res.partner.customer.type"]
-                .sudo()
-                .browse(int(request.session["customer_type"]))
-            )
-        return (
-            request.session["uid"]
-            and customer_type_id
-            and customer_type_id == request.env.user.customer_type_id
-        ) or (
-            not request.session["uid"]
-            and customer_type_id
-            and not customer_type_id.website_require_early_login
-        )
-
-    def _get_customer_selector_vals(self):
-        """
-        Return values for the template that generate de popover
-        selector.
-        """
-        vals = {}
-        customer_type_ids = (
-            request
-            .env["res.partner.customer.type"]
-            .sudo()
-            .search(
-                [("show_on_website", "=", True)]
-            )
-        )
-        vals["show_customer_type_selector"] = (
-            customer_type_ids and not self._user_can_shop()
-        )
-        vals["customer_type_ids"] = customer_type_ids
-        if "customer_type_selector_error" in request.session:
-            vals["customer_type_selector_error"] = request.session[
-                "customer_type_selector_error"
-            ]
-        return vals
-
-    @http.route(
-        ["/shop/product/stock_info"], type="json", website=True, auth="public"
-    )
-    def get_product_stock_info(self, **kwargs):
-        """Give a json data structure that contains informations about
-        the available stock for a product variant.
-        """
-        product_id = kwargs.get("id", None)
-        product = request.env["product.product"].sudo().browse(product_id)
-        if product:
-            return {
-                "id": product.id,
-                "virtual_available": product.virtual_available,
-                "inventory_availability": product.inventory_availability,
-                "available_threshold": product.available_threshold,
-                "custom_message": product.custom_message,
-                "cart_qty": product.cart_qty,
-            }
-        else:
-            return {"error": True}
-
-    @http.route(
-        ['/set/customer_type'], type='http', auth="public", website=True
-    )
-    def set_customer_type(self, customer_type=None, origin_url=None, **post):
-        """
-        Set the customer_type in the request.session and redirect to
-        next_url.
-        """
-        # Remove previous error if any
-        if "customer_type_selector_error" in request.session:
-            del request.session["customer_type_selector_error"]
-
-        customer_type_id = (
-            request
-            .env["res.partner.customer.type"]
-            .sudo()
-            .browse(int(customer_type))
-        )
-
-        # Set customer_type in session
-        request.session["customer_type"] = customer_type_id.id
-
-        # Redirect
-        next_url = (
-            "/check/customer_type?next_url=%s&origin_url=%s"
-            % (customer_type_id.next_url or origin_url, origin_url)
-        )
-        if customer_type_id.website_require_early_login:
-            return request.redirect("/web/login?redirect=%s" % next_url)
-        return request.redirect(next_url)
-
-    @http.route(
-        ['/check/customer_type'], type='http', auth="public", website=True
-    )
-    def check_customer_type(self, origin_url=None, next_url=None, **post):
-        """
-        Check if the customer type choice is correct regarding to the
-        connected user.
-        """
-        # Check that customer type is in session to test this choice
-        if "customer_type" not in request.session:
-            return request.redirect(origin_url)
-        customer_type_id = (
-            request
-            .env["res.partner.customer.type"]
-            .sudo()
-            .browse(int(request.session["customer_type"]))
-        )
-        # Check state that needs to show errors to the user
-        if (
-            customer_type_id.website_require_early_login
-            or request.session["uid"]
-        ) and request.env.user.customer_type_id != customer_type_id:
-            request.session.logout(keep_db=True)
-            request.session["customer_type_selector_error"] = _(
-                "Mismatch between the customer type selected and the "
-                "customer type of the user. Please select a customer "
-                "type and login with the corresponding user."
-            )
-            return request.redirect(origin_url)
-        if not self._user_can_shop():
-            return request.redirect(origin_url)
-        return request.redirect(next_url)
-
     @http.route()
     def shop(
         self,
@@ -242,6 +110,7 @@ class WebsiteSale(Base):
             ppg=0,
             **post
         )
+        products = response.qcontext["products"]
 
         # Put seedling months in the context so that it is accessible by
         # other function of this controller.
@@ -251,34 +120,13 @@ class WebsiteSale(Base):
             context["seedling_month_ids"] = seedling_month_ids
             request.env.context = context
 
-        # Get all product.template that match the domain
-        attrib_values = response.qcontext["attrib_values"]
-        products = request.env["product.template"].search(
-            self._get_search_domain(search, category, attrib_values),
-            order=self._get_search_order(post)
-        )
-
-        # Get current user list of products (product.product)
-        partner = request.env.user.commercial_partner_id
-        if partner.website_restrict_product:
-            allowed_products = partner.website_product_ids
-        else:
-            allowed_products = None
-
         def variant_ok(product):
             """
-            Return True if at least one variant can be sold and at least
-            one variant are allowed to be sold to the current user.
+            Return True if at least one variant can be sold.
             product must be a product.template
             """
             for variant in product.product_variant_ids:
-                if (
-                    variant.variant_sale_ok
-                    and allowed_products is not None
-                    and variant in allowed_products
-                ):
-                    return True
-                elif variant.variant_sale_ok and allowed_products is None:
+                if variant.variant_sale_ok:
                     return True
             return False
 
@@ -299,20 +147,15 @@ class WebsiteSale(Base):
         )
 
         # Truncate product according to the pager
-        products = products[pager["offset"]:pager["offset"]+ppg]
+        products = products[pager["offset"]:pager["offset"] + ppg]
 
         # Add element to context
         response.qcontext["products"] = products
-        response.qcontext["restrict_product"] = (
-            partner.website_restrict_product
-        )
-        response.qcontext["allowed_products"] = allowed_products
         response.qcontext["product_count"] = product_count
         response.qcontext["pager"] = pager
         response.qcontext[
             "get_attribute_value_ids"
         ] = self.get_attribute_value_ids
-        response.qcontext.update(self._get_customer_selector_vals())
         return response
 
     @http.route()
@@ -324,20 +167,25 @@ class WebsiteSale(Base):
         response.qcontext["all_seedling_months"] = sm_mgr.sudo().search([])
         response.qcontext.update(self._get_customer_selector_vals())
 
-        # Get product list allowed for the current user (product.product)
-        partner = request.env.user.commercial_partner_id
-        if partner.website_restrict_product:
-            allowed_products = partner.website_product_ids
-        else:
-            allowed_products = None
-
-        # Filter alternative_product_ids
-        if allowed_products is not None:
-            allowed_product_tmpls = allowed_products.mapped("product_tmpl_id")
-            alt_product_ids = product.alternative_product_ids.filtered(
-                lambda p: p in allowed_product_tmpls
-            )
-        else:
-            alt_product_ids = product.alternative_product_ids
-        response.qcontext["alt_product_ids"] = alt_product_ids
         return response
+
+    @http.route(
+        ["/shop/product/stock_info"], type="json", website=True, auth="public"
+    )
+    def get_product_stock_info(self, **kwargs):
+        """Give a json data structure that contains informations about
+        the available stock for a product variant.
+        """
+        product_id = kwargs.get("id", None)
+        product = request.env["product.product"].sudo().browse(product_id)
+        if product:
+            return {
+                "id": product.id,
+                "virtual_available": product.virtual_available,
+                "inventory_availability": product.inventory_availability,
+                "available_threshold": product.available_threshold,
+                "custom_message": product.custom_message,
+                "cart_qty": product.cart_qty,
+            }
+        else:
+            return {"error": True}

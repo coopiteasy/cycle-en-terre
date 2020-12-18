@@ -22,39 +22,10 @@ Cycle en Terre Website Sale
 This modules add lots of customisation for the e-commerce of
 Cycle-en-Terre.
 
-One of the feature is to add the ability to define different Customer
-Type and assign it to partner. This way, you can decide what products
-are shown on the website for different Customer Type.
-
 **Table of contents**
 
 .. contents::
    :local:
-
-Configuration
-=============
-
-Customer Type Selector
-~~~~~~~~~~~~~~~~~~~~~~
-
-By default, this module don't show a Customer Selector on the
-e-commerce. The goal of the Customer Selector is to let the user choose
-his type of customer a be guided to the right procedure to connect.
-
-Customer Type can be configured under *Contacts > Configuration >
-Customer Type*.
-
-To enable the Customer Selector on the e-commerce, it must exists at
-least one Customer Type with the *Show On Website* property set to True.
-
-Usage
-=====
-
-Customer Type Selector
-~~~~~~~~~~~~~~~~~~~~~~
-
-Configure as show in the configure section. To use it assign a Customer
-Type to your partners.
 
 Bug Tracker
 ===========

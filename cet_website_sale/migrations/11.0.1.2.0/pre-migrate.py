@@ -6,7 +6,7 @@ def migrate(cr, version):
     # Backup relation between tags and products
     cr.execute(
         """
-        CREATE TABLE IF NOT EXISTS tmp_product_product_res_partner_category_rel
+        CREATE TABLE IF NOT EXISTS backup_product_product_res_partner_category_rel
         AS TABLE product_product_res_partner_category_rel
         """
     )
@@ -14,7 +14,7 @@ def migrate(cr, version):
     # Keep old tags that appears in the previous table
     cr.execute(
         """
-        CREATE TABLE IF NOT EXISTS tmp_res_partner_customer_type
+        CREATE TABLE IF NOT EXISTS backup_res_partner_customer_type
         AS SELECT id, name, website_restrict_product, active
         FROM res_partner_category
         WHERE id in (
