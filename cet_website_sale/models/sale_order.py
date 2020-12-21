@@ -18,16 +18,20 @@ class SaleOrder(models.Model):
         return False
 
     @api.multi
+    def _is_restricted(self, customer_type_id):
+        for line in self.order_line:
+            if line._is_restricted(customer_type_id):
+                return True
+        return False
+
+    @api.multi
     def _check_cart_customer_type(self, customer_type_id):
         if not customer_type_id.sudo().website_restrict_product:
             return
         values = {}
         restricted_products = []
         for line in self.order_line:
-            if (
-                line.product_id.type == "product"
-                and customer_type_id not in line.product_id.customer_type_ids
-            ):
+            if line._is_restricted(customer_type_id):
                 restricted_products.append(line.product_id.name)
                 self._cart_update(
                     product_id=line.product_id.id,
@@ -96,19 +100,25 @@ class SaleOrderLine(models.Model):
     warning_threshold = fields.Char("Warning Threshold")
 
     @api.multi
+    def _is_restricted(self, customer_type_id):
+        self.ensure_one()
+        return (
+            self.product_id.type == "product"
+            and customer_type_id not in self.product_id.customer_type_ids
+        )
+
+    @api.multi
     def _is_threshold_reached(self):
         self.ensure_one()
         threshold_reached = (
             self.product_id.virtual_available - self.product_id.cart_qty
         ) < self.product_id.available_threshold
-        if (
+        return (
             self.product_id.type == "product"
             and self.product_id.inventory_availability
             in ["always", "threshold"]
             and threshold_reached
-        ):
-            return True
-        return False
+        )
 
     @api.multi
     def _get_threshold_warning(self, clear=True):

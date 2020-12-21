@@ -205,6 +205,12 @@ class WebsiteSale(Base):
     def checkout(self, **post):
         response = super().checkout(**post)
         sale_order = request.website.sale_get_order()
-        if sale_order._is_threshold_reached():
-            return request.redirect('/shop/cart')
+        uid = request.session["uid"]
+        customer_type_id = request.env["res.users"].browse(uid).customer_type_id or request.env.user.customer_type_id
+        if (
+                customer_type_id
+                and customer_type_id.sudo().website_restrict_product
+                and sale_order._is_restricted(customer_type_id)
+        ) or sale_order._is_threshold_reached:
+            return request.redirect("/shop/cart")
         return response
