@@ -211,6 +211,6 @@ class WebsiteSale(Base):
                 customer_type_id
                 and customer_type_id.sudo().website_restrict_product
                 and sale_order._is_restricted(customer_type_id)
-        ) or sale_order._is_threshold_reached:
+        ) or sale_order._is_threshold_reached():
             return request.redirect("/shop/cart")
         return response
