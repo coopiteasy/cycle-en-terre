@@ -640,6 +640,31 @@
     </xpath>
   </template>
 
+  <template id="confirmation"
+    inherit_id="website_sale.confirmation"
+    name="CET Confirmation Design">
+    <xpath expr="//t[@t-esc='order.payment_acquirer_id.name']" position="after">
+      <t t-if="order.payment_acquirer_id.provider == 'transfer'">
+         <t t-if="order.reference">
+           <br/>
+            Structured reference: <t t-esc="order.reference"/>
+         </t>
+      </t>
+    </xpath>
+    <xpath expr="//t[@t-call='website_sale.payment_confirmation_status']" position="before">
+      <t t-if="order.payment_acquirer_id.provider == 'transfer'">
+        <div class="row">
+          <div class="col-md-9">
+            <h3 class="text-left">
+              <strong>Your invoice will be available on your account <i>after</i> shipping.</strong>
+              <br/>
+            </h3>
+          </div>
+        </div>
+      </t>
+    </xpath>
+  </template>
+
   <template id="stock_messages">
     <!--
       :param: text_class: classes that will be applied to the text.
