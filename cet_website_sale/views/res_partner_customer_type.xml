@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_partner_customer_type_form" model="ir.ui.view">
+        <field name="name">res.partner.customer.type.form</field>
+        <field name="model">res.partner.customer.type</field>
+        <field name="inherit_id" ref="website_sale_customer_type.view_partner_customer_type_form"/>
+        <field name="arch" type="xml">
+            <field name="website_restrict_product" position="before">
+                <field name="default_cart_qty"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

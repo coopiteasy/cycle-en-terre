@@ -1,7 +1,7 @@
 # Copyright 2018 Coop IT Easy SCRLfs
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import http
+from odoo import _, http
 from odoo.http import request
 from odoo.osv import expression
 from odoo.addons.website_sale.controllers.main import PPG
@@ -110,6 +110,7 @@ class WebsiteSale(Base):
             ppg=0,
             **post
         )
+        products = response.qcontext["products"]
 
         # Put seedling months in the context so that it is accessible by
         # other function of this controller.
@@ -119,34 +120,13 @@ class WebsiteSale(Base):
             context["seedling_month_ids"] = seedling_month_ids
             request.env.context = context
 
-        # Get all product.template that match the domain
-        attrib_values = response.qcontext["attrib_values"]
-        products = request.env["product.template"].search(
-            self._get_search_domain(search, category, attrib_values),
-            order=self._get_search_order(post)
-        )
-
-        # Get current user list of products (product.product)
-        partner = request.env.user.commercial_partner_id
-        if partner.website_restrict_product:
-            allowed_products = partner.website_product_ids
-        else:
-            allowed_products = None
-
         def variant_ok(product):
             """
-            Return True if at least one variant can be sold and at least
-            one variant are allowed to be sold to the current user.
+            Return True if at least one variant can be sold.
             product must be a product.template
             """
             for variant in product.product_variant_ids:
-                if (
-                    variant.variant_sale_ok
-                    and allowed_products is not None
-                    and variant in allowed_products
-                ):
-                    return True
-                elif variant.variant_sale_ok and allowed_products is None:
+                if variant.variant_sale_ok:
                     return True
             return False
 
@@ -167,14 +147,10 @@ class WebsiteSale(Base):
         )
 
         # Truncate product according to the pager
-        products = products[pager["offset"]:pager["offset"]+ppg]
+        products = products[pager["offset"]:pager["offset"] + ppg]
 
         # Add element to context
         response.qcontext["products"] = products
-        response.qcontext["restrict_product"] = (
-            partner.website_restrict_product
-        )
-        response.qcontext["allowed_products"] = allowed_products
         response.qcontext["product_count"] = product_count
         response.qcontext["pager"] = pager
         response.qcontext[
@@ -186,7 +162,11 @@ class WebsiteSale(Base):
     def product(self, product, category="", search="", **kwargs):
         sm_mgr = request.env["seed.seedling.month"]
         response = super().product(product, category, search, **kwargs)
+
+        # Add seedling months
         response.qcontext["all_seedling_months"] = sm_mgr.sudo().search([])
+        response.qcontext.update(self._get_customer_selector_vals())
+
         return response
 
     @http.route(
