@@ -213,3 +213,14 @@ class WebsiteSale(Base):
         ) or sale_order._is_threshold_reached():
             return request.redirect("/shop/cart")
         return response
+
+    # Taken from oca/e-commerce/website_sale_tax_toggle
+    # Start of addition
+    @http.route(
+        ['/website/tax_toggle'], type='json', auth="public", website=True)
+    def tax_toggle(self):
+        # Create a session variable
+        request.session['tax_toggle_taxed'] = not request.session.get(
+            'tax_toggle_taxed', False)
+        return request.session['tax_toggle_taxed']
+    # End of addition
