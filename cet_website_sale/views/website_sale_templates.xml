@@ -3,6 +3,21 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
+  <!-- Taken from oca/e-commerce/website_sale_tax_toggle and adapted for cet_website_sale -->
+  <!-- Start of addition -->
+
+  <template id="tax_toggle_template">
+    <t t-set="taxed" t-value="request.session.get('tax_toggle_taxed', request.env.user.with_context(skip_tax_toggle_check=True).has_group('sale.group_show_price_total'))"/>
+    <div class="js_tax_toggle_management" data-controller="/website/tax_toggle">
+        <label class="o_switch o_switch_danger js_tax_toggle_btn">
+            <input type="checkbox" t-att-checked="taxed"/>
+            <span/>
+            <span>Show prices with taxes included</span>
+        </label>
+    </div>
+  </template>
+  <!-- End of addition -->
+
 
   <template id="products_item" name="CET Products Item Design">
 
@@ -107,6 +122,18 @@
     name="CET Products List Design"
     customize_show="True"
     active="True">
+    <!-- Taken from oca/e-commerce/website_sale_tax_toggle and adapted for cet_website_sale -->
+    <!-- Start of addition -->
+    <xpath expr="//div[hasclass('products_pager')]" position="after">
+      <div class="row mt16 mb0">
+          <div class="col">
+              <div class="pull-right">
+                  <t t-call="cet_website_sale.tax_toggle_template"/>
+              </div>
+          </div>
+      </div>
+    </xpath>
+    <!-- End of addition -->
     <xpath expr="//div[@id='products_grid']" position="replace">
       <div id="products_grid" class="oe_cet_product_grid col-md-12">
         <t t-foreach="products" t-as="product">
@@ -187,6 +214,10 @@
           <form action="/shop/cart/update" class="js_add_cart_variants" method="POST">
             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
             <div class="js_product" t-if="product.product_variant_ids">
+              <!-- Taken from oca/e-commerce/website_sale_tax_toggle and adapted for cet_website_sale -->
+              <!-- Start of addition -->
+              <t t-call="cet_website_sale.tax_toggle_template"/>
+              <!-- End of addition -->
               <t t-call="website_sale.product_price" />
               <t t-call="cet_website_sale.product_variants">
                 <t t-set="radio_position" t-value="'before'"/>
