@@ -8,4 +8,4 @@ from odoo import fields, models
 class ResPartnerCustomerType(models.Model):
     _inherit = "res.partner.customer.type"
 
-    default_cart_qty = fields.Integer('Default Cart Quantity', default=1)
+    default_cart_qty = fields.Integer("Default Cart Quantity", default=1)

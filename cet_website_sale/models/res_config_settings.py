@@ -8,8 +8,10 @@ class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
     login_invite = fields.Html(
-        string="Custom Login Invite", related="website_id.login_invite",
+        string="Custom Login Invite",
+        related="website_id.login_invite",
     )
     custom_text = fields.Html(
-        string="Custom Text", related="website_id.custom_text",
+        string="Custom Text",
+        related="website_id.custom_text",
     )

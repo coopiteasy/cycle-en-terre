@@ -106,7 +106,7 @@ class WebsiteSale(Base):
             category=category,
             seedling_months=seedling_months,
             search=search,
-            ppg='10000',
+            ppg="10000",
             **post
         )
         products = response.qcontext["products"]
@@ -142,11 +142,11 @@ class WebsiteSale(Base):
             page=page,
             step=ppg,
             scope=7,
-            url_args=post
+            url_args=post,
         )
 
         # Truncate product according to the pager
-        products = products[pager["offset"]:pager["offset"] + ppg]
+        products = products[pager["offset"] : pager["offset"] + ppg]
 
         # Add element to context
         response.qcontext["products"] = products
@@ -189,7 +189,7 @@ class WebsiteSale(Base):
         else:
             return {"error": True}
 
-    @http.route(['/shop/cart'], type='http', auth="public", website=True)
+    @http.route(["/shop/cart"], type="http", auth="public", website=True)
     def cart(self, access_token=None, revive="", **post):
         response = super().cart(access_token, revive, **post)
         sale_order = request.website.sale_get_order()
@@ -200,7 +200,7 @@ class WebsiteSale(Base):
         sale_order._check_cart_available_threshold()
         return response
 
-    @http.route(['/shop/checkout'], type='http', auth="public", website=True)
+    @http.route(["/shop/checkout"], type="http", auth="public", website=True)
     def checkout(self, **post):
         response = super().checkout(**post)
         sale_order = request.website.sale_get_order()
@@ -216,10 +216,13 @@ class WebsiteSale(Base):
     # Taken from oca/e-commerce/website_sale_tax_toggle
     # Start of addition
     @http.route(
-        ['/website/tax_toggle'], type='json', auth="public", website=True)
+        ["/website/tax_toggle"], type="json", auth="public", website=True
+    )
     def tax_toggle(self):
         # Create a session variable
-        request.session['tax_toggle_taxed'] = not request.session.get(
-            'tax_toggle_taxed', False)
-        return request.session['tax_toggle_taxed']
+        request.session["tax_toggle_taxed"] = not request.session.get(
+            "tax_toggle_taxed", False
+        )
+        return request.session["tax_toggle_taxed"]
+
     # End of addition
