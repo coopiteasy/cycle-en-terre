@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cet_mollie_form" inherit_id="payment_mollie_official.mollie_form">
+        <xpath expr="//input[@name='Phone']" position="after">
+            <input type="hidden" name="OrderReference" t-att-value="OrderReference"/>
+        </xpath>
+    </template>
+</odoo>
