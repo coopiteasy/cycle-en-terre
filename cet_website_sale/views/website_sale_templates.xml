@@ -460,15 +460,17 @@
 
     <t t-if="len(product.product_variant_ids) &gt; 1">
       <div class="oe_cet_product_variant">
+
+        <!-- This part is hidden via css. -->
         <t t-foreach="product.product_variant_ids" t-as="variant_id">
           <t t-if="not restrict_product or (restrict_product and variant_id in allowed_products)">
-            <div id="oe_variant_ids_selector"
-                 class="radio"
-                 t-if="variant_id.variant_sale_ok">
+            <div class="radio oe_variant_ids_selector"
+                 t-if="variant_id.variant_sale_ok"
+                 aria-hidden="true">
               <input type="radio" name="product_id"
                 t-if="radio_position == 'before'"
                 class="js_product_change radio-before"
-                t-att-id="variant_id.id"
+                t-att-vid="variant_id.id"
                 t-att-checked="'checked' if variant_id.default_variant else None"
                 t-att-value="variant_id.id"
                 t-att-data-lst_price="compute_currency(variant_id.lst_price)"
@@ -484,7 +486,7 @@
               <input type="radio" name="product_id"
                 t-if="radio_position == 'after'"
                 class="js_product_change radio-after"
-                t-att-id="variant_id.id"
+                t-att-vid="variant_id.id"
                 t-att-checked="'checked' if variant_id.default_variant else None"
                 t-att-value="variant_id.id"
                 t-att-data-lst_price="compute_currency(variant_id.lst_price)"
@@ -492,6 +494,23 @@
             </div>
           </t>
         </t>
+
+        <!-- This select tag is just a wrapper that uses the input above -->
+        <select class="oe_cet_product_variant_select js_product_change_select">
+          <t t-foreach="product.product_variant_ids" t-as="variant_id">
+            <t t-if="not restrict_product or (restrict_product and variant_id in allowed_products)">
+              <option t-if="variant_id.variant_sale_ok"
+                  t-att-selected="'selected' if variant_id.default_variant else None"
+                  t-att-value="variant_id.id">
+                <span t-esc="variant_id.attribute_value_ids.name"/> (<t t-esc="variant_id.seed_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
+                <span t-if="variant_id.covered_surface">
+                  = <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
+                </span>
+              </option>
+            </t>
+          </t>
+        </select>
+
       </div>
 
     </t>
