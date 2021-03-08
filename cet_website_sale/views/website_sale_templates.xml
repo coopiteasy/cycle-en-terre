@@ -80,16 +80,11 @@
 
               <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer" class="js_product add_to_cart" t-if="product.product_variant_ids">
                 <!-- Price -->
-                <t t-call="website_sale.product_price" />
+                <t name="cet_product_price_template" t-call="website_sale.product_price" />
                 <!-- Variants -->
-                <t t-call="cet_website_sale.product_variants">
+                <t name="cet_product_variant_template" t-call="cet_website_sale.product_variants">
                   <t t-set="radio_position" t-value="'after'"/>
                 </t>
-                <div class="oe_stock_messages hidden">
-                  <t t-call="cet_website_sale.stock_messages">
-                    <t t-set="text_class" t-value="'stock_message_text'"/>
-                  </t>
-                </div>
                 <div class="oe_quantity_price">
                   <!-- Quantity Selector -->
                   <div class="oe_p_quantity">
@@ -201,7 +196,7 @@
             <t t-call="website_sale_product_seeds.seedling_calendar_caption"/>
           </div>
         </div>
-        <!-- Informatinos -->
+        <!-- Informations -->
         <div class="col-xs-12 col-sm-7 col-md-6">
           <div class="oe_p_name" t-field="product.name" itemprop="name"/>
           <span itemprop="url" class="hidden" t-esc="'%sshop/product/%s' % (request.httprequest.url_root, slug(product))"/>
@@ -222,12 +217,7 @@
               <t t-call="cet_website_sale.product_variants">
                 <t t-set="radio_position" t-value="'before'"/>
               </t>
-              <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
-              <div class="oe_stock_messages hidden">
-                <t t-call="cet_website_sale.stock_messages">
-                  <t t-set="text_class" t-value="'stock_message_text'"/>
-                </t>
-              </div>
+              <p name="cet_not_valid_combination_message" t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
               <div class="oe_quantity_price">
                 <!-- Quantity Selector -->
                 <div class="oe_p_quantity pull-left">
@@ -437,9 +427,9 @@
   </template>
 
 
-  <!-- Warning, as this template replace a element of his parent
-       (`website_sale.product`), it should by loaded last. So, it should
-       have a hight priority.
+  <!-- Warning, as this template replaces a element of his parent
+       (`website_sale.product`), it should be loaded last. So, it should
+       have a high priority.
    -->
   <template id="product_view"
     inherit_id="website_sale.product"
@@ -694,16 +684,6 @@
         </div>
       </t>
     </xpath>
-  </template>
-
-  <template id="stock_messages">
-    <!--
-      :param: text_class: classes that will be applied to the text.
-    -->
-    <p t-attf-class="{{ text_class }}">
-      <i class="fa fa-exclamation-triangle"></i> Not enough products in
-      stock for now.
-    </p>
   </template>
 
   <template id="login_invite"

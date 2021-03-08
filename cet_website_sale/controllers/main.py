@@ -106,7 +106,7 @@ class WebsiteSale(Base):
             category=category,
             seedling_months=seedling_months,
             search=search,
-            ppg='10000',
+            ppg="10000",
             **post
         )
         products = response.qcontext["products"]
@@ -142,11 +142,11 @@ class WebsiteSale(Base):
             page=page,
             step=ppg,
             scope=7,
-            url_args=post
+            url_args=post,
         )
 
         # Truncate product according to the pager
-        products = products[pager["offset"]:pager["offset"] + ppg]
+        products = products[pager["offset"] : pager["offset"] + ppg]
 
         # Add element to context
         response.qcontext["products"] = products
@@ -168,59 +168,39 @@ class WebsiteSale(Base):
 
         return response
 
-    @http.route(
-        ["/shop/product/stock_info"], type="json", website=True, auth="public"
-    )
-    def get_product_stock_info(self, **kwargs):
-        """Give a json data structure that contains informations about
-        the available stock for a product variant.
-        """
-        product_id = kwargs.get("id", None)
-        product = request.env["product.product"].sudo().browse(product_id)
-        if product:
-            return {
-                "id": product.id,
-                "virtual_available": product.virtual_available,
-                "inventory_availability": product.inventory_availability,
-                "available_threshold": product.available_threshold,
-                "custom_message": product.custom_message,
-                "cart_qty": product.cart_qty,
-            }
-        else:
-            return {"error": True}
-
-    @http.route(['/shop/cart'], type='http', auth="public", website=True)
+    @http.route(["/shop/cart"], type="http", auth="public", website=True)
     def cart(self, access_token=None, revive="", **post):
         response = super().cart(access_token, revive, **post)
         sale_order = request.website.sale_get_order()
-        uid = request.session["uid"]
-        customer_type_id = request.env["res.users"].browse(uid).customer_type_id or request.env.user.customer_type_id
-        if customer_type_id and customer_type_id.sudo().website_restrict_product:
-            sale_order._check_cart_customer_type(customer_type_id)
-        sale_order._check_cart_available_threshold()
+        if request.env.user.website_restrict_product:
+            sale_order._check_cart_customer_type(
+                request.env.user.partner_id.get_customer_type_id()
+            )
         return response
 
-    @http.route(['/shop/checkout'], type='http', auth="public", website=True)
+    @http.route(["/shop/checkout"], type="http", auth="public", website=True)
     def checkout(self, **post):
         response = super().checkout(**post)
         sale_order = request.website.sale_get_order()
-        uid = request.session["uid"]
-        customer_type_id = request.env["res.users"].browse(uid).customer_type_id or request.env.user.customer_type_id
         if (
-                customer_type_id
-                and customer_type_id.sudo().website_restrict_product
-                and sale_order._is_restricted(customer_type_id)
-        ) or sale_order._is_threshold_reached():
+            request.env.user.website_restrict_product
+            and sale_order._is_restricted(
+                request.env.user.partner_id.get_customer_type_id()
+            )
+        ):
             return request.redirect("/shop/cart")
         return response
 
     # Taken from oca/e-commerce/website_sale_tax_toggle
     # Start of addition
     @http.route(
-        ['/website/tax_toggle'], type='json', auth="public", website=True)
+        ["/website/tax_toggle"], type="json", auth="public", website=True
+    )
     def tax_toggle(self):
         # Create a session variable
-        request.session['tax_toggle_taxed'] = not request.session.get(
-            'tax_toggle_taxed', False)
-        return request.session['tax_toggle_taxed']
+        request.session["tax_toggle_taxed"] = not request.session.get(
+            "tax_toggle_taxed", False
+        )
+        return request.session["tax_toggle_taxed"]
+
     # End of addition

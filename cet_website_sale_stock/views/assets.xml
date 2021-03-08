@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+<data>
+
+  <template id="megamenu_extend_assets"
+    name="CET Mega-menu Extend Assets"
+    inherit_id="website.assets_frontend">
+    <xpath expr="//link[last()]" position="after">
+      <link rel="stylesheet" type="text/less"
+        href="/cet_website_sale_stock/static/src/less/design.less"/>
+      <link rel="stylesheet" type="text/less"
+        href="/cet_website_sale_stock/static/src/less/products_item.less"/>
+      <link rel="stylesheet" type="text/less"
+        href="/cet_website_sale_stock/static/src/less/product.less"/>
+      <script type="text/javascript" src="/cet_website_sale_stock/static/src/js/stock.js"/>
+    </xpath>
+  </template>
+
+</data>
+</odoo>

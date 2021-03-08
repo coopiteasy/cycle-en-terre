@@ -2,6 +2,7 @@
 #   Rémy Taymans <remy@coopiteasy.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+
 def migrate(cr, version):
     # Get old categ
     cr.execute(
@@ -20,7 +21,7 @@ def migrate(cr, version):
             FROM backup_product_product_res_partner_category_rel
             WHERE res_partner_category_id = %s
             """,
-            (categ[0],)
+            (categ[0],),
         )
         products = cr.fetchall()
         # Create new customer type and get back its id
@@ -33,7 +34,7 @@ def migrate(cr, version):
             ) VALUES (%s, %s, %s)
             RETURNING id
             """,
-            (categ[1], categ[2], categ[3])
+            (categ[1], categ[2], categ[3]),
         )
         customer_type_id = cr.fetchone()[0]
         # Link product to the new customer type
@@ -47,7 +48,7 @@ def migrate(cr, version):
                 product_product_id
             ) VALUES (%s, %s)
             """,
-            type_product_rel_vals
+            type_product_rel_vals,
         )
         # Get all partner assigned to this categ
         cr.execute(
@@ -55,7 +56,7 @@ def migrate(cr, version):
             SELECT partner_id FROM res_partner_res_partner_category_rel
             WHERE category_id = %s
             """,
-            (categ[0],)
+            (categ[0],),
         )
         partners = cr.fetchall()
         partner_customer_type_vals = (
@@ -63,7 +64,7 @@ def migrate(cr, version):
         )
         cr.executemany(
             "UPDATE res_partner SET customer_type_id = %s WHERE id = %s",
-            partner_customer_type_vals
+            partner_customer_type_vals,
         )
 
     # Delete backup tables

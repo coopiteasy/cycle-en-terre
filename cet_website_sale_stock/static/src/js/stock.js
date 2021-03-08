@@ -14,7 +14,7 @@ odoo.define('cet_website_sale', function (require) {
         /**
          * This function gets information about stock for a product
          * variant and it disables action button when needed. It also
-         * shows messages about the stock when appropriated.
+         * shows messages about the stock when relevant.
          */
 
         // The variable 'this' must contain an input with value equal
