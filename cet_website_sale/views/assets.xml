@@ -29,6 +29,7 @@
       <link type="text/less" rel="stylesheet"
             href="/cet_website_sale/static/src/less/website_sale_tax_toggle.less"/>
       <!-- End of addition -->
+      <script type="text/javascript" src="/cet_website_sale/static/src/js/website_sale.js"></script>
     </xpath>
   </template>
 
