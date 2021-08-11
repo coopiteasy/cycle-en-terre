@@ -41,6 +41,7 @@
                             <field name="sowing_outoors_month_ids" widget="many2many_tags"/>
                             <field name="pot_planting_month_ids" widget="many2many_tags"/>
                             <field name="comment"/>
+                            <field name="sale_years_number"/>
                         </group>
                     </page>
                     <page name="seed_packets" string="Packets" attrs="{'invisible':[('is_species','!=',True)]}">

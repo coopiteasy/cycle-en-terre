@@ -92,4 +92,7 @@ class ProductTemplate(models.Model):
         ('ornamental', 'Ornamental')],
         string='Plant Passport Type'
     )
-
+    sale_years_number = fields.Integer(
+        string="Sale Years Number",
+        help="This information is useful to compute the sell-by date (SBD) printed on packets"
+    )
