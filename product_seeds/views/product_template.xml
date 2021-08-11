@@ -43,6 +43,11 @@
                             <field name="comment"/>
                         </group>
                     </page>
+                    <page name="seed_packets" string="Packets">
+                        <group>
+                            <field name="packet_species_information"/>
+                        </group>
+                    </page>
                 </xpath>
 
             </field>

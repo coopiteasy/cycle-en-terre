@@ -1,12 +1,16 @@
 {
     "name": "Seeds - Products",
     "summary": """
-        Customization of product_template to manage seed production""",
+        Customization of product_template to manage:
+        - seed production
+        - variety
+        - variant
+    """,
     "author": "Coop IT Easy SCRL",
     "website": "https://www.coopiteasy.be",
     "license": "AGPL-3",
     "category": "Warehouse Management",
-    "version": "11.0.0.0.1",
+    "version": "11.0.0.1.1",
     "depends": ["product", "sale", "stock", "website_sale"],
     "data": [
         "data/data.xml",

@@ -68,3 +68,9 @@ class ProductTemplate(models.Model):
         string="Light Requirements", translate=True
     )
     comment = fields.Text(string="Comment", translate=True)
+    packet_species_information = fields.Char(
+        string="Packet Species Information",
+        size=150,
+        translate=True,
+        help="This information is printed on packets. Max. 150 characters."
+    )
