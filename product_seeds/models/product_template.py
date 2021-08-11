@@ -77,3 +77,9 @@ class ProductTemplate(models.Model):
         translate=True,
         help="This information is printed on packets. Max. 150 characters."
     )
+    packet_culture_information = fields.Char(
+        string="Packet Culture Information",
+        size=293,
+        translate=True,
+        help="This information is printed on packets. Max. 293 characters."
+    )

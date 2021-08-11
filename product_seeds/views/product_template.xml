@@ -46,6 +46,7 @@
                     <page name="seed_packets" string="Packets" attrs="{'invisible':[('is_species','!=',True)]}">
                         <group>
                             <field name="packet_species_information"/>
+                            <field name="packet_culture_information"/>
                         </group>
                     </page>
                 </xpath>
