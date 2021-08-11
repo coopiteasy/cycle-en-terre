@@ -57,6 +57,12 @@ class ProductTemplate(models.Model):
         related="max_seeding_density",
         readonly=True
     )
+    plants_nb = fields.Float(
+        string="Number of plants per m²",
+        digits=(10,2),
+        help="Number of plants per square meter"
+
+    )
     germination = fields.Char(string="Germination", translate=True)
     thousand_grain_weight = fields.Float(string="Thousand Grain Weight (g)")
     thousand_plants_gram = fields.Float(

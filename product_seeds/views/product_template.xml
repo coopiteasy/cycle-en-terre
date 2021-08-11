@@ -48,6 +48,7 @@
                             <field name="min_seeding_density"/>
                             <field name="max_seeding_density"/>
                             <field name="selected_seeding_density"/>
+                            <field name="plants_nb"/>
                         </group>
                     </page>
                     <page name="seed_packets" string="Packets" attrs="{'invisible':[('is_species','!=',True)]}">
