@@ -51,7 +51,10 @@
                     </page>
                     <page name="legal_information" string="Legal Information" attrs="{'invisible':[('is_species','!=',True)]}">
                         <group>
-                            <field name="plant_passport_type"/>
+                            <field name="plant_passport_needed"/>
+                            <field name="plant_passport_type"
+                                   attrs="{'invisible': [('plant_passport_needed', '!=', True)],
+                                           'required': [('plant_passport_needed', '=', True)]}"/>
                         </group>
                     </page>
                 </xpath>

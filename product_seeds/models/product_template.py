@@ -84,8 +84,12 @@ class ProductTemplate(models.Model):
         translate=True,
         help="This information is printed on packets. Max. 293 characters."
     )
+    plant_passport_needed = fields.Boolean(
+        string="Plant Passport Needed?"
+    )
     plant_passport_type = fields.Selection([
         ('leguminous', 'Leguminous'),
         ('ornamental', 'Ornamental')],
         string='Plant Passport Type'
     )
+
