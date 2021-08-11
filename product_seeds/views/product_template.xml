@@ -49,6 +49,11 @@
                             <field name="packet_culture_information"/>
                         </group>
                     </page>
+                    <page name="legal_information" string="Legal Information" attrs="{'invisible':[('is_species','!=',True)]}">
+                        <group>
+                            <field name="plant_passport_type"/>
+                        </group>
+                    </page>
                 </xpath>
 
             </field>
