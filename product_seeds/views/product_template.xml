@@ -25,6 +25,7 @@
                             <field name="latin_name"/>
                             <field name="produced_in_house"/>
                             <field name="thousand_grain_weight"/>
+                            <field name="thousand_plants_gram"/>
                             <field name="emergence"/>
                             <field name="germination"/>
                             <field name="light_requirements"/>

@@ -59,6 +59,11 @@ class ProductTemplate(models.Model):
     )
     germination = fields.Char(string="Germination", translate=True)
     thousand_grain_weight = fields.Float(string="Thousand Grain Weight (g)")
+    thousand_plants_gram = fields.Float(
+        string="Thousand Plants Gram #",
+        digits=(10,2),
+        help="Number of grams to have one thousand plants"
+    )
     website_species_information = fields.Html(
         string="Website Species Information", translate=html_translate,
         help="Information to be displayed on the website and in the annual catalog"
