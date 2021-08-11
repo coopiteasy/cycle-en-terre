@@ -24,7 +24,6 @@
                             <field name="seedling_month_ids" widget="many2many_tags"/>
                             <field name="latin_name"/>
                             <field name="produced_in_house"/>
-                            <field name="density"/>
                             <field name="thousand_grain_weight"/>
                             <field name="emergence"/>
                             <field name="germination"/>
@@ -42,6 +41,12 @@
                             <field name="pot_planting_month_ids" widget="many2many_tags"/>
                             <field name="comment"/>
                             <field name="sale_years_number"/>
+                        </group>
+                        <group name="density" string="Density">
+                            <field name="density"/>
+                            <field name="min_seeding_density"/>
+                            <field name="max_seeding_density"/>
+                            <field name="selected_seeding_density"/>
                         </group>
                     </page>
                     <page name="seed_packets" string="Packets" attrs="{'invisible':[('is_species','!=',True)]}">

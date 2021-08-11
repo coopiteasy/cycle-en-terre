@@ -50,6 +50,13 @@ class ProductTemplate(models.Model):
     latin_name = fields.Char(string="Latin Name")
     emergence = fields.Char(string="Emergence", translate=True)
     density = fields.Float(string="Density (g/10 m²)")
+    min_seeding_density = fields.Float(string="Min. Seeding Density (g/10 m²)")
+    max_seeding_density = fields.Float(string="Max. Seeding Density (g/10 m²)")
+    selected_seeding_density = fields.Float(
+        string="Selected Seeding Density",
+        related="max_seeding_density",
+        readonly=True
+    )
     germination = fields.Char(string="Germination", translate=True)
     thousand_grain_weight = fields.Float(string="Thousand Grain Weight (g)")
     website_species_information = fields.Html(
