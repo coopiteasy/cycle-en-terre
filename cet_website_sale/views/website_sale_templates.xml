@@ -265,7 +265,7 @@
               </div>
             </div>
             <div class="panel panel-default">
-              <div t-if="product.culture_information" class="panel-heading" role="tab" id="oe_collapse_p_cult_info">
+              <div t-if="product.website_culture_information" class="panel-heading" role="tab" id="oe_collapse_p_cult_info">
                 <h4 class="panel-title">
                   <a role="button" data-toggle="collapse" href="#oe_p_cult_info" aria-expanded="true" aria-controls="oe_p_cult_info">
                     Culture Information
@@ -274,7 +274,7 @@
               </div>
               <div id="oe_p_cult_info" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="oe_collapse_p_cult_info">
                 <div class="panel-body">
-                  <p t-field="product.culture_information"/>
+                  <p t-field="product.website_culture_information"/>
                 </div>
               </div>
             </div>

@@ -56,8 +56,9 @@ class ProductTemplate(models.Model):
         string="Website Species Information", translate=html_translate,
         help="Information to be displayed on the website and in the annual catalog"
     )
-    culture_information = fields.Text(
-        string="Culture Information", translate=True
+    website_culture_information = fields.Html(
+        string="Website Culture Information", translate=html_translate,
+        help="Information to be displayed on the website and in the annual catalog"
     )
     recipe = fields.Html(string="Recipe", translate=True)
     beemeadow = fields.Boolean(string="Beemeadow")

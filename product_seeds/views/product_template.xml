@@ -33,7 +33,7 @@
                             <field name="spacing_within_line"/>
                             <field name="beemeadow"/>
                             <field name="website_species_information"/>
-                            <field name="culture_information"/>
+                            <field name="website_culture_information"/>
                             <field name="recipe"/>
                             <field name="flowering_month_ids" widget="many2many_tags"/>
                             <field name="harvest_month_ids" widget="many2many_tags"/>
