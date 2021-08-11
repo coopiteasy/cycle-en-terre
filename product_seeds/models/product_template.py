@@ -120,3 +120,15 @@ class ProductTemplate(models.Model):
         string="Sale Years Number",
         help="This information is useful to compute the sell-by date (SBD) printed on packets"
     )
+    eu_catalog = fields.Boolean(
+        string="EU Catalog",
+        help="European Union Catalog"
+    )
+    catalog_maintainer = fields.Text(
+        string="Catalog Maintainer",
+        translate=True
+    )
+    breeder = fields.Text(
+        string="Breeder",
+        translate=True
+    )

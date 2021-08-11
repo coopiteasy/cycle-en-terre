@@ -67,6 +67,10 @@
                             <field name="plant_passport_type"
                                    attrs="{'invisible': [('plant_passport_needed', '!=', True)],
                                            'required': [('plant_passport_needed', '=', True)]}"/>
+                            <field name="eu_catalog"/>
+                            <field name="catalog_maintainer"/>
+                            <field name="breeder"/>
+
                         </group>
                     </page>
                 </xpath>
