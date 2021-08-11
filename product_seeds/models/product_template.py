@@ -1,4 +1,6 @@
 from odoo import models, fields
+from odoo.tools.translate import html_translate
+
 
 
 class SeedlingMonth(models.Model):
@@ -50,8 +52,9 @@ class ProductTemplate(models.Model):
     density = fields.Float(string="Density (g/10 m²)")
     germination = fields.Char(string="Germination", translate=True)
     thousand_grain_weight = fields.Float(string="Thousand Grain Weight (g)")
-    species_information = fields.Text(
-        string="Species Information", translate=True
+    website_species_information = fields.Html(
+        string="Website Species Information", translate=html_translate,
+        help="Information to be displayed on the website and in the annual catalog"
     )
     culture_information = fields.Text(
         string="Culture Information", translate=True

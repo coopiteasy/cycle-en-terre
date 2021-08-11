@@ -46,10 +46,8 @@
                 </t>
                 <span class="oe_p_latin_name" t-field="product.latin_name"/>
               </div>
-              <p class="oe_p_species_info" t-if="product.species_information and len(product.species_information) &gt; 250">
-                <t t-esc="product.species_information[0:250]"/> ...
-              </p>
-              <p class="oe_p_species_info" t-if="product.species_information and len(product.species_information) &lt;= 250" t-esc="product.species_information"/>
+              <p class="oe_p_species_info" t-if="product.website_species_information and len(product.website_species_information) &gt; 250" t-field="product.website_species_information[0:250]"/>
+              <p class="oe_p_species_info" t-if="product.website_species_information and len(product.website_species_information) &lt;= 250" t-field="product.website_species_information"/>
               <p class="oe_details">
                 <a t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
                   More details
@@ -252,7 +250,7 @@
                 </div>
               </div>
             </div>
-            <div t-if="product.species_information" class="panel panel-default">
+            <div t-if="product.website_species_information" class="panel panel-default">
               <div class="panel-heading" role="tab" id="oe_collapse_p_species_info">
                 <h4 class="panel-title">
                   <a role="button" data-toggle="collapse" href="#oe_p_species_info" aria-expanded="true" aria-controls="oe_p_species_info">
@@ -262,7 +260,7 @@
               </div>
               <div id="oe_p_species_info" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="oe_collapse_p_species_info">
                 <div class="panel-body">
-                  <p t-field="product.species_information"/>
+                  <p t-field="product.website_species_information"/>
                 </div>
               </div>
             </div>
