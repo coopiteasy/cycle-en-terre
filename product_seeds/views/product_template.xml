@@ -29,8 +29,6 @@
                             <field name="emergence"/>
                             <field name="germination"/>
                             <field name="light_requirements"/>
-                            <field name="spacing_between_lines"/>
-                            <field name="spacing_within_line"/>
                             <field name="beemeadow"/>
                             <field name="website_species_information"/>
                             <field name="website_culture_information"/>
@@ -43,11 +41,17 @@
                             <field name="comment"/>
                             <field name="sale_years_number"/>
                         </group>
+                        <group name="spacing" string="Spacing">
+                            <field name="spacing_between_lines"/>
+                            <field name="spacing_within_line"/>
+                            <field name="spacing_between_plants"/>
+                        </group>
                         <group name="density" string="Density">
                             <field name="density"/>
                             <field name="min_seeding_density"/>
                             <field name="max_seeding_density"/>
                             <field name="selected_seeding_density"/>
+                            <field name="linear_seeding_density"/>
                             <field name="plants_nb"/>
                         </group>
                     </page>

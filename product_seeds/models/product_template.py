@@ -57,6 +57,7 @@ class ProductTemplate(models.Model):
         related="max_seeding_density",
         readonly=True
     )
+    linear_seeding_density = fields.Float(string="Linear Seeding Density (g/m²)")
     plants_nb = fields.Float(
         string="Number of plants per m²",
         digits=(10,2),
@@ -85,6 +86,11 @@ class ProductTemplate(models.Model):
     )
     spacing_within_line = fields.Char(
         string="Spacing Within Line", translate=True
+    )
+    spacing_between_plants = fields.Float(
+        string="Plant spacing (m²)",
+        digits=(10,2),
+        help="Spacing between plants per square meter"
     )
     light_requirements = fields.Char(
         string="Light Requirements", translate=True
