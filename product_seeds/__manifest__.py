@@ -22,6 +22,7 @@
         "views/legal_information_certification.xml",
         "views/legal_information_mention.xml",
         "views/legal_information_variety_right.xml",
+        "views/product_packing_method.xml",
         "security/ir.model.access.csv",
     ],
     "demo": ["demo/demo.xml"],

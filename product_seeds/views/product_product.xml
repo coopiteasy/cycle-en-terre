@@ -55,6 +55,23 @@
                             <field name="default_variant"/>
                         </group>
                     </page>
+                    <page name="packing" string="Packing">
+                        <group name="packing" string="Packing">
+                            <group>
+                                <field name="max_seed_weight"/>
+                                <field name="packing_method_id"/>
+                                <field name="theoretical_packing_time" widget="float_time"/>
+                                <field name="theoretical_adjustment_time" widget="float_time"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="legal_information" string="Legal Information">
+                        <group name="legal_information" string="Legal Information">
+                            <group>
+                                <field name="legal_mention"/>
+                            </group>
+                        </group>
+                    </page>
                 </xpath>
             </field>
         </record>
