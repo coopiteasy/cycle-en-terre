@@ -132,3 +132,15 @@ class ProductTemplate(models.Model):
         string="Breeder",
         translate=True
     )
+    certification_id = fields.Many2one(
+        comodel_name="legal.information.certification",
+        string="Certification"
+    )
+    mention_id = fields.Many2one(
+        comodel_name="legal.information.mention",
+        string="Mention"
+    )
+    variety_right_id = fields.Many2one(
+        comodel_name="legal.information.variety.right",
+        string="Variety Right"
+    )

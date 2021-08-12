@@ -70,7 +70,9 @@
                             <field name="eu_catalog"/>
                             <field name="catalog_maintainer"/>
                             <field name="breeder"/>
-
+                            <field name="certification_id"/>
+                            <field name="mention_id"/>
+                            <field name="variety_right_id"/>
                         </group>
                     </page>
                 </xpath>
