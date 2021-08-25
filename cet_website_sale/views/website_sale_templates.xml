@@ -20,10 +20,11 @@
 
 
   <template id="products_item" name="CET Products Item Design">
-
-      <form class="js_add_cart_variants row" action="/shop/cart/update" method="post">
-        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
-        <div itemscope="itemscope" itemtype="http://schema.org/Product">
+    <!-- TODO: split into 2 templates without breaking cet_website_sale_stock inheritance -->
+    <form class="js_add_cart_variants row" action="/shop/cart/update" method="post">
+      <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+      <div itemscope="itemscope" itemtype="http://schema.org/Product">
+        <t t-if="not is_display_stand">
           <div class="col-xs-6 col-xs-offset-3 col-sm-offset-0 col-sm-2">
             <div class="oe_cet_product_image">
               <a itemprop="url" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
@@ -106,8 +107,68 @@
 
             </div>
           </section>
-        </div>
-      </form>
+        </t>
+        <t t-if="is_display_stand">
+          <!-- Default Code -->
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="oe_p_ref mt16">
+              <t t-foreach="product.product_variant_ids.sorted(key=lambda p: p.seed_weight)" t-as="p">
+                <span class="oe_p_ref" t-if="p.default_variant"># <t t-esc="p.default_code"/></span>
+              </t>
+            </div>
+          </div>
+          <!-- Name -->
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="oe_p_name mt16">
+              <a itemprop="name" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" t-att-content="product.name" t-field="product.name" />
+            </div>
+          </div>
+          <!-- Barcode -->
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="oe_p_barcode mt16">
+              <span class="oe_p_barcode" t-if="product.barcode"><t t-esc="product.barcode"/></span>
+            </div>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="oe_p_last_seedling_month mt16">
+              <span class="oe_p_last_seedling_month" t-if="product.seedling_month_ids"><t t-esc="product.seedling_month_ids[-1].name"/></span>
+            </div>
+          </div>
+          <!-- Product Price -->
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <t name="cet_product_price_template" t-call="website_sale.product_price" />
+          </div>
+          <!-- Quantity -->
+          <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer" class="js_product add_to_cart" t-if="product.product_variant_ids">
+            <!-- Variants -->
+              <t name="cet_product_variant_template" t-call="cet_website_sale.product_variants">
+                <t t-set="radio_position" t-value="'after'"/>
+              </t>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <div class="oe_quantity_price mt8">
+                <!-- Quantity Selector -->
+                <div class="oe_p_quantity">
+                  <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
+                    <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json js_remove">
+                      <i class="fa fa-minus"></i>
+                    </a>
+                    <t t-set="qty" t-value="request.env.user.customer_type_id.default_cart_qty or '1'"/>
+                    <input type="text" class="form-control input-sm quantity" data-min="1" name="add_qty" t-att-value="qty"/>
+                    <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json js_add">
+                      <i class="fa fa-plus"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              <a id="add_to_cart" class="mt8 btn btn-primary pull-right js_check_product a-submit js_goto_shop" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </t>
+
+      </div>
+    </form>
 
   </template>
 
@@ -130,7 +191,29 @@
     </xpath>
     <!-- End of addition -->
     <xpath expr="//div[@id='products_grid']" position="replace">
-      <div id="products_grid" class="oe_cet_product_grid col-md-12">
+      <div id="products_grid" t-att-class="'col-md-12 ' + 'oe_cet_product_grid' if not is_display_stand else None">
+        <t t-if="is_display_stand">
+          <div class="row">
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <span>Reference</span>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <span>Name</span>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            Barcode
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <span>Last Seeding Month</span>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <span>Price</span>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <span>Quantity</span>
+          </div>
+          </div>
+        </t>
         <t t-foreach="products" t-as="product">
           <div class="oe_cet_product"
             t-att-data-publish="product.website_published and 'on' or 'off'">
@@ -444,72 +527,74 @@
 
 
   <template id="product_variants">
-    <t t-set="radio_position" t-value="'before'" t-if="not radio_position"/>
+    <div t-att-class="'hidden' if is_display_stand else None">
+      <t t-set="radio_position" t-value="'before'" t-if="not radio_position"/>
 
-    <input type="hidden" t-if="len(product.product_variant_ids) == 1" class="product_id" name="product_id" t-att-value="product.product_variant_id.id"/>
+      <input type="hidden" t-if="len(product.product_variant_ids) == 1" class="product_id" name="product_id" t-att-value="product.product_variant_id.id"/>
 
-    <t t-if="len(product.product_variant_ids) &gt; 1">
-      <div class="oe_cet_product_variant">
+      <t t-if="len(product.product_variant_ids) &gt; 1">
+        <div class="oe_cet_product_variant">
 
-        <!-- This part is hidden via css. -->
-        <t t-foreach="product.product_variant_ids.sorted(key=lambda p: p.seed_weight)" t-as="variant_id">
-          <t t-if="not restrict_product or (restrict_product and variant_id in allowed_products)">
-            <div class="radio oe_variant_ids_selector"
-                 t-if="variant_id.variant_sale_ok"
-                 aria-hidden="true">
-              <input type="radio" name="product_id"
-                t-if="radio_position == 'before'"
-                class="js_product_change radio-before"
-                t-att-vid="variant_id.id"
-                t-att-checked="'checked' if variant_id.default_variant else None"
-                t-att-value="variant_id.id"
-                t-att-data-lst_price="compute_currency(variant_id.lst_price)"
-                t-att-data-price="variant_id.price"/>
-
-              <label t-att-for="variant_id.id" t-att-class="radio_position">
-                <span t-esc="variant_id.attribute_value_ids.name"/> (<t t-esc="variant_id.seed_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
-                <span t-if="variant_id.covered_surface">
-                  = <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
-                </span>
-              </label>
-
-              <input type="radio" name="product_id"
-                t-if="radio_position == 'after'"
-                class="js_product_change radio-after"
-                t-att-vid="variant_id.id"
-                t-att-checked="'checked' if variant_id.default_variant else None"
-                t-att-value="variant_id.id"
-                t-att-data-lst_price="compute_currency(variant_id.lst_price)"
-                t-att-data-price="variant_id.price"/>
-            </div>
-          </t>
-        </t>
-
-        <!-- This select tag is just a wrapper that uses the input above -->
-        <select class="oe_cet_product_variant_select js_product_change_select">
+          <!-- This part is hidden via css. -->
           <t t-foreach="product.product_variant_ids.sorted(key=lambda p: p.seed_weight)" t-as="variant_id">
             <t t-if="not restrict_product or (restrict_product and variant_id in allowed_products)">
-              <option t-if="variant_id.variant_sale_ok"
-                  t-att-selected="'selected' if variant_id.default_variant else None"
-                  t-att-value="variant_id.id">
-                <span t-esc="variant_id.attribute_value_ids.name"/> (<t t-esc="variant_id.seed_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
-                <span t-if="variant_id.covered_surface">
-                  = <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
-                </span>
-              </option>
+              <div class="radio oe_variant_ids_selector"
+                   t-if="variant_id.variant_sale_ok"
+                   aria-hidden="true">
+                <input type="radio" name="product_id"
+                  t-if="radio_position == 'before'"
+                  class="js_product_change radio-before"
+                  t-att-vid="variant_id.id"
+                  t-att-checked="'checked' if variant_id.default_variant else None"
+                  t-att-value="variant_id.id"
+                  t-att-data-lst_price="compute_currency(variant_id.lst_price)"
+                  t-att-data-price="variant_id.price"/>
+
+                <label t-att-for="variant_id.id" t-att-class="radio_position">
+                  <span t-esc="variant_id.attribute_value_ids.name"/> (<t t-esc="variant_id.seed_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
+                  <span t-if="variant_id.covered_surface">
+                    = <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
+                  </span>
+                </label>
+
+                <input type="radio" name="product_id"
+                  t-if="radio_position == 'after'"
+                  class="js_product_change radio-after"
+                  t-att-vid="variant_id.id"
+                  t-att-checked="'checked' if variant_id.default_variant else None"
+                  t-att-value="variant_id.id"
+                  t-att-data-lst_price="compute_currency(variant_id.lst_price)"
+                  t-att-data-price="variant_id.price"/>
+              </div>
             </t>
           </t>
-        </select>
 
-      </div>
+          <!-- This select tag is just a wrapper that uses the input above -->
+          <select class="oe_cet_product_variant_select js_product_change_select">
+            <t t-foreach="product.product_variant_ids.sorted(key=lambda p: p.seed_weight)" t-as="variant_id">
+              <t t-if="not restrict_product or (restrict_product and variant_id in allowed_products)">
+                <option t-if="variant_id.variant_sale_ok"
+                    t-att-selected="'selected' if variant_id.default_variant else None"
+                    t-att-value="variant_id.id">
+                  <span t-esc="variant_id.attribute_value_ids.name"/> (<t t-esc="variant_id.seed_weight"/> <t t-esc="variant_id.weight_unit.name"/>)
+                  <span t-if="variant_id.covered_surface">
+                    = <t t-esc="variant_id.covered_surface"/> m<sup>2</sup>
+                  </span>
+                </option>
+              </t>
+            </t>
+          </select>
 
-    </t>
-    <t t-else="">
+        </div>
 
-      <t t-set="attribute_value_ids" t-value="get_attribute_value_ids(product)"/>
-      <ul class="hidden js_add_cart_variants" t-att-data-attribute_value_ids="json.dumps(attribute_value_ids)"/>
+      </t>
+      <t t-else="">
 
-    </t>
+        <t t-set="attribute_value_ids" t-value="get_attribute_value_ids(product)"/>
+        <ul class="hidden js_add_cart_variants" t-att-data-attribute_value_ids="json.dumps(attribute_value_ids)"/>
+
+      </t>
+    </div>
   </template>
 
 
