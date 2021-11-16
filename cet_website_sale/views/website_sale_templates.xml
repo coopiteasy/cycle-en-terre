@@ -408,10 +408,10 @@
         <h2>Alternative Products</h2>
         <div class="col-xs-6 col-sm-3 col-md-2 col-lg-1" t-foreach="alt_product_ids" t-as="p">
           <span itemprop="image"
-            t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image"
-            t-field="product.image"
+            t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{p.id}}/image"
+            t-field="p.image"
             t-options="{'widget': 'image'}"
-            t-att-alt="product.name" />
+            t-att-alt="p.name" />
           <div class="oe_p_name">
             <a t-attf-href="/shop/product/#{ slug(p) }" t-field="p.name"/>
           </div>
