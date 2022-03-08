@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="variety_right_view_form" model="ir.ui.view">
+        <field name="name">legal.information.variety.right.form</field>
+        <field name="model">legal.information.variety.right</field>
+        <field name="arch" type="xml">
+            <form string="Variety Right">
+                <group>
+                    <field name="name"/>
+                    <field name="product_ids" widget="many2many_tags"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="variety_right_view_tree" model="ir.ui.view">
+        <field name="name">legal.information.variety.right.tree</field>
+        <field name="model">legal.information.variety.right</field>
+        <field name="arch" type="xml">
+            <tree string="Variety Right">
+                <field name="name"/>
+                <field name="product_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_variety_right_form" model="ir.actions.act_window">
+        <field name="name">Variety Right</field>
+        <field name="res_model">legal.information.variety.right</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            action="action_variety_right_form"
+            id="menu_action_variety_right_form"
+            parent="menu_legal_information_parent"
+            sequence="30"
+    />
+</odoo>

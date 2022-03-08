@@ -7,6 +7,10 @@
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
 
+                <field name="default_code" position="attributes">
+                    <attribute name="attrs">{'invisible': 0}</attribute>
+                </field>
+
                 <xpath expr="//div[@name='options']" position="before">
                     <field name="species" placeholder="Species" attrs="{'invisible':[('is_species','!=',True)]}"/>
                 </xpath>
@@ -24,16 +28,14 @@
                             <field name="seedling_month_ids" widget="many2many_tags"/>
                             <field name="latin_name"/>
                             <field name="produced_in_house"/>
-                            <field name="density"/>
                             <field name="thousand_grain_weight"/>
+                            <field name="thousand_plants_gram"/>
                             <field name="emergence"/>
                             <field name="germination"/>
                             <field name="light_requirements"/>
-                            <field name="spacing_between_lines"/>
-                            <field name="spacing_within_line"/>
                             <field name="beemeadow"/>
-                            <field name="species_information"/>
-                            <field name="culture_information"/>
+                            <field name="website_species_information"/>
+                            <field name="website_culture_information"/>
                             <field name="recipe"/>
                             <field name="flowering_month_ids" widget="many2many_tags"/>
                             <field name="harvest_month_ids" widget="many2many_tags"/>
@@ -41,6 +43,40 @@
                             <field name="sowing_outoors_month_ids" widget="many2many_tags"/>
                             <field name="pot_planting_month_ids" widget="many2many_tags"/>
                             <field name="comment"/>
+                            <field name="sale_years_number"/>
+                        </group>
+                        <group name="spacing" string="Spacing">
+                            <field name="spacing_between_lines"/>
+                            <field name="spacing_within_line"/>
+                            <field name="spacing_between_plants"/>
+                        </group>
+                        <group name="density" string="Density">
+                            <field name="density"/>
+                            <field name="min_seeding_density"/>
+                            <field name="max_seeding_density"/>
+                            <field name="selected_seeding_density"/>
+                            <field name="linear_seeding_density"/>
+                            <field name="plants_nb"/>
+                        </group>
+                    </page>
+                    <page name="seed_packets" string="Packets" attrs="{'invisible':[('is_species','!=',True)]}">
+                        <group>
+                            <field name="packet_species_information"/>
+                            <field name="packet_culture_information"/>
+                        </group>
+                    </page>
+                    <page name="legal_information" string="Legal Information" attrs="{'invisible':[('is_species','!=',True)]}">
+                        <group>
+                            <field name="plant_passport_needed"/>
+                            <field name="plant_passport_type"
+                                   attrs="{'invisible': [('plant_passport_needed', '!=', True)],
+                                           'required': [('plant_passport_needed', '=', True)]}"/>
+                            <field name="eu_catalog"/>
+                            <field name="catalog_maintainer"/>
+                            <field name="breeder"/>
+                            <field name="certification_id"/>
+                            <field name="mention_id"/>
+                            <field name="variety_right_id"/>
                         </group>
                     </page>
                 </xpath>
