@@ -2,4 +2,7 @@
 
   * Rémy Taymans <remy@coopiteasy.be>
   * Robin Keunen <robin@coopiteasy.be>
-  * Vincent Van Rossem <vincent@coopiteasy.be>
+
+* `Cycle en Terre <https://cycle-en-terre.be>`_:
+
+  * Nicolas77
