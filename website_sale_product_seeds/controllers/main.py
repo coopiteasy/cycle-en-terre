@@ -121,6 +121,7 @@ class WebsiteSale(Base):
             attrib=attrib_list,
             seedling_months=seedling_months and str(seedling_months),
             order=post.get("order"),
+            is_display_stand=post.get("is_display_stand")  # from website_sale_customer_type
         )
 
         # Add element to context
