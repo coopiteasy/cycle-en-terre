@@ -21,8 +21,8 @@
                     <div class="col-md-2 col-md-offset-1 col-sm-12">
                         <a href="mailto:info@cycle-en-terre.be">
                             <img width="63" height="64"
-                                 src="\cycle_en_terre_website_design\static\src\img\icon-mail.jpg"
-                                 alt="icon cycle en terre email"
+                                 src="/cycle_en_terre_website_design/static/src/img/icon-mail.jpg"
+                                 alt="E-mail"
                                  sizes="(max-width: 63px) 100vw, 63px"/>
                         </a>
                     </div>
@@ -31,8 +31,8 @@
                     <div class="col-md-2 col-sm-12">
                         <a href="https://www.facebook.com/cycleenterre/" target="_blank">
                             <img width="63" height="64"
-                                 src="\cycle_en_terre_website_design\static\src\img\icon-facebook.jpg"
-                                 alt="icon cycle en terre facebook"
+                                 src="/cycle_en_terre_website_design/static/src/img/icon-facebook.jpg"
+                                 alt="Facebook"
                                  sizes="(max-width: 63px) 100vw, 63px"/>
                         </a>
                     </div>
@@ -55,8 +55,8 @@
                         <p>
                             <a href="https://cycle-en-terre.be/conditions-generales-de-vente/#cgvpaiement">
                                 <img width="63" height="64"
-                                     src="\cycle_en_terre_website_design\static\src\img\icon-paiement.jpg"
-                                     alt="icon paiement"
+                                     src="/cycle_en_terre_website_design/static/src/img/icon-paiement.jpg"
+                                     alt="Paiement"
                                      sizes="(max-width: 63px) 100vw, 63px"/>
                             </a>
                         </p>
@@ -66,8 +66,8 @@
                     <div class="col-md-2 col-sm-12">
                         <a href="https://cycle-en-terre.be/conditions-generales-de-vente/#livraison">
                             <img width="63" height="64"
-                                 src="\cycle_en_terre_website_design\static\src\img\icon-livraison.jpg"
-                                 alt="icon livraison"
+                                 src="/cycle_en_terre_website_design/static/src/img/icon-livraison.jpg"
+                                 alt="Livraison"
                                  sizes="(max-width: 63px) 100vw, 63px"/>
                         </a>
                     </div>
@@ -76,8 +76,8 @@
                 <div class="row">
                     <!-- Copyrights -->
                     <div class="copyright">
-                        <img alt="Logo cycle en Terre"
-                             src="\cycle_en_terre_website_design\static\src\img\logo-cet-footer.png"
+                        <img alt="Logo Cycle en Terre"
+                             src="/cycle_en_terre_website_design/static/src/img/logo-cet-footer.png"
                              class="logo-footer"/>
                         <br/>
                         ©2018 Cycle-En-Terre: Semences biologiques
