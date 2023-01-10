@@ -164,7 +164,6 @@ class WebsiteSale(Base):
 
         # Add seedling months
         response.qcontext["all_seedling_months"] = sm_mgr.sudo().search([])
-        response.qcontext.update(self._get_customer_selector_vals())
 
         return response
 
