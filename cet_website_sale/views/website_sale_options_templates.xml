@@ -33,5 +33,21 @@
     </xpath>
   </template>
 
+  <template id="modal_cet_custom"
+    inherit_id="website_sale_options.modal"
+    name="CeT Custom Optional Products"
+    customize_show="True"
+    active="True">
+    <xpath expr="//tr[@id='product_confirmation']/td[hasclass('td-qty')]//a[1]" position="attributes">
+      <attribute name="style">display: none;</attribute>
+    </xpath>
+    <xpath expr="//tr[@id='product_confirmation']/td[hasclass('td-qty')]//a[last()]" position="attributes">
+      <attribute name="style">display: none;</attribute>
+    </xpath>
+    <xpath expr="//tr[@id='product_confirmation']/td[hasclass('td-qty')]//input" position="attributes">
+      <attribute name="readonly">readonly</attribute>
+    </xpath>
+  </template>
+
 
 </odoo>
