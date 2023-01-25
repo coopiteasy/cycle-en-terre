@@ -4,13 +4,16 @@
 <odoo>
 
 
-  <template id="modal"
+  <template id="modal_switch_button"
             inherit_id="website_sale_options.modal"
             name="Optional Products Switch Button"
             customize_show="True"
             active="True">
     <xpath expr="//div[hasclass('modal-footer')]" position="replace">
       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+          <i class="fa fa-remove"></i> Cancel
+        </button>
         <a class="btn btn-default a-submit">
           <i class="fa fa-shopping-cart fa-fw"></i>
           &#160;
@@ -30,6 +33,22 @@
           <i class="fa fa-chevron-right"></i>
         </a>
       </div>
+    </xpath>
+  </template>
+
+  <template id="modal_cet_custom"
+    inherit_id="website_sale_options.modal"
+    name="CeT Custom Optional Products"
+    customize_show="True"
+    active="True">
+    <xpath expr="//tr[@id='product_confirmation']/td[hasclass('td-qty')]//a[1]" position="attributes">
+      <attribute name="style">display: none;</attribute>
+    </xpath>
+    <xpath expr="//tr[@id='product_confirmation']/td[hasclass('td-qty')]//a[last()]" position="attributes">
+      <attribute name="style">display: none;</attribute>
+    </xpath>
+    <xpath expr="//tr[@id='product_confirmation']/td[hasclass('td-qty')]//input" position="attributes">
+      <attribute name="readonly">readonly</attribute>
     </xpath>
   </template>
 

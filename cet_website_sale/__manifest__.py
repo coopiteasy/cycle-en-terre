@@ -4,7 +4,7 @@
 {
     "name": "Cycle en Terre Website Sale",
     "summary": "Adaptation for Cycle en Terre to the e-Commerce",
-    "version": "11.0.1.4.2",
+    "version": "11.0.1.5.0",
     "category": "e-commerce",
     "website": "https://github.com/coopiteasy/cycle-en-terre/",
     "author": "Coop IT Easy SCRLfs",
