@@ -4,13 +4,16 @@
 <odoo>
 
 
-  <template id="modal"
+  <template id="modal_switch_button"
             inherit_id="website_sale_options.modal"
             name="Optional Products Switch Button"
             customize_show="True"
             active="True">
     <xpath expr="//div[hasclass('modal-footer')]" position="replace">
       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+          <i class="fa fa-remove"></i> Cancel
+        </button>
         <a class="btn btn-default a-submit">
           <i class="fa fa-shopping-cart fa-fw"></i>
           &#160;
