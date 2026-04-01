@@ -18,8 +18,8 @@
             <field name="emergence">4</field>
             <field name="density">123.2</field>
             <field name="germination">1.2</field>
-            <field name="species_information">Desciptive text about the species</field>
-            <field name="culture_information">Descriptive text about the culture</field>
+            <field name="website_species_information">Desciptive text about the species</field>
+            <field name="website_culture_information">Descriptive text about the culture</field>
         </record>
 
         <record id="specie_product_1" model="product.template">
@@ -40,8 +40,8 @@
             <field name="emergence">7</field>
             <field name="density">12.2</field>
             <field name="germination">11.2</field>
-            <field name="species_information">Lorem ipsum toussa toussa</field>
-            <field name="culture_information">La lucidité est la blessure la plus rapprochée du soleil</field>
+            <field name="website_species_information">Lorem ipsum toussa toussa</field>
+            <field name="website_culture_information">La lucidité est la blessure la plus rapprochée du soleil</field>
         </record>
 
         <record id="specie_product_2" model="product.template">
@@ -62,8 +62,8 @@
             <field name="emergence">43</field>
             <field name="density">1232.2</field>
             <field name="germination">11.2</field>
-            <field name="species_information">L'obsession de la moisson et l'indifférence à l'Histoire sont les deux extrémités de mon arc.</field>
-            <field name="culture_information">Base et sommet, pour peu que les hommes remuent et divergent, rapidement s'effritent. Mais il y a la tension de la recherche, la répugnance du sablier, l'itinéraire nonpareil, jusqu'à la folle faveur, une exigence de la conscience enfin à laquelle nous ne pouvons nous soustraire, avant de tomber au gouffre.</field>
+            <field name="website_species_information">L'obsession de la moisson et l'indifférence à l'Histoire sont les deux extrémités de mon arc.</field>
+            <field name="website_culture_information">Base et sommet, pour peu que les hommes remuent et divergent, rapidement s'effritent. Mais il y a la tension de la recherche, la répugnance du sablier, l'itinéraire nonpareil, jusqu'à la folle faveur, une exigence de la conscience enfin à laquelle nous ne pouvons nous soustraire, avant de tomber au gouffre.</field>
         </record>
 
         <record id="specie_product_3" model="product.template">
@@ -84,8 +84,8 @@
             <field name="emergence">4</field>
             <field name="density">123.2</field>
             <field name="germination">1.2</field>
-            <field name="species_information">Pourquoi me soucierais-je de l' histoire, vieille dame jadis blanche, maintenant flambante, énorme sous la lentille de notre siècle biseauté? Elle nous gâche l'existence avec ses précieux voiles de deuil, ses passes magnétiques, ses dilatations, ses revers mensongers, ses folâtreries.</field>
-            <field name="culture_information">Je m'inquiète de ce qui s'accomplit sur cette terre, dans la paresse de ses nuits, sous son soleil que nous avons délaissé. Je m'associe à son bouillonnement. Par la trêve des décisions s'ajourne quelque agonie.</field>
+            <field name="website_species_information">Pourquoi me soucierais-je de l' histoire, vieille dame jadis blanche, maintenant flambante, énorme sous la lentille de notre siècle biseauté? Elle nous gâche l'existence avec ses précieux voiles de deuil, ses passes magnétiques, ses dilatations, ses revers mensongers, ses folâtreries.</field>
+            <field name="website_culture_information">Je m'inquiète de ce qui s'accomplit sur cette terre, dans la paresse de ses nuits, sous son soleil que nous avons délaissé. Je m'associe à son bouillonnement. Par la trêve des décisions s'ajourne quelque agonie.</field>
         </record>
 
     </data>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_packing_method_view_form" model="ir.ui.view">
+        <field name="name">product.packing.method.form</field>
+        <field name="model">product.packing.method</field>
+        <field name="arch" type="xml">
+            <form string="Packing Method">
+                <group>
+                    <field name="name"/>
+                    <field name="product_ids" widget="many2many_tags"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_packing_method_view_tree" model="ir.ui.view">
+        <field name="name">product.packing.method.tree</field>
+        <field name="model">product.packing.method</field>
+        <field name="arch" type="xml">
+            <tree string="Packing Method">
+                <field name="name"/>
+                <field name="product_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_product_packing_method_form" model="ir.actions.act_window">
+        <field name="name">Packing Method</field>
+        <field name="res_model">product.packing.method</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            action="action_product_packing_method_form"
+            id="menu_product_packing_method_form"
+            parent="sale.prod_config_main"
+            sequence="30"
+    />
+</odoo>

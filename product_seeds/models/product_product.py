@@ -45,6 +45,14 @@ class ProductProduct(models.Model):
         "field.",
     )
     seed_weight = fields.Float(string="Seed Weight", help="Seed Weight")
+    max_seed_weight = fields.Float(string="Maximum Seed Weight", help="Maximum not to be exceeded during bagging.")
+    packing_method_id = fields.Many2one(
+        comodel_name="product.packing.method",
+        string="Packing Method"
+    )
+    theoretical_packing_time = fields.Float(string="Theoretical Packing Time")
+    theoretical_adjustment_time = fields.Float(string="Theoretical Adjustment Time")
+    legal_mention = fields.Text(string="Legal Mention")
 
     @api.multi
     def _compute_default_variant(self):

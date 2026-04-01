@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mention_view_form" model="ir.ui.view">
+        <field name="name">legal.information.mention.form</field>
+        <field name="model">legal.information.mention</field>
+        <field name="arch" type="xml">
+            <form string="Mention">
+                <group>
+                    <field name="name"/>
+                    <field name="product_ids" widget="many2many_tags"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="mention_view_tree" model="ir.ui.view">
+        <field name="name">legal.information.mention.tree</field>
+        <field name="model">legal.information.mention</field>
+        <field name="arch" type="xml">
+            <tree string="Mention">
+                <field name="name"/>
+                <field name="product_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mention_form" model="ir.actions.act_window">
+        <field name="name">Mention</field>
+        <field name="res_model">legal.information.mention</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+            action="action_mention_form"
+            id="menu_action_mention_form"
+            parent="menu_legal_information_parent"
+            sequence="20"
+    />
+</odoo>
