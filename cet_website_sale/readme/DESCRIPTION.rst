@@ -20,3 +20,5 @@ Cycle-en-Terre.
   customisation).
 * display seed growing seasons
 * customize e-commerce menu (see also `website_sale_category_megamenu`)
+* add toggle to include/exclude tax from prices on the ecommerce
+* add specific product list view for ecommerce categories defined as display stand

@@ -4,7 +4,14 @@
 <odoo>
 
     <template id="products_item" inherit_id="cet_website_sale.products_item" name="CET Products Item Design - Stock">
-        <xpath expr="//t[@name='cet_product_variant_template']" position="after">
+        <xpath expr="//t[@t-if='not is_display_stand']//t[@name='cet_product_variant_template']" position="after">
+            <div class="oe_stock_messages hidden">
+                <t t-call="cet_website_sale_stock.stock_messages">
+                    <t t-set="text_class" t-value="'stock_message_text'"/>
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-if='is_display_stand']//a[@id='add_to_cart']/.." position="after">
             <div class="oe_stock_messages hidden">
                 <t t-call="cet_website_sale_stock.stock_messages">
                     <t t-set="text_class" t-value="'stock_message_text'"/>

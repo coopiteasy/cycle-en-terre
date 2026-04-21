@@ -19,8 +19,12 @@
                                        'active' if c.id is not False else ''))">
 
               <a t-att-href="keep(
-                            '/shop/category/' + slug(c),
-                            category=0, seedling_months='', search='')"
+                            '/shop/category/'
+                            + slug(c),
+                            category=0,
+                            seedling_months='',
+                            search='',
+                            is_display_stand=c.is_display_stand)"
                 t-field="c.name"/>
 
               <ul t-if="c.child_id"
@@ -53,7 +57,8 @@
                                                   + slug(cat),
                                                   category=0,
                                                   seedling_months='',
-                                                  search='')"
+                                                  search='',
+                                                  is_display_stand=cat.is_display_stand)"
                                  t-field="cat.name"/>
                             </li>
                           </t>
@@ -71,7 +76,8 @@
                                                   + slug(cat),
                                                   category=0,
                                                   seedling_months='',
-                                                  search='')"
+                                                  search='',
+                                                  is_display_stand=cat.is_display_stand)"
                                  t-field="cat.name"/>
                             </li>
                           </t>
@@ -89,7 +95,8 @@
                                                   + slug(cat),
                                                   category=0,
                                                   seedling_months='',
-                                                  search='')"
+                                                  search='',
+                                                  is_display_stand=cat.is_display_stand)"
                                  t-field="cat.name"/>
                             </li>
                           </t>
@@ -107,7 +114,8 @@
                                                   + slug(cat),
                                                   category=0,
                                                   seedling_months='',
-                                                  search='')"
+                                                  search='',
+                                                  is_display_stand=cat.is_display_stand)"
                                  t-field="cat.name"/>
                             </li>
                           </t>
